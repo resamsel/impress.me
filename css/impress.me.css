@@ -1,0 +1,701 @@
+@import url(css/fonts.css);
+
+/*
+    So you like the style of impress.js demo?
+    Or maybe you are just curious how it was done?
+
+    You couldn't find a better place to find out!
+
+    Welcome to the stylesheet impress.js demo presentation.
+
+    Please remember that it is not meant to be a part of impress.js and is
+    not required by impress.js.
+    I expect that anyone creating a presentation for impress.js would create
+    their own set of styles.
+
+    But feel free to read through it and learn how to get the most of what
+    impress.js provides.
+
+    And let me be your guide.
+
+    Shall we begin?
+*/
+
+
+/*
+    We start with a good ol' reset.
+    That's the one by Eric Meyer http://meyerweb.com/eric/tools/css/reset/
+
+    You can probably argue if it is needed here, or not, but for sure it
+    doesn't do any harm and gives us a fresh start.
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  line-height: 150%;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*
+    Now here is when interesting things start to appear.
+
+    We set up <body> styles with default font and nice gradient in the background.
+    And yes, there is a lot of repetition there because of -prefixes but we don't
+    want to leave anybody behind.
+*/
+body {
+  font-family: 'PT Sans', sans-serif;
+  min-height: 740px;
+}
+
+/*
+    Now let's bring some text styles back ...
+*/
+b, strong {
+  font-weight: bold
+}
+
+i, em {
+  font-style: italic
+}
+
+/*
+    ... and give links a nice look.
+*/
+a {
+  color: rgba(0, 0, 0, .87);
+  text-decoration: none;
+  padding: 0 0.3em;
+
+  border-radius: 8px;
+  transition: 0.5s;
+  background: none;
+  text-shadow: none;
+}
+
+a:hover,
+a:focus {
+  color: #000;
+  background: rgba(255, 255, 255, 1);
+}
+
+h1, h2, h3 {
+  font-size: 300%;
+  line-height: 120%;
+}
+
+body {
+  background-color: #eee;
+}
+
+/*
+    Because the main point behind the impress.js demo is to demo impress.js
+    we display a fallback message for users with browsers that don't support
+    all the features required by it.
+
+    All of the content will be still fully accessible for them, but I want
+    them to know that they are missing something - that's what the demo is
+    about, isn't it?
+
+    And then we hide the message, when support is detected in the browser.
+*/
+
+.fallback-message {
+  font-family: sans-serif;
+  line-height: 1.3;
+
+  width: 780px;
+  padding: 10px 10px 0;
+  margin: 20px auto;
+
+  border: 1px solid #E4C652;
+  border-radius: 10px;
+  background: #EEDC94;
+}
+
+.fallback-message p {
+  margin-bottom: 10px;
+}
+
+.impress-supported .fallback-message {
+  display: none;
+}
+
+/*
+    Now let's style the presentation steps.
+
+    We start with basics to make sure it displays correctly in everywhere ...
+*/
+
+.step {
+  position: relative;
+  width: 1920px;
+  padding: 40px;
+  margin: 20px auto;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+
+  font-family: 'PT Sans', sans-serif;
+  font-size: 48px;
+  line-height: 1.5;
+}
+
+/*
+    ... and we enhance the styles for impress.js.
+
+    Basically we remove the margin and make inactive steps a little bit transparent.
+*/
+.impress-enabled .step {
+  margin: 0;
+  opacity: 1;
+
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+}
+
+.impress-enabled .step.active {
+  opacity: 1;
+}
+
+/*
+    These 'slide' step styles were heavily inspired by HTML5 Slides:
+    http://html5slides.googlecode.com/svn/trunk/styles.css
+
+    ;)
+
+    They cover everything what you see on first three steps of the demo.
+
+    All impress.js steps are wrapped inside a div element of 0 size! This means that relative
+    values for width and height (example: `width: 100%`) will not work. You need to use pixel
+    values. The pixel values used here correspond to the data-width and data-height given to the
+    #impress root element. When the presentation is viewed on a larger or smaller screen, impress.js
+    will automatically scale the steps to fit the screen.
+*/
+.slide {
+  display: block;
+
+  width: 1920px;
+  height: 1080px;
+  padding: 40px 60px;
+
+  color: rgba(0, 0, 0, .87);
+
+  font-family: 'Open Sans', Arial, non-serif;
+  font-size: 30px;
+  line-height: 36px;
+  letter-spacing: -1px;
+}
+
+/* DEBUGGING *
+.slide.present {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+/**/
+
+.slide q {
+  display: block;
+  font-size: 50px;
+  line-height: 72px;
+
+  margin-top: 100px;
+}
+
+.slide q strong {
+  white-space: nowrap;
+}
+
+.slide > * {
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 1s;
+}
+
+.slide > h1,
+.slide > h2,
+.slide > h3,
+.slide.present > * {
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration: 1s;
+}
+
+.slide {
+  padding: 100px 32px;
+  position: relative;
+
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.slide:before {
+  content: '';
+  position: absolute;
+  background-color: rgba(255, 255, 255, .87);
+  border-radius: 50%;
+  width: 1680px;
+  height: 1680px;
+  left: -420px;
+  top: -300px;
+  z-index: -1;
+}
+
+.slide ol,
+.slide ul {
+  padding-left: 128px;
+}
+
+.slide > ol,
+.slide > ul {
+  font-size: 180%;
+  margin-top: 100px;
+  width: 800px;
+  overflow: hidden;
+}
+
+.slide ul > li {
+  list-style-type: disc;
+}
+
+/*
+Specific styles for: .title slides
+*/
+
+.slide.title {
+  padding: 0;
+}
+
+.title h1,
+.title h2,
+.title h3,
+.title p {
+  margin-left: 5%; /* slide width is 900px, so this is like a 5% margin on both sides */
+  width: 90%;
+}
+
+.title h1,
+.title h2,
+.title h3 {
+  margin-top: 36px;
+}
+
+.title h2,
+.title p {
+  margin-top: 20px;
+}
+
+.title p {
+  font-size: 200%;
+  line-height: 120%;
+}
+
+.title h3 {
+  margin-top: 16px;
+}
+
+.title img {
+  width: 400px;
+  position: absolute;
+  right: 64px;
+  bottom: 32px;
+}
+
+.title.slide > p {
+  opacity: 1;
+}
+
+.title.slide:before {
+  display: none;
+}
+
+/* End slides */
+
+.step.end {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.step.end.active {
+  opacity: 1;
+}
+
+.slide.end:before {
+  content: none;
+}
+
+.slide.end img[alt="logo"] {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.end a {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: 100px;
+  transform: translate(-50%, -50%);
+}
+
+/* Overview */
+
+.overview {
+  display: none;
+}
+
+/* Background */
+
+.background > h2,
+.background:before {
+  display: none;
+  content: '';
+}
+
+.background.slide {
+  padding: 0;
+}
+
+.background.slide > * {
+  opacity: 1;
+}
+
+.slide img[alt="background"] {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  transform: none;
+  top: 0;
+}
+
+/* HIERARCHY */
+
+.step:not(.present):not(.title) {
+  cursor: pointer;
+}
+
+.step:not(.present):not(.title) > h2,
+.step:not(.present):not(.title) > h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(2);
+  width: 720px;
+  margin-left: -540px;
+  text-align: center;
+  transition-property: scale;
+  transition-duration: 1s;
+}
+
+/* CODE */
+
+.slide > pre {
+  position: absolute;
+  display: block;
+  width: 868px;
+  right: 32px;
+  top: 100px;
+  font-size: 120%;
+  line-height: 120%;
+  transform: translate3d(0, 0, 1px);
+}
+
+.slide > pre > code {
+  padding: 16px 32px;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
+  overflow: hidden;
+}
+
+.slide :not(pre) > code {
+  font-family: monospace;
+}
+
+/* BUTTONS */
+
+#impress-toolbar button,
+#impress-toolbar select {
+  border: none;
+  margin: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
+}
+
+/*
+    We also make other steps visible and give them a pointer cursor using the
+    `impress-on-` class.
+*/
+.impress-on-overview .step {
+  opacity: 1;
+  cursor: pointer;
+}
+
+/*
+    This version of impress.js supports plugins, and in particular, a UI toolbar
+    plugin that allows easy navigation between steps and autoplay.
+*/
+.impress-enabled div#impress-toolbar {
+  position: fixed;
+  right: 8px;
+  bottom: 8px;
+}
+
+.impress-enabled div#impress-toolbar > span {
+  margin-right: 10px;
+}
+
+/*
+    With help from the mouse-timeout plugin, we can hide the toolbar and
+    have it show only when you move/click/touch the mouse.
+*/
+body.impress-mouse-timeout div#impress-toolbar {
+  display: none;
+}
+
+/*
+    In fact, we can hide the mouse cursor itself too, when mouse isn't used.
+*/
+body.impress-mouse-timeout {
+  cursor: none;
+}
+
+
+/*
+    Now, when we have all the steps styled let's give users a hint how to navigate
+    around the presentation.
+
+    The best way to do this would be to use JavaScript, show a delayed hint for a
+    first time users, then hide it and store a status in cookie or localStorage...
+
+    But I wanted to have some CSS fun and avoid additional scripting...
+
+    Let me explain it first, so maybe the transition magic will be more readable
+    when you read the code.
+
+    First of all I wanted the hint to appear only when user is idle for a while.
+    You can't detect the 'idle' state in CSS, but I delayed a appearing of the
+    hint by 5s using transition-delay.
+
+    You also can't detect in CSS if the user is a first-time visitor, so I had to
+    make an assumption that I'll only show the hint on the first step. And when
+    the step is changed hide the hint, because I can assume that user already
+    knows how to navigate.
+
+    To summarize it - hint is shown when the user is on the first step for longer
+    than 5 seconds.
+
+    The other problem I had was caused by the fact that I wanted the hint to fade
+    in and out. It can be easily achieved by transitioning the opacity property.
+    But that also meant that the hint was always on the screen, even if totally
+    transparent. It covered part of the screen and you couldn't correctly clicked
+    through it.
+    Unfortunately you cannot transition between display `block` and `none` in pure
+    CSS, so I needed a way to not only fade out the hint but also move it out of
+    the screen.
+
+    I solved this problem by positioning the hint below the bottom of the screen
+    with CSS transform and moving it up to show it. But I also didn't want this move
+    to be visible. I wanted the hint only to fade in and out visually, so I delayed
+    the fade in transition, so it starts when the hint is already in its correct
+    position on the screen.
+
+    I know, it sounds complicated ... maybe it would be easier with the code?
+*/
+
+.hint {
+  /*
+      We hide the hint until presentation is started and from browsers not supporting
+      impress.js, as they will have a linear scrollable view ...
+  */
+  display: none;
+
+  /*
+      ... and give it some fixed position and nice styles.
+  */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 200px;
+
+  background: rgba(0, 0, 0, 0.5);
+  color: #EEE;
+  text-align: center;
+
+  font-size: 50px;
+  padding: 20px;
+
+  z-index: 100;
+
+  /*
+      By default we don't want the hint to be visible, so we make it transparent ...
+  */
+  opacity: 0;
+
+  /*
+      ... and position it below the bottom of the screen (relative to it's fixed position)
+  */
+  -webkit-transform: translateY(400px);
+  -moz-transform: translateY(400px);
+  -ms-transform: translateY(400px);
+  -o-transform: translateY(400px);
+  transform: translateY(400px);
+
+  /*
+      Now let's imagine that the hint is visible and we want to fade it out and move out
+      of the screen.
+
+      So we define the transition on the opacity property with 1s duration and another
+      transition on transform property delayed by 1s so it will happen after the fade out
+      on opacity finished.
+
+      This way user will not see the hint moving down.
+  */
+  -webkit-transition: opacity 1s, -webkit-transform 0.5s 1s;
+  -moz-transition: opacity 1s, -moz-transform 0.5s 1s;
+  -ms-transition: opacity 1s, -ms-transform 0.5s 1s;
+  -o-transition: opacity 1s, -o-transform 0.5s 1s;
+  transition: opacity 1s, transform 0.5s 1s;
+}
+
+/*
+    Now we 'enable' the hint when presentation is initialized ...
+*/
+.impress-enabled .hint {
+  display: block
+}
+
+/*
+    ... and we will show it when the first step (with id 'bored') is active.
+*/
+.impress-on-bored .hint {
+  /*
+      We remove the transparency and position the hint in its default fixed
+      position.
+  */
+  opacity: 1;
+
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  -o-transform: translateY(0px);
+  transform: translateY(0px);
+
+  /*
+      Now for fade in transition we have the oposite situation from the one
+      above.
+
+      First after 4.5s delay we animate the transform property to move the hint
+      into its correct position and after that we fade it in with opacity
+      transition.
+  */
+  -webkit-transition: opacity 1s 5s, -webkit-transform 0.5s 4.5s;
+  -moz-transition: opacity 1s 5s, -moz-transform 0.5s 4.5s;
+  -ms-transition: opacity 1s 5s, -ms-transform 0.5s 4.5s;
+  -o-transition: opacity 1s 5s, -o-transform 0.5s 4.5s;
+  transition: opacity 1s 5s, transform 0.5s 4.5s;
+}
+
+/*
+    And as the last thing there is a workaround for quite strange bug.
+    It happens a lot in Chrome. I don't remember if I've seen it in Firefox.
+
+    Sometimes the element positioned in 3D (especially when it's moved back
+    along Z axis) is not clickable, because it falls 'behind' the <body>
+    element.
+
+    To prevent this, I decided to make <body> non clickable by setting
+    pointer-events property to `none` value.
+    Value if this property is inherited, so to make everything else clickable
+    I bring it back on the #impress element.
+
+    If you want to know more about `pointer-events` here are some docs:
+    https://developer.mozilla.org/en/CSS/pointer-events
+
+    There is one very important thing to notice about this workaround - it makes
+    everything 'unclickable' except what's in #impress element.
+
+    So use it wisely ... or don't use at all.
+*/
+.impress-enabled {
+  pointer-events: none
+}
+
+.impress-enabled #impress {
+  pointer-events: auto
+}
+
+.impress-enabled #impress-toolbar {
+  pointer-events: auto
+}
+
+.impress-enabled #impress-console-button {
+  pointer-events: auto
+}
+
+/*
+    There is one funny thing I just realized.
+
+    Thanks to this workaround above everything except #impress element is invisible
+    for click events. That means that the hint element is also not clickable.
+    So basically all of this transforms and delayed transitions trickery was probably
+    not needed at all...
+
+    But it was fun to learn about it, wasn't it?
+*/
+
+/*
+    That's all I have for you in this file.
+    Thanks for reading. I hope you enjoyed it at least as much as I enjoyed writing it
+    for you.
+*/
