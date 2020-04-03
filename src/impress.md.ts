@@ -5,23 +5,27 @@ import * as jade from "jade";
 import * as marked from "marked";
 import * as UglifyJs from "uglify-es";
 import * as CleanCss from "clean-css";
-import { highlightAuto } from 'highlight.js';
+import {highlightAuto} from 'highlight.js';
 
-var js_files = ['node_modules/impress.js/js/impress.js'];
-var css_files = ['css/impress.me.css', 'node_modules/highlight.js/styles/monokai.css'];
+var js_files = ['impress.js/js/impress.js'];
+var css_files = [
+  'css/impress.me.css',
+  'highlight.js/styles/monokai.css'
+];
 var module_path = path.dirname(__dirname);
 
-function resolve_path(path: string) {
-  return module_path + '/' + path;
+function resolve_path(path: string): string {
+  return [
+    path,
+    module_path + '/' + path,
+    'node_modules/' + path,
+    '../' + path
+  ].find(fs.existsSync) || path;
 }
 
-js_files = js_files.map(function (file) {
-  return resolve_path(file);
-});
+js_files = js_files.map(resolve_path);
 
-css_files = css_files.map(function (file) {
-  return resolve_path(file);
-});
+css_files = css_files.map(resolve_path);
 
 var attr_pattern = /(.*\S)\s*\[]\(([^"]*)\)\s*/;
 var attr_item_pattern = /([^=,]+)\s*=\s*([^=,]+)/g;
@@ -168,7 +172,6 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
   };
 
   renderer.image = function (href, title, text) {
-    // href = cleanUrl(this.options.sanitize, this.options.baseUrl, href);
     if (href === null) {
       return text;
     }
@@ -219,7 +222,6 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
       });
     });
   })).then(function (css_list) {
-
     return html_jade({
       js: js,
       css: css_list.join("\n"),
@@ -227,6 +229,5 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
       marked: marked_html,
       transitionDuration: options.transitionDuration
     })
-
   });
 }
