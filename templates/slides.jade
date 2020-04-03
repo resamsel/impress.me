@@ -7,12 +7,12 @@ html(lang="en")
     meta(name="author" content="Bartek Szopka")
     link(name="shortcut icon" href="favicon.png")
     link(name="apple-touch-icon" href="apple-touch-icon.png")
-    link(href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet")
+    link(href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic|PT+Mono" rel="stylesheet")
     title #{title}
     style(type='text/css') !{css}
 
   body
-    div(id='impress' data-max-scale='3' data-width='1920' data-height='1080' data-transition-duration='!{transitionDuration}') !{marked}
+    div(id='impress' data-max-scale='2' data-width='1920' data-height='1080' data-transition-duration='!{transitionDuration}') !{marked}
     script(type='text/javascript') !{js}
     script(type='text/javascript').
       impress().init();
