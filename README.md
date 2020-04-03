@@ -19,7 +19,7 @@ $ npm install -g impress-me
 $ impress-me COMMAND
 running command...
 $ impress-me (-v|--version|version)
-impress-me/0.1.0 linux-x64 node-v13.11.0
+impress-me/0.1.1 linux-x64 node-v13.11.0
 $ impress-me --help [COMMAND]
 USAGE
   $ impress-me COMMAND
