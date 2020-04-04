@@ -9,6 +9,7 @@ Create impress.js presentations from markdown documents with style
 [![License](https://img.shields.io/npm/l/impress.me.svg)](https://github.com/resamsel/impress.me/blob/master/package.json)
 
 <!-- toc -->
+* [Demo](#demo)
 * [Usage](#usage)
 <!-- tocstop -->
 
@@ -23,7 +24,7 @@ $ npm install -g impress.me
 $ impress.me COMMAND
 running command...
 $ impress.me (-v|--version|version)
-impress.me/0.1.2 linux-x64 node-v13.11.0
+impress.me/0.2.0 linux-x64 node-v13.11.0
 $ impress.me --help [COMMAND]
 USAGE
   $ impress.me COMMAND
