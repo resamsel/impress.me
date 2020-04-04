@@ -1,12 +1,12 @@
 {
-  "name": "impress-me",
+  "name": "impress.me",
   "description": "Create impress.js presentations from markdown documents with style",
   "version": "0.1.2",
   "author": "René Panzar",
   "bin": {
-    "impress-me": "./bin/run"
+    "impress.me": "./bin/run"
   },
-  "bugs": "https://github.com/resamsel/impress-me/issues",
+  "bugs": "https://github.com/resamsel/impress.me/issues",
   "dependencies": {
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.14.0",
@@ -16,6 +16,7 @@
     "impress.js": "^1.0.0",
     "jade": "^1.11.0",
     "lodash": "4.17.15",
+    "loglevel": "1.6.7",
     "marked": "^0.8.2",
     "tslib": "^1.11.1",
     "uglify-es": "3.3.9"
@@ -27,6 +28,7 @@
     "@types/clean-css": "4.2.1",
     "@types/highlight.js": "9.12.3",
     "@types/jade": "0.0.30",
+    "@types/loglevel": "1.6.3",
     "@types/marked": "^0.7.3",
     "@types/mocha": "^5.2.7",
     "@types/node": "^10.17.18",
@@ -36,6 +38,7 @@
     "eslint": "^5.16.0",
     "eslint-config-oclif": "^3.1.0",
     "eslint-config-oclif-typescript": "^0.1.0",
+    "material-colors": "1.2.6",
     "mocha": "^5.2.0",
     "nyc": "^14.1.1",
     "ts-node": "^8.8.1",
@@ -48,11 +51,9 @@
     "/bin",
     "/lib",
     "/templates",
-    "/css",
-    "node_modules/impress.js/js/impress.js",
-    "/node_modules/highlight.js/styles/monokai.css"
+    "/css"
   ],
-  "homepage": "https://github.com/resamsel/impress-me",
+  "homepage": "https://github.com/resamsel/impress.me",
   "keywords": [
     "impress.js",
     "markdown",
@@ -62,11 +63,12 @@
   "license": "ISC",
   "main": "src/index.ts",
   "oclif": {
-    "bin": "impress-me"
+    "bin": "impress.me"
   },
-  "repository": "resamsel/impress-me",
+  "repository": "resamsel/impress.me",
   "scripts": {
     "build": "bin/run HelloWorld.md",
+    "build:demo": "bin/run Demo.md --primary=blue --secondary=orange",
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rm -rf lib && tsc -b && oclif-dev readme",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",

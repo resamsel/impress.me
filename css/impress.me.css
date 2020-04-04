@@ -52,7 +52,7 @@ table {
 
 body {
   font-family: 'PT Sans', sans-serif;
-  background-color: #eee;
+  background-color: #e0e0e0;
   min-height: 740px;
 }
 
@@ -67,18 +67,13 @@ i, em {
 a {
   color: rgba(0, 0, 0, .87);
   text-decoration: none;
-  padding: 0 0.3em;
 
-  border-radius: 8px;
   transition: 0.5s;
-  background: none;
-  text-shadow: none;
 }
 
 a:hover,
 a:focus {
   color: #000;
-  background: rgba(255, 255, 255, 1);
 }
 
 h1, h2, h3 {
@@ -220,7 +215,7 @@ h1, h2, h3 {
 .slide > ol,
 .slide > ul {
   font-size: 180%;
-  margin-top: 100px;
+  margin-top: 64px;
   width: 800px;
   overflow: hidden;
 }
@@ -378,7 +373,8 @@ Specific styles for: .title slides
   width: 868px;
   right: 32px;
   top: 100px;
-  font: 28px/38px 'PT Mono',monospace;
+  font-size: 28px;
+  line-height: 38px;
   transform: translate3d(0, 0, 1px);
 }
 
@@ -390,7 +386,7 @@ Specific styles for: .title slides
 }
 
 .slide code {
-  font-family: 'PT Mono', monospace;
+  font-family: 'Fira Code', monospace;
 }
 
 /* BUTTONS */

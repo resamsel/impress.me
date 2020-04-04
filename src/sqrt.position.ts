@@ -19,12 +19,12 @@ export function sqrtPosition(config: ImpressMeConfig) {
         if (state.current === undefined || state.current.parent === undefined || state.current.parent.pos === undefined) {
           return {x: 0, y: 0, z: 0, scale: 1};
         }
-        const parent = state.current.parent.pos;
-        const scale = 0.05;
+        const parentPos = state.current.parent.pos;
+        const scale = parentPos.scale / 5;
         const stepSizeScaled = (config.circleSize + 100) * scale;
-        const h = parent.x - config.circleOffset * parent.scale;
-        const k = parent.y;
-        const r = (config.circleSize / 2) * parent.scale + (config.circleSize / 2 + 100) * scale;
+        const h = parentPos.x - config.circleOffset * parentPos.scale;
+        const k = parentPos.y;
+        const r = (config.circleSize / 2) * parentPos.scale + (config.circleSize / 2 + 100) * scale;
         const c = r * 2 * Math.PI;
         const offsetRad = (stepSizeScaled / c) * 2 * Math.PI;
         const t = -offsetRad + offsetRad * (siblings.length - 1);

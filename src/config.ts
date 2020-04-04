@@ -10,6 +10,8 @@ export interface ImpressMeConfig {
   circleSize: number;
   circleOffset: number;
   stepDistance: number;
+  primary: string;
+  secondary: string;
   cssFiles: string[];
   transitionDuration: number;
 }
@@ -22,13 +24,13 @@ export interface SlidePosition {
 }
 
 export interface SlideNode {
-  level: number;
+  depth: number;
   pos?: SlidePosition;
   parent?: SlideNode;
   children: SlideNode[];
 }
 
 export interface ImpressMdState {
-  root: SlideNode;
+  root?: SlideNode;
   current?: SlideNode;
 }

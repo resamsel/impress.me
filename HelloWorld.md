@@ -14,6 +14,8 @@ by [liangqing](https://github.com/liangqing)
 
 ## Javascript
 
+* Also `ECMAScript`
+
 ```javascript
 var a = 100;
 console.log("Hello World")

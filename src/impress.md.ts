@@ -1,27 +1,19 @@
 import {ImpressMdState, SlideNode, SlidePosition} from "./config";
-import * as path from "path";
 import * as fs from "fs";
 import * as jade from "jade";
 import * as marked from "marked";
 import * as UglifyJs from "uglify-es";
 import * as CleanCss from "clean-css";
 import {highlightAuto} from 'highlight.js';
+import {resolve_path} from './helpers';
+import Heading = marked.Tokens.Heading;
 
 var js_files = ['impress.js/js/impress.js'];
 var css_files = [
   'css/impress.me.css',
+  'css/themes.css',
   'highlight.js/styles/monokai.css'
 ];
-var module_path = path.dirname(__dirname);
-
-function resolve_path(path: string): string {
-  return [
-    path,
-    module_path + '/' + path,
-    'node_modules/' + path,
-    '../' + path
-  ].find(fs.existsSync) || path;
-}
 
 js_files = js_files.map(resolve_path);
 
@@ -37,6 +29,8 @@ interface ImpressMdConfig {
   css_files: string[];
   js_files: string[];
   marked?: any;
+  primary: string;
+  secondary: string;
   transitionDuration: number;
 
   position(steps: number, level: number, state: ImpressMdState): SlidePosition;
@@ -44,28 +38,32 @@ interface ImpressMdConfig {
 
 export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
   const md = fs.readFileSync(file).toString();
-  // const tokens = marked.lexer(md);
-  // const headings = tokens.filter(token => token.type === 'heading');
-  // const tree = headings.reduce((root, curr) => {
-  //     switch (curr.depth) {
-  //         case 1:
-  //             return ({
-  //                 ...curr,
-  //                 children: []
-  //             });
-  //         case 2:
-  //             return ({
-  //                 ...root,
-  //                 children: [...root.children, {...curr, children: []}]
-  //             });
-  //         case 3:
-  //             const parent = root.children[root.children.length - 1];
-  //             parent.children = [...parent.children, {...curr, children: []}];
-  //             return ({
-  //                 ...root
-  //             });
-  //     }
-  // }, {});
+  const tokens = marked.lexer(md);
+  const headings = tokens.filter(token => token.type === 'heading') as Heading[];
+  const tree = headings.reduce((root: SlideNode, curr: Heading) => {
+    switch (curr.depth) {
+      case 1:
+        return ({
+          ...root,
+          ...curr,
+          children: []
+        });
+      case 2:
+        return ({
+          ...root,
+          children: [
+            ...root.children,
+            {...curr, children: []}
+          ]
+        });
+      case 3:
+        const parent = root.children[root.children.length - 1];
+        parent.children = [...parent.children, {...curr, children: []}];
+        return root;
+    }
+
+    return root;
+  }, {} as SlideNode);
 
   var renderer = new marked.Renderer();
   var is_open = false;
@@ -73,7 +71,7 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
   var cleanCss = new CleanCss();
   const state: ImpressMdState = {
     root: {
-      level: 1,
+      depth: 1,
       children: []
     }
   };
@@ -81,6 +79,8 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
   const options: ImpressMdConfig = {
     js_files: [],
     css_files: [],
+    primary: 'default',
+    secondary: 'default',
     transitionDuration: 1000,
     position: function (step: number, level: number, state: ImpressMdState) {
       return {
@@ -120,19 +120,19 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
       }
     }
     const node: SlideNode = {
-      level,
+      depth: level,
       children: []
     };
     if (state.current === undefined) {
       // root
       state.root = node;
-    } else if (level > state.current.level) {
+    } else if (level > state.current.depth) {
       // child of current
       node.parent = state.current;
-    } else if (level === state.current.level) {
+    } else if (level === state.current.depth) {
       // sibling of current
       node.parent = state.current.parent;
-    } else if (level < state.current.level && state.current.parent !== undefined) {
+    } else if (level < state.current.depth && state.current.parent !== undefined) {
       // new parent sibling of current
       node.parent = state.current.parent.parent;
     }
@@ -227,6 +227,8 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
       css: css_list.join("\n"),
       title: options.title || 'Impress Slides',
       marked: marked_html,
+      primary: options.primary,
+      secondary: options.secondary,
       transitionDuration: options.transitionDuration
     })
   });
