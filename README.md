@@ -13,11 +13,11 @@ Create impress.js presentations from markdown documents with style
 * [Usage](#usage)
 <!-- tocstop -->
 
-# Demo
+## Demo
 
 See [Demo.md](Demo.md) for an example markdown document that will create great results.
 
-# Usage
+## Usage
 <!-- usage -->
 ```sh-session
 $ npm install -g impress.me

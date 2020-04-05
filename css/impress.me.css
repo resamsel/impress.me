@@ -66,6 +66,7 @@ i, em {
 
 a {
   color: rgba(0, 0, 0, .87);
+  border-bottom: 1px solid rgba(0, 0, 0, .4);
   text-decoration: none;
 
   transition: 0.5s;
@@ -74,6 +75,7 @@ a {
 a:hover,
 a:focus {
   color: #000;
+  border-bottom: 1px solid #000;
 }
 
 h1, h2, h3 {
@@ -173,8 +175,7 @@ h1, h2, h3 {
 
 .slide > * {
   opacity: 0;
-  transition-property: opacity;
-  transition-duration: 1s;
+  transition: 1s;
 }
 
 .slide > h1,
@@ -182,8 +183,26 @@ h1, h2, h3 {
 .slide > h3,
 .slide.present > * {
   opacity: 1;
-  transition-property: opacity;
-  transition-duration: 1s;
+}
+
+.slide.depth-2 > p,
+.slide.depth-3 > p {
+  width: 1000px;
+}
+
+.slide.depth-2 > h2,
+.slide.depth-3 > h3 {
+  display: inline-block;
+  width: auto;
+  max-width: 800px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.slide.present.depth-2 > h2,
+.slide.present.depth-3 > h3 {
+  white-space: normal;
 }
 
 .slide {
@@ -195,6 +214,7 @@ h1, h2, h3 {
   box-shadow: none;
 }
 
+/* Shape */
 .slide:before {
   content: '';
   position: absolute;
@@ -205,6 +225,16 @@ h1, h2, h3 {
   left: -420px;
   top: -300px;
   z-index: -1;
+}
+
+.slide p {
+  font-size: 150%;
+  line-height: 150%;
+}
+
+.slide.depth-2 p:first-of-type,
+.slide.depth-3 p:first-of-type {
+  margin-top: 64px;
 }
 
 .slide ol,
@@ -264,13 +294,6 @@ Specific styles for: .title slides
 
 .title h3 {
   margin-top: 16px;
-}
-
-.title img {
-  width: 400px;
-  position: absolute;
-  right: 64px;
-  bottom: 32px;
 }
 
 .step.title > p {
@@ -354,15 +377,8 @@ Specific styles for: .title slides
 
 .step.depth-2:not(.present) > h2,
 .step.depth-3:not(.present) > h3 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(2);
-  width: 720px;
-  margin-left: -540px;
-  text-align: center;
-  transition-property: scale;
-  transition-duration: 1s;
+  transform: translate3d(420px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
+  transition: 1s;
 }
 
 /* Slides with code */

@@ -18,7 +18,7 @@ by [resamsel](https://github.com/resamsel)
 * Third level headings: satellites 🛰️
 * Further headings: content 📖
 
-## CLI Usage
+### CLI Usage
 
 * First param: input markdown file
 * Second param: optional output file
@@ -113,7 +113,7 @@ shown.
 
 ### Highlight.js Styles
 
-* Default style: `highlight.js/styles/monokai.css`
+* Default style: monokai
 
 [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
 [Reference style link]: http://www.reddit.com
