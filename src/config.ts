@@ -25,6 +25,7 @@ export interface SlidePosition {
 
 export interface SlideNode {
   depth: number;
+  text: string;
   pos?: SlidePosition;
   parent?: SlideNode;
   children: SlideNode[];

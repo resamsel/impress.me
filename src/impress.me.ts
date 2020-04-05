@@ -1,9 +1,8 @@
-import {sqrtPosition} from "./sqrt.position";
+import {PlanetPositionStrategy} from "./planet-position.strategy";
 import {impress_md} from "./impress.md";
-import * as fs from "fs";
-import * as log from "loglevel";
+import {debug, error} from "loglevel";
 import {ImpressMeConfig} from "./config";
-import {resolve_path} from "./helpers";
+import {existsSync, writeFile} from "fs";
 
 const circleSize = 1680;
 const defaultConfig: ImpressMeConfig = {
@@ -32,7 +31,7 @@ export class ImpressMe {
   }
 
   convert(input: string, output?: string): void {
-    const inputFile = [input, `${input}.md`].find(fs.existsSync);
+    const inputFile = [input, `${input}.md`].find(existsSync);
     if (inputFile === undefined) {
       throw new Error('Input file not found: ' + input);
     }
@@ -41,18 +40,18 @@ export class ImpressMe {
       : `${input.replace(/\.[^/.]+$/, "")}.html`;
 
     impress_md(inputFile, {
-      position: sqrtPosition(this.config),
+      positionStrategy: new PlanetPositionStrategy(this.config),
       css_files: this.config.cssFiles,
       ...this.config
     })
       .then(function (html) {
-        fs.writeFile(
+        writeFile(
           outFile,
           html,
-          () => log.debug('Created ' + outFile + ' from ' + inputFile)
+          () => debug('Created ' + outFile + ' from ' + inputFile)
         );
       }, function (err) {
-        log.error(err);
+        error(err);
         throw new Error(err);
       });
   }

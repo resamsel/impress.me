@@ -1,0 +1,17 @@
+.slide:before {
+  content: '';
+  position: absolute;
+  background-color: rgba(255, 255, 255, .87);
+  border-radius: 50%;
+  width: 1680px;
+  height: 1680px;
+  left: -420px;
+  top: -300px;
+  z-index: -1;
+}
+
+.step.depth-2:not(.present) > h2,
+.step.depth-3:not(.present) > h3 {
+  transform: translate3d(420px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
+  transition: 1s;
+}

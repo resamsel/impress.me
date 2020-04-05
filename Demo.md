@@ -36,7 +36,7 @@ impress.me INPUT.md 'My Fancy Presentation.html'
 impress.me Demo.md --cssFiles a.css b.css
 ```
 
-## Features
+## 🧰 Features
 
 * Markdown
 
@@ -78,7 +78,7 @@ console.log('Hello World!');
 * Square root function
 * More to come
 
-## Customization
+## 🖌️ Customization
 
 * Step CSS classes
 * `step`: defines a step in the presentation

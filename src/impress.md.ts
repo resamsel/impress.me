@@ -1,16 +1,20 @@
-import {ImpressMdState, SlideNode, SlidePosition} from "./config";
-import * as fs from "fs";
-import * as jade from "jade";
+import {SlideNode} from "./config";
 import * as marked from "marked";
-import * as UglifyJs from "uglify-es";
 import * as CleanCss from "clean-css";
 import {highlightAuto} from 'highlight.js';
 import {resolve_path} from './helpers';
+import {PositionStrategy} from "./position.strategy";
+import {LinearPositionStrategy} from "./linear-position.strategy";
+import {existsSync, readFileSync} from "fs";
+import {compileFile} from "pug";
+import {minify} from "uglify-es";
 import Heading = marked.Tokens.Heading;
 
 var js_files = ['impress.js/js/impress.js'];
 var css_files = [
   'css/impress.me.css',
+  'css/circle.shape.css',
+  // 'css/rounded.shape.css',
   'css/themes.css',
   'highlight.js/styles/monokai.css'
 ];
@@ -21,8 +25,8 @@ css_files = css_files.map(resolve_path);
 
 var attr_pattern = /(.*\S)\s*\[]\(([^"]*)\)\s*/;
 var attr_item_pattern = /([^=,]+)\s*=\s*([^=,]+)/g;
-var html_template_file = resolve_path('templates/slides.jade');
-var html_jade = jade.compileFile(html_template_file);
+var html_template_file = resolve_path('templates/slides.pug');
+var htmlPug = compileFile(html_template_file);
 
 interface ImpressMdConfig {
   title?: string;
@@ -33,32 +37,37 @@ interface ImpressMdConfig {
   secondary: string;
   transitionDuration: number;
 
-  position(steps: number, level: number, state: ImpressMdState): SlidePosition;
+  positionStrategy: PositionStrategy;
 }
 
 export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
-  const md = fs.readFileSync(file).toString();
+  const md = readFileSync(file).toString();
   const tokens = marked.lexer(md);
   const headings = tokens.filter(token => token.type === 'heading') as Heading[];
-  const tree = headings.reduce((root: SlideNode, curr: Heading) => {
+  const nodes: Record<string, SlideNode> = {};
+
+  headings.reduce((root: SlideNode, curr: Heading) => {
+    const node: SlideNode = {
+      ...curr,
+      children: []
+    };
+
+    nodes[curr.text] = node;
+
     switch (curr.depth) {
       case 1:
         return ({
           ...root,
-          ...curr,
-          children: []
+          ...node
         });
       case 2:
-        return ({
-          ...root,
-          children: [
-            ...root.children,
-            {...curr, children: []}
-          ]
-        });
+        node.parent = root;
+        root.children.push(node);
+        return root;
       case 3:
         const parent = root.children[root.children.length - 1];
-        parent.children = [...parent.children, {...curr, children: []}];
+        node.parent = parent;
+        parent.children.push(node);
         return root;
     }
 
@@ -69,12 +78,6 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
   var is_open = false;
   var steps = 0;
   var cleanCss = new CleanCss();
-  const state: ImpressMdState = {
-    root: {
-      depth: 1,
-      children: []
-    }
-  };
 
   const options: ImpressMdConfig = {
     js_files: [],
@@ -82,14 +85,7 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
     primary: 'default',
     secondary: 'default',
     transitionDuration: 1000,
-    position: function (step: number, level: number, state: ImpressMdState) {
-      return {
-        x: (step - 5) * 1000,
-        y: 0,
-        z: 0,
-        scale: 1
-      };
-    },
+    positionStrategy: new LinearPositionStrategy(),
     ...inOptions
   };
 
@@ -97,6 +93,7 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
     var html = '';
     var h = 'h' + level;
     var match;
+
     if (level > 3) {
       return '<' + h + '>' + text + '</' + h + '>';
     }
@@ -105,7 +102,9 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
     }
     steps += 1;
     match = attr_pattern.exec(text);
-    const attrs: { [key: string]: string | number } = {'class': "step slide depth-" + level};
+    const attrs: { [key: string]: string | number } = {
+      'class': "step slide depth-" + level
+    };
     if (match) {
       text = match[1];
       var attr_text = match[2];
@@ -119,28 +118,9 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
         }
       }
     }
-    const node: SlideNode = {
-      depth: level,
-      children: []
-    };
-    if (state.current === undefined) {
-      // root
-      state.root = node;
-    } else if (level > state.current.depth) {
-      // child of current
-      node.parent = state.current;
-    } else if (level === state.current.depth) {
-      // sibling of current
-      node.parent = state.current.parent;
-    } else if (level < state.current.depth && state.current.parent !== undefined) {
-      // new parent sibling of current
-      node.parent = state.current.parent.parent;
-    }
-    if (node.parent !== undefined) {
-      node.parent.children.push(node);
-    }
-    state.current = node;
-    const pos = options.position(steps, level, state);
+
+    const node = nodes[text];
+    const pos = options.positionStrategy.calculate(node);
     node.pos = pos;
 
     if (level === 1) {
@@ -176,9 +156,9 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
       return text;
     }
 
-    const imageSrc = [href, resolve_path(href)].find(fs.existsSync);
+    const imageSrc = [href, resolve_path(href)].find(existsSync);
     if (imageSrc !== undefined) {
-      const data = fs.readFileSync(imageSrc, 'base64');
+      const data = readFileSync(imageSrc, 'base64');
       href = `data:image/png;base64,${data}`;
     }
     let out = '<img src="' + href + '" alt="' + text + '"';
@@ -205,7 +185,7 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
   });
 
   var js = js_files.concat(options.js_files).map(function (file) {
-    return UglifyJs.minify(fs.readFileSync(file, 'utf8').toString()).code;
+    return minify(readFileSync(file, 'utf8').toString()).code;
   }).join(";");
 
   var marked_html = marked(md);
@@ -216,13 +196,13 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
 
   return Promise.all(css_files.concat(options.css_files).map(function (file) {
     return new Promise(function (resolve, reject) {
-      cleanCss.minify(fs.readFileSync(file), function (err: any, css: any) {
+      cleanCss.minify(readFileSync(file), function (err: any, css: any) {
         if (err) return reject(err);
         return resolve(css.styles);
       });
     });
   })).then(function (css_list) {
-    return html_jade({
+    return htmlPug({
       js: js,
       css: css_list.join("\n"),
       title: options.title || 'Impress Slides',
