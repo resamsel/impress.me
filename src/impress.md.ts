@@ -9,6 +9,7 @@ import {existsSync, readFileSync} from "fs";
 import {compileFile} from "pug";
 import {minify} from "uglify-es";
 import Heading = marked.Tokens.Heading;
+import {debug} from 'loglevel';
 
 var js_files = ['impress.js/js/impress.js'];
 var css_files = [
@@ -93,8 +94,12 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
     var html = '';
     var h = 'h' + level;
     var match;
+    const node = nodes[text];
+    if (node === undefined) {
+      debug('Node not found', text, Object.keys(nodes));
+    }
 
-    if (level > 3) {
+    if (node === undefined || level > 3) {
       return '<' + h + '>' + text + '</' + h + '>';
     }
     if (is_open === true) {
@@ -119,7 +124,6 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
       }
     }
 
-    const node = nodes[text];
     const pos = options.positionStrategy.calculate(node);
     node.pos = pos;
 

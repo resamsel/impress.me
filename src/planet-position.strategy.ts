@@ -2,12 +2,23 @@ import {ImpressMeConfig, SlideNode, SlidePosition} from "./config";
 import {PositionStrategy} from "./position.strategy";
 import {debug} from "loglevel";
 
+const defaultPosition = {
+  x: 0,
+  y: 0,
+  z: 0,
+  scale: 1
+};
+
 export class PlanetPositionStrategy implements PositionStrategy {
   constructor(private readonly config: ImpressMeConfig) {
   }
 
   calculate(node: SlideNode): SlidePosition {
     debug('PlanetPositionStrategy.calculate()', node);
+
+    if (node === undefined) {
+      return defaultPosition;
+    }
 
     const siblings = node.parent ? node.parent.children : [node];
     const siblingIndex = siblings.indexOf(node);
@@ -42,12 +53,7 @@ export class PlanetPositionStrategy implements PositionStrategy {
         };
       }
       default:
-        return {
-          x: 0,
-          y: 0,
-          z: 0,
-          scale: 1
-        };
+        return defaultPosition;
     }
   }
 }
