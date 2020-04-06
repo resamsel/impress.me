@@ -13,6 +13,7 @@ export interface ImpressMeConfig {
   primary: string;
   secondary: string;
   cssFiles: string[];
+  slideShape: string;
   transitionDuration: number;
 }
 

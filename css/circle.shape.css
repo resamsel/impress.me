@@ -1,4 +1,5 @@
-.slide:before {
+.shape-circle .slide:before,
+.slide.shape-circle:before {
   content: '';
   position: absolute;
   background-color: rgba(255, 255, 255, .87);
@@ -10,8 +11,10 @@
   z-index: -1;
 }
 
-.step.depth-2:not(.present) > h2,
-.step.depth-3:not(.present) > h3 {
+.shape-circle .slide.depth-2:not(.present) > h2,
+.shape-circle .slide.depth-3:not(.present) > h3,
+.slide.shape-circle.depth-2:not(.present) > h2,
+.slide.shape-circle.depth-3:not(.present) > h3 {
   transform: translate3d(420px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
   transition: 1s;
 }

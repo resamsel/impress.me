@@ -15,7 +15,7 @@ var js_files = ['impress.js/js/impress.js'];
 var css_files = [
   'css/impress.me.css',
   'css/circle.shape.css',
-  // 'css/rounded.shape.css',
+  'css/rounded.shape.css',
   'css/themes.css',
   'highlight.js/styles/monokai.css'
 ];
@@ -36,6 +36,7 @@ interface ImpressMdConfig {
   marked?: any;
   primary: string;
   secondary: string;
+  slideShape: string;
   transitionDuration: number;
 
   positionStrategy: PositionStrategy;
@@ -85,6 +86,7 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
     css_files: [],
     primary: 'default',
     secondary: 'default',
+    slideShape: 'circle',
     transitionDuration: 1000,
     positionStrategy: new LinearPositionStrategy(),
     ...inOptions
@@ -213,6 +215,7 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
       marked: marked_html,
       primary: options.primary,
       secondary: options.secondary,
+      slideShape: options.slideShape,
       transitionDuration: options.transitionDuration
     })
   });

@@ -18,6 +18,7 @@ const defaultConfig: ImpressMeConfig = {
   primary: 'default',
   secondary: 'default',
   cssFiles: [],
+  slideShape: 'circle',
   transitionDuration: 0
 };
 
