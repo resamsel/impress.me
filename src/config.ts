@@ -1,19 +1,15 @@
-export interface Offset {
-  top: number;
-  left: number;
-}
-
 export interface ImpressMeConfig {
   width: number;
   height: number;
-  offset: Offset;
-  circleSize: number;
-  circleOffset: number;
+  offset: SlidePosition;
+  shapeSize: number;
+  shapeOffset: number;
   stepDistance: number;
   primary: string;
   secondary: string;
   cssFiles: string[];
-  slideShape: string;
+  shape: string;
+  strategy: string;
   transitionDuration: number;
 }
 
@@ -25,11 +21,13 @@ export interface SlidePosition {
 }
 
 export interface SlideNode {
+  parent?: SlideNode;
+  children: SlideNode[];
   depth: number;
   text: string;
   pos?: SlidePosition;
-  parent?: SlideNode;
-  children: SlideNode[];
+  attrs?: Record<string, string>;
+  classes?: string[];
 }
 
 export interface ImpressMdState {

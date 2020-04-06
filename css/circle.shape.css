@@ -11,6 +11,13 @@
   z-index: -1;
 }
 
+.shape-circle .slide.depth-2 > h2,
+.shape-circle .slide.depth-3 > h3,
+.slide.depth-2.shape-circle > h2,
+.slide.depth-3.shape-circle > h3 {
+  max-width: 800px;
+}
+
 .shape-circle .slide.depth-2:not(.present) > h2,
 .shape-circle .slide.depth-3:not(.present) > h3,
 .slide.shape-circle.depth-2:not(.present) > h2,

@@ -4,12 +4,11 @@ import * as CleanCss from "clean-css";
 import {highlightAuto} from 'highlight.js';
 import {resolve_path} from './helpers';
 import {PositionStrategy} from "./position.strategy";
-import {LinearPositionStrategy} from "./linear-position.strategy";
 import {existsSync, readFileSync} from "fs";
 import {compileFile} from "pug";
 import {minify} from "uglify-es";
-import Heading = marked.Tokens.Heading;
 import {debug} from 'loglevel';
+import Heading = marked.Tokens.Heading;
 
 var js_files = ['impress.js/js/impress.js'];
 var css_files = [
@@ -24,7 +23,7 @@ js_files = js_files.map(resolve_path);
 
 css_files = css_files.map(resolve_path);
 
-var attr_pattern = /(.*\S)\s*\[]\(([^"]*)\)\s*/;
+var attr_pattern = /(.*\S)\s*(\[]\(|<a href=")([^"]*)(\)|"><\/a>)\s*/;
 var attr_item_pattern = /([^=,]+)\s*=\s*([^=,]+)/g;
 var html_template_file = resolve_path('templates/slides.pug');
 var htmlPug = compileFile(html_template_file);
@@ -36,13 +35,13 @@ interface ImpressMdConfig {
   marked?: any;
   primary: string;
   secondary: string;
-  slideShape: string;
+  shape: string;
   transitionDuration: number;
 
   positionStrategy: PositionStrategy;
 }
 
-export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
+export function impress_md(file: string, inOptions: ImpressMdConfig) {
   const md = readFileSync(file).toString();
   const tokens = marked.lexer(md);
   const headings = tokens.filter(token => token.type === 'heading') as Heading[];
@@ -56,12 +55,32 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
 
     nodes[curr.text] = node;
 
+    let match = attr_pattern.exec(curr.text);
+    node.attrs = {
+      'class': "step slide depth-" + curr.depth
+    };
+    if (match) {
+      const text = match[1];
+      const attr_text = match[3];
+      debug('heading with attributes', text, attr_text);
+      while (match = attr_item_pattern.exec(attr_text)) {
+        const key = match[1].trim();
+        const value = match[2].trim();
+        if (key == 'class' || key == 'id' || key == 'style') {
+          node.attrs['class'] += ' ' + value
+        } else {
+          node.attrs['data-' + key] = value;
+        }
+      }
+    }
+    if (node.depth === 1) {
+      node.attrs['class'] += ' screen title';
+    }
+    node.classes = node.attrs['class'].split(' ');
+
     switch (curr.depth) {
       case 1:
-        return ({
-          ...root,
-          ...node
-        });
+        return node;
       case 2:
         node.parent = root;
         root.children.push(node);
@@ -84,21 +103,19 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
   const options: ImpressMdConfig = {
     js_files: [],
     css_files: [],
-    primary: 'default',
-    secondary: 'default',
-    slideShape: 'circle',
-    transitionDuration: 1000,
-    positionStrategy: new LinearPositionStrategy(),
     ...inOptions
   };
 
   renderer.heading = function (text, level) {
     var html = '';
     var h = 'h' + level;
-    var match;
-    const node = nodes[text];
+
+    const nodeKey = text
+      .replace('<a href="', '[](')
+      .replace('"></a>', ')');
+    const node = nodes[nodeKey];
     if (node === undefined) {
-      debug('Node not found', text, Object.keys(nodes));
+      debug('Node not found', nodeKey, Object.keys(nodes));
     }
 
     if (node === undefined || level > 3) {
@@ -108,42 +125,30 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
       html += '</div>';
     }
     steps += 1;
-    match = attr_pattern.exec(text);
-    const attrs: { [key: string]: string | number } = {
-      'class': "step slide depth-" + level
-    };
+    const match = attr_pattern.exec(text);
     if (match) {
       text = match[1];
-      var attr_text = match[2];
-      while (match = attr_item_pattern.exec(attr_text)) {
-        var key = match[1].trim();
-        var value = match[2].trim();
-        if (key == 'class' || key == 'id' || key == 'style') {
-          attrs['class'] += ' ' + value
-        } else {
-          attrs['data-' + key] = value;
-        }
-      }
+    }
+
+    if (level === 1) {
+      options.title = options.title || text;
     }
 
     const pos = options.positionStrategy.calculate(node);
     node.pos = pos;
+    const attrs = node.attrs ? node.attrs : {};
 
-    if (level === 1) {
-      attrs['class'] += ' screen title';
-      options.title = options.title || text;
-    }
     if (!attrs['data-x']) {
-      attrs['data-x'] = pos.x;
+      attrs['data-x'] = '' + pos.x;
     }
     if (!attrs['data-y']) {
-      attrs['data-y'] = pos.y;
+      attrs['data-y'] = '' + pos.y;
     }
     if (!attrs['data-z']) {
-      attrs['data-z'] = pos.z;
+      attrs['data-z'] = '' + pos.z;
     }
     if (!attrs['data-scale']) {
-      attrs['data-scale'] = pos.scale;
+      attrs['data-scale'] = '' + pos.scale;
     }
     var attr_list = [];
     for (var k in attrs) {
@@ -215,7 +220,7 @@ export function impress_md(file: string, inOptions: Partial<ImpressMdConfig>) {
       marked: marked_html,
       primary: options.primary,
       secondary: options.secondary,
-      slideShape: options.slideShape,
+      shape: options.shape,
       transitionDuration: options.transitionDuration
     })
   });

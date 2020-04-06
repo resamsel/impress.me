@@ -1,47 +1,60 @@
 import {PositionStrategy} from "./position.strategy";
-import {SlideNode, SlidePosition} from "./config";
+import {ImpressMeConfig, SlideNode, SlidePosition} from "./config";
+import {debug} from 'loglevel';
+import {findIndex, findRoot, includeSlide} from "./helpers";
 
-const findRoot = (node: SlideNode): SlideNode => {
-  if (node.parent === undefined) {
-    // already root
-    return node;
-  }
-  if (node.parent.parent === undefined) {
-    return node.parent;
-  }
-  return node.parent.parent;
-};
-
-const findIndex = (root: SlideNode, node: SlideNode): number => {
-  if (root === node) {
-    return 0;
-  }
-  let index = 0;
-  for (let child of root.children) {
-    index += 1;
-    if (child === node) {
-      return index;
-    }
-    for (let child2 of child.children) {
-      index += 1;
-      if (child2 === node) {
-        return index;
-      }
-    }
-  }
-
-  return -1;
+const slideCount = (node: SlideNode): number => {
+  let count = includeSlide(node) ? 1 : 0;
+  return node.children.reduce(
+    (acc, child) => acc + slideCount(child),
+    count
+  );
 };
 
 export class LinearPositionStrategy implements PositionStrategy {
+  private readonly offset: SlidePosition = {
+    x: -this.config.width * 0.5,
+    y: 100,
+    z: 0,
+    scale: 0.4
+  };
+
+  constructor(private readonly config: ImpressMeConfig) {
+  }
+
   calculate(node: SlideNode): SlidePosition {
-    const root = findRoot(node);
-    const step = findIndex(root, node);
-    return {
-      x: (step - 1) * 1000,
-      y: 0,
-      z: 0,
-      scale: 0.5
-    };
+    // debug('calculate', node);
+    if (node.attrs && node.attrs['class']) {
+      const classes = node.attrs['class'].split(' ');
+      if (classes.includes('overview')) {
+        const numberOfSteps = slideCount(findRoot(node));
+        const maxX = this.offset.x + (numberOfSteps - 1) * this.config.width * this.offset.scale;
+        debug('overview pos', maxX, numberOfSteps);
+        return {
+          x: this.offset.x * this.offset.scale + maxX / 2,
+          y: this.offset.y,
+          z: 0,
+          // we want to show a bit more than just all of the steps
+          scale: (numberOfSteps + 1) * this.offset.scale
+        }
+      }
+    }
+
+    switch (node.depth) {
+      case 1:
+        return {
+          x: 0,
+          y: 0,
+          z: 0,
+          scale: 1
+        };
+      default:
+        const root = findRoot(node);
+        const step = findIndex(root, node);
+        return {
+          ...this.offset,
+          x: this.offset.x + step * this.config.width * this.offset.scale,
+        };
+    }
   }
 }

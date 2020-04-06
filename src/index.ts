@@ -19,10 +19,16 @@ class ImpressMeCommand extends Command {
       description: 'define the secondary color from material colors',
       default: 'default'
     }),
-    slideShape: flags.option({
+    shape: flags.option({
       description: 'define the shape of the slides',
       default: 'circle',
       options: ['circle', 'rounded'],
+      parse: x => x
+    }),
+    strategy: flags.option({
+      description: 'define the slide positioning strategy',
+      default: 'planet',
+      options: ['planet', 'linear'],
       parse: x => x
     }),
     cssFiles: flags.string({

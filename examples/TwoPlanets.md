@@ -78,43 +78,6 @@ console.log('Hello World!');
 * Square root function
 * More to come
 
-## 🖌️ Customization
-
-* Step CSS classes
-* `step`: defines a step in the presentation
-* `slide`: this step will be displayed as a slide
-* `depth-{1,2,3}`: heading level
-
-### Slide Options
-
-* `x, y, z`: custom position
-* `scale`: custom size
-* `id, class, style`: directly added to DOM element
-* See [impress.js documentation](https://github.com/impress/impress.js/blob/master/DOCUMENTATION.md#step-element)
-
-```markdown
-## No Options
-
-Will be positioned and scaled automatically.
-
-## Positioning [](x=100, y=100)
-
-Custom position, automatic scaling.
-
-## Sizing [](scale=2)
-
-Custom scaling, position will be computed.
-
-## Last Slide [](class=end)
-
-Special class for hidden heading, only content is
-shown.
-```
-
-### Highlight.js Styles
-
-* Default style: monokai
-
 ## Logo [](class=skip background, x=1700, y=900, z=0, scale=1)
 
 ![logo]

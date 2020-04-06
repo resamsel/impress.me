@@ -194,7 +194,6 @@ h1, h2, h3 {
 .slide.depth-3 > h3 {
   display: inline-block;
   width: auto;
-  max-width: 800px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -353,8 +352,8 @@ Specific styles for: .title slides
 
 /* Background */
 
-.background > h2,
-.background:before {
+.step.background > h2,
+.step.background:before {
   display: none;
   content: '';
 }
