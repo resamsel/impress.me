@@ -32,7 +32,9 @@ const defaultConfig: ImpressMeConfig = {
 export class ImpressMe {
   private readonly config: ImpressMeConfig = {
     ...defaultConfig,
-    ...this.flags
+    ...this.flags,
+    cssFiles: [...defaultConfig.cssFiles, ...this.flags.cssFiles || []],
+    jsFiles: [...defaultConfig.jsFiles, ...this.flags.jsFiles || []]
   };
 
   constructor(private readonly flags: Partial<ImpressMeConfig> = {}) {
