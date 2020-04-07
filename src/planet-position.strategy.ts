@@ -1,6 +1,5 @@
 import {ImpressMeConfig, SlideNode, SlidePosition} from "./config";
 import {PositionStrategy} from "./position.strategy";
-import {includeSlide} from "./helpers";
 
 const defaultPosition = {
   x: 0,
@@ -10,6 +9,13 @@ const defaultPosition = {
 };
 
 export class PlanetPositionStrategy implements PositionStrategy {
+  private readonly offset: SlidePosition = {
+    x: -this.config.width / 2 + 450,
+    y: -this.config.height / 2 + 800,
+    z: 0,
+    scale: 0.4
+  };
+
   constructor(private readonly config: ImpressMeConfig) {
   }
 
@@ -35,14 +41,14 @@ export class PlanetPositionStrategy implements PositionStrategy {
         // Planet positioning
         //
 
-        const siblingCount = siblings.filter(includeSlide).length;
+        // const siblingCount = siblings.filter(includeSlide).length;
         const scale = 1 / (siblingIndex + 4);
         // const scale2 = this.config.width / (siblingCount * (this.config.width + this.config.stepDistance)) * scale;
         // debug('siblingCount', node.text, siblingCount, scale, scale2);
         return {
-          x: this.config.offset.x + siblingIndex * this.config.stepDistance * Math.sqrt(scale),
-          y: this.config.offset.y - Math.sqrt(siblingIndex) * 250,
-          z: this.config.offset.z,
+          x: this.offset.x + siblingIndex * this.config.stepDistance * Math.sqrt(scale),
+          y: this.offset.y - Math.sqrt(siblingIndex) * 250,
+          z: this.offset.z,
           scale
         };
       }

@@ -10,6 +10,7 @@
   "dependencies": {
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.14.0",
+    "@oclif/errors": "1.2.2",
     "@oclif/plugin-help": "^2.2.3",
     "clean-css": "^4.1.11",
     "highlight.js": "^8.9.1",

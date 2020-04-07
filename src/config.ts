@@ -1,16 +1,18 @@
 export interface ImpressMeConfig {
+  template: string;
   width: number;
   height: number;
-  offset: SlidePosition;
   shapeSize: number;
   shapeOffset: number;
   stepDistance: number;
   primary: string;
   secondary: string;
   cssFiles: string[];
+  jsFiles: string[];
   shape: string;
   strategy: string;
   transitionDuration: number;
+  title?: string;
 }
 
 export interface SlidePosition {
@@ -26,11 +28,12 @@ export interface SlideNode {
   depth: number;
   text: string;
   pos?: SlidePosition;
-  attrs?: Record<string, string>;
+  attrs: Record<string, string>;
   classes?: string[];
 }
 
-export interface ImpressMdState {
-  root?: SlideNode;
-  current?: SlideNode;
+export interface SlideNodeState {
+  root: SlideNode;
+  nodes: Record<string, SlideNode>;
+  isOpen: boolean;
 }

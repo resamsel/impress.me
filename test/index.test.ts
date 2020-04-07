@@ -1,19 +1,19 @@
 import {expect, test} from '@oclif/test'
 
-import cmd = require('../src')
+import cmd = require('../src');
 
-describe('assertj-for-the-ambitious-developer', () => {
-  test
-  .stdout()
-  .do(() => cmd.run([]))
-  .it('runs hello', ctx => {
-    expect(ctx.stdout).to.contain('hello world')
-  })
+describe('impress.me', () => {
+  // test
+  //   .stderr()
+  //   .do(() => cmd.run([]))
+  //   .it('runs impress.me', ctx => {
+  //     expect(ctx.stderr).to.contain('Missing 1 required arg')
+  //   });
 
   test
-  .stdout()
-  .do(() => cmd.run(['--name', 'jeff']))
-  .it('runs hello --name jeff', ctx => {
-    expect(ctx.stdout).to.contain('hello jeff')
-  })
-})
+    .stdout()
+    .do(() => cmd.run(['Demo.md']))
+    .it('runs impress.me Demo.md', ctx => {
+      expect(ctx.stdout).to.contain('')
+    });
+});

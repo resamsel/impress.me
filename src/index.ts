@@ -1,6 +1,7 @@
 import {Command, flags} from '@oclif/command';
 import {ImpressMe} from "./impress.me";
 import * as log from "loglevel";
+import {handle} from "@oclif/errors";
 
 class ImpressMeCommand extends Command {
   static description = 'create impress.js presentations from markdown documents in style';
@@ -60,9 +61,9 @@ class ImpressMeCommand extends Command {
       log.setLevel("info");
     }
 
-    const impressMe = new ImpressMe(flags);
-
-    impressMe.convert(args.input, args.output);
+    new ImpressMe(flags)
+      .convert(args.input, args.output)
+      .catch(handle);
   }
 }
 
