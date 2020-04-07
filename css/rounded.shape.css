@@ -1,4 +1,4 @@
-.shape-rounded .slide:before,
+.shape-rounded .slide:not([class*="shape-"]):before,
 .slide.shape-rounded:before {
   content: '';
   position: absolute;
@@ -10,15 +10,15 @@
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 }
 
-.shape-rounded .slide.depth-2 > h2,
-.shape-rounded .slide.depth-3 > h3,
+.shape-rounded .slide:not([class*="shape-"]).depth-2 > h2,
+.shape-rounded .slide:not([class*="shape-"]).depth-3 > h3,
 .slide.depth-2.shape-rounded > h2,
 .slide.depth-3.shape-rounded > h3 {
   max-width: 680px;
 }
 
-.shape-rounded .slide.depth-2:not(.present) > h2,
-.shape-rounded .slide.depth-3:not(.present) > h3,
+.shape-rounded .slide:not([class*="shape-"]).depth-2:not(.present) > h2,
+.shape-rounded .slide:not([class*="shape-"]).depth-3:not(.present) > h3,
 .slide.shape-rounded.depth-2:not(.present) > h2,
 .slide.shape-rounded.depth-3:not(.present) > h3 {
   transform: translate3d(580px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);

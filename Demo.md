@@ -11,7 +11,7 @@ by [resamsel](https://github.com/resamsel)
 * Customizable by CSS
 * Quickly achieve amazing results
 
-### How?
+### How? [](class=shape-circle)
 
 * Top level heading is title slide
 * Second level headings: planets 🌎
