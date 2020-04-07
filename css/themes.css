@@ -1,6 +1,6 @@
 .primary-red {
   background: #f44336;
-  background: linear-gradient(to right bottom, #f44336, #1565c0);
+  background: linear-gradient(to right bottom, #f44336, #c62828);
 }
 .secondary-red a {
   border-bottom: 1px solid #f44336;
@@ -12,7 +12,7 @@
 
 .primary-pink {
   background: #e91e63;
-  background: linear-gradient(to right bottom, #e91e63, #1565c0);
+  background: linear-gradient(to right bottom, #e91e63, #ad1457);
 }
 .secondary-pink a {
   border-bottom: 1px solid #e91e63;
@@ -24,7 +24,7 @@
 
 .primary-purple {
   background: #9c27b0;
-  background: linear-gradient(to right bottom, #9c27b0, #1565c0);
+  background: linear-gradient(to right bottom, #9c27b0, #6a1b9a);
 }
 .secondary-purple a {
   border-bottom: 1px solid #9c27b0;
@@ -36,7 +36,7 @@
 
 .primary-deepPurple {
   background: #673ab7;
-  background: linear-gradient(to right bottom, #673ab7, #1565c0);
+  background: linear-gradient(to right bottom, #673ab7, #4527a0);
 }
 .secondary-deepPurple a {
   border-bottom: 1px solid #673ab7;
@@ -48,7 +48,7 @@
 
 .primary-indigo {
   background: #3f51b5;
-  background: linear-gradient(to right bottom, #3f51b5, #1565c0);
+  background: linear-gradient(to right bottom, #3f51b5, #283593);
 }
 .secondary-indigo a {
   border-bottom: 1px solid #3f51b5;
@@ -72,7 +72,7 @@
 
 .primary-lightBlue {
   background: #03a9f4;
-  background: linear-gradient(to right bottom, #03a9f4, #1565c0);
+  background: linear-gradient(to right bottom, #03a9f4, #0277bd);
 }
 .secondary-lightBlue a {
   border-bottom: 1px solid #03a9f4;
@@ -84,7 +84,7 @@
 
 .primary-cyan {
   background: #00bcd4;
-  background: linear-gradient(to right bottom, #00bcd4, #1565c0);
+  background: linear-gradient(to right bottom, #00bcd4, #00838f);
 }
 .secondary-cyan a {
   border-bottom: 1px solid #00bcd4;
@@ -96,7 +96,7 @@
 
 .primary-teal {
   background: #009688;
-  background: linear-gradient(to right bottom, #009688, #1565c0);
+  background: linear-gradient(to right bottom, #009688, #00695c);
 }
 .secondary-teal a {
   border-bottom: 1px solid #009688;
@@ -108,7 +108,7 @@
 
 .primary-green {
   background: #4caf50;
-  background: linear-gradient(to right bottom, #4caf50, #1565c0);
+  background: linear-gradient(to right bottom, #4caf50, #2e7d32);
 }
 .secondary-green a {
   border-bottom: 1px solid #4caf50;
@@ -120,7 +120,7 @@
 
 .primary-lightGreen {
   background: #8bc34a;
-  background: linear-gradient(to right bottom, #8bc34a, #1565c0);
+  background: linear-gradient(to right bottom, #8bc34a, #558b2f);
 }
 .secondary-lightGreen a {
   border-bottom: 1px solid #8bc34a;
@@ -132,7 +132,7 @@
 
 .primary-lime {
   background: #cddc39;
-  background: linear-gradient(to right bottom, #cddc39, #1565c0);
+  background: linear-gradient(to right bottom, #cddc39, #9e9d24);
 }
 .secondary-lime a {
   border-bottom: 1px solid #cddc39;
@@ -144,7 +144,7 @@
 
 .primary-yellow {
   background: #ffeb3b;
-  background: linear-gradient(to right bottom, #ffeb3b, #1565c0);
+  background: linear-gradient(to right bottom, #ffeb3b, #f9a825);
 }
 .secondary-yellow a {
   border-bottom: 1px solid #ffeb3b;
@@ -156,7 +156,7 @@
 
 .primary-amber {
   background: #ffc107;
-  background: linear-gradient(to right bottom, #ffc107, #1565c0);
+  background: linear-gradient(to right bottom, #ffc107, #ff8f00);
 }
 .secondary-amber a {
   border-bottom: 1px solid #ffc107;
@@ -168,7 +168,7 @@
 
 .primary-orange {
   background: #ff9800;
-  background: linear-gradient(to right bottom, #ff9800, #1565c0);
+  background: linear-gradient(to right bottom, #ff9800, #ef6c00);
 }
 .secondary-orange a {
   border-bottom: 1px solid #ff9800;
@@ -180,7 +180,7 @@
 
 .primary-deepOrange {
   background: #ff5722;
-  background: linear-gradient(to right bottom, #ff5722, #1565c0);
+  background: linear-gradient(to right bottom, #ff5722, #d84315);
 }
 .secondary-deepOrange a {
   border-bottom: 1px solid #ff5722;
@@ -192,7 +192,7 @@
 
 .primary-brown {
   background: #795548;
-  background: linear-gradient(to right bottom, #795548, #1565c0);
+  background: linear-gradient(to right bottom, #795548, #4e342e);
 }
 .secondary-brown a {
   border-bottom: 1px solid #795548;
@@ -204,7 +204,7 @@
 
 .primary-grey {
   background: #9e9e9e;
-  background: linear-gradient(to right bottom, #9e9e9e, #1565c0);
+  background: linear-gradient(to right bottom, #9e9e9e, #424242);
 }
 .secondary-grey a {
   border-bottom: 1px solid #9e9e9e;
@@ -216,7 +216,7 @@
 
 .primary-blueGrey {
   background: #607d8b;
-  background: linear-gradient(to right bottom, #607d8b, #1565c0);
+  background: linear-gradient(to right bottom, #607d8b, #37474f);
 }
 .secondary-blueGrey a {
   border-bottom: 1px solid #607d8b;
@@ -228,7 +228,7 @@
 
 .primary-white {
   background: undefined;
-  background: linear-gradient(to right bottom, undefined, #1565c0);
+  background: linear-gradient(to right bottom, undefined, undefined);
 }
 .secondary-white a {
   border-bottom: 1px solid undefined;
@@ -240,7 +240,7 @@
 
 .primary-black {
   background: undefined;
-  background: linear-gradient(to right bottom, undefined, #1565c0);
+  background: linear-gradient(to right bottom, undefined, undefined);
 }
 .secondary-black a {
   border-bottom: 1px solid undefined;

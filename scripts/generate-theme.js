@@ -17,7 +17,7 @@ fs.writeFile(
       const color = colors[colorName];
       return `.primary-${colorName} {
   background: ${color['500']};
-  background: linear-gradient(to right bottom, ${color['500']}, #1565c0);
+  background: linear-gradient(to right bottom, ${color['500']}, ${color['800']});
 }
 .secondary-${colorName} a {
   border-bottom: 1px solid ${color['500']};
