@@ -45,6 +45,12 @@ const generateState = (headings: marked.Tokens.Heading[], positionStrategy: Posi
     }
     node.classes = node.attrs['class'].split(' ');
 
+    ['title', 'overview'].forEach(id => {
+      if (node.classes!.includes(id) && !node.attrs['id']) {
+        node.attrs['id'] = id;
+      }
+    })
+
     switch (curr.depth) {
       case 1:
         return {

@@ -10,7 +10,7 @@ const excluded = [
 ];
 
 fs.writeFile(
-  'css/themes.css',
+  'css/colors.css',
   Object.keys(colors)
     .filter(colorName => !excluded.includes(colorName))
     .map(colorName => {

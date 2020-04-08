@@ -2,6 +2,7 @@ import {Command, flags} from '@oclif/command';
 import {ImpressMe} from "./impress.me";
 import * as log from "loglevel";
 import {handle} from "@oclif/errors";
+import {themes} from "./themes";
 
 class ImpressMeCommand extends Command {
   static description = 'create impress.js presentations from markdown documents in style';
@@ -20,16 +21,21 @@ class ImpressMeCommand extends Command {
       description: 'define the secondary color from material colors',
       default: 'default'
     }),
+    theme: flags.option({
+      char: 't',
+      description: 'choose the theme for the presentation (shape and strategy)',
+      options: Object.keys(themes),
+      parse: x => x,
+      default: 'planet'
+    }),
     shape: flags.option({
       description: 'define the shape of the slides',
-      default: 'circle',
-      options: ['circle', 'rounded'],
+      options: ['circle', 'rounded', 'none'],
       parse: x => x
     }),
     strategy: flags.option({
       description: 'define the slide positioning strategy',
-      default: 'planet',
-      options: ['planet', 'linear'],
+      options: ['planet', 'linear', 'newspaper'],
       parse: x => x
     }),
     cssFiles: flags.string({
@@ -38,7 +44,7 @@ class ImpressMeCommand extends Command {
       multiple: true
     }),
     transitionDuration: flags.integer({
-      char: 't',
+      char: 'd',
       description: 'the duration between slides in millis',
       default: 1000
     }),
@@ -61,7 +67,7 @@ class ImpressMeCommand extends Command {
       log.setLevel("info");
     }
 
-    new ImpressMe(flags)
+    new ImpressMe({...flags, theme: themes[flags.theme as string]})
       .convert(args.input, args.output)
       .catch(handle);
   }

@@ -12,7 +12,7 @@
     "@oclif/config": "^1.14.0",
     "@oclif/errors": "1.2.2",
     "@oclif/plugin-help": "^2.2.3",
-    "clean-css": "^4.1.11",
+    "clean-css": "4.2.3",
     "highlight.js": "^8.9.1",
     "impress.js": "^1.0.0",
     "lodash": "4.17.15",
@@ -42,7 +42,7 @@
     "material-colors": "1.2.6",
     "mocha": "^5.2.0",
     "nyc": "^14.1.1",
-    "ts-node": "^8.8.1",
+    "ts-node": "8.8.2",
     "typescript": "^3.8.3"
   },
   "engines": {
@@ -69,10 +69,11 @@
   "repository": "resamsel/impress.me",
   "scripts": {
     "build": "bin/run HelloWorld.md",
-    "build:simple": "bin/run Demo.md",
-    "build:complex": "bin/run Demo.md --primary=purple --secondary=lightBlue --strategy=linear --shape=rounded --cssFiles=css/themes.css",
-    "build:demo": "bin/run Demo.md --primary=blue --secondary=orange --strategy=planet --shape=circle --debug",
+    "build:simple": "bin/run Demo.md 'Demo Plain.html'",
+    "build:complex": "bin/run Demo.md --primary=purple --secondary=lightBlue --strategy=linear --shape=rounded --cssFiles=css/themes.css 'Demo Complex.html'",
+    "build:demo": "bin/run Demo.md --primary=blue --secondary=orange --strategy=planet --shape=circle",
     "build:examples": "for i in examples/*.md; do bin/run $i --primary=blue --secondary=orange --strategy=planet --shape=circle; done",
+    "build:newspaper": "bin/run Demo.md --theme=newspaper 'Demo Newspaper.html'",
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rm -rf lib && tsc -b && oclif-dev readme",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",

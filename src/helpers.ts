@@ -1,16 +1,15 @@
 import * as path from "path";
 import * as fs from "fs";
-import {ImpressMeConfig, SlideNode, SlideNodeState} from "./config";
+import {promises} from "fs";
+import {ImpressMeConfig, SlideNode} from "./config";
 import {PositionStrategy} from "./position.strategy";
 import {LinearPositionStrategy} from "./linear-position.strategy";
 import {PlanetPositionStrategy} from "./planet-position.strategy";
 import * as marked from "marked";
-import {debug} from "loglevel";
-import Heading = marked.Tokens.Heading;
 import * as CleanCss from "clean-css";
-import {promises} from "fs";
 import {minify} from "uglify-es";
 import {compileFile} from "pug";
+import {NewspaperPositionStrategy} from "./newspaper-position.strategy";
 
 export const noSlideClasses = ['title', 'overview', 'background', 'end'];
 export const attrPattern = /(.*\S)\s*(\[]\(|<a href=")([^"]*)(\)|"><\/a>)\s*/;
@@ -58,6 +57,13 @@ export const findIndex = (root: SlideNode, node: SlideNode): number => {
   return -1;
 };
 
+export const flattenNodes = (node: SlideNode): SlideNode[] => {
+  return node.children.reduce(
+    (acc, child) => [...acc, ...flattenNodes(child)],
+    [node]
+  );
+};
+
 export const includeSlide = (node: SlideNode): boolean =>
   noSlideClasses.find(cls => (node.classes || ['title']).includes(cls)) === undefined;
 
@@ -65,6 +71,8 @@ export const createPositionStrategy = (config: ImpressMeConfig): PositionStrateg
   switch (config.strategy) {
     case 'linear':
       return new LinearPositionStrategy(config);
+    case 'newspaper':
+      return new NewspaperPositionStrategy(config);
     case 'planet':
     default:
       return new PlanetPositionStrategy(config);

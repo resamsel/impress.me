@@ -1,3 +1,5 @@
+import {Theme} from "./theme";
+
 export interface ImpressMeConfig {
   template: string;
   width: number;
@@ -9,6 +11,7 @@ export interface ImpressMeConfig {
   secondary: string;
   cssFiles: string[];
   jsFiles: string[];
+  theme: Theme;
   shape: string;
   strategy: string;
   transitionDuration: number;

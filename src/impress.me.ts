@@ -3,6 +3,7 @@ import {existsSync, promises} from "fs";
 import {minifyCss, minifyJs, renderTemplate, resolvePath} from "./helpers";
 import {markdownToHtml} from "./markdown";
 import {debug} from 'loglevel';
+import {themes} from "./themes";
 
 const defaultConfig: ImpressMeConfig = {
   template: 'templates/slides.pug',
@@ -10,7 +11,8 @@ const defaultConfig: ImpressMeConfig = {
     'css/impress.me.css',
     'css/circle.shape.css',
     'css/rounded.shape.css',
-    'css/themes.css',
+    'css/colors.css',
+    'css/newspaper.theme.css',
     'highlight.js/styles/monokai.css'
   ].map(resolvePath),
   jsFiles: [
@@ -18,6 +20,7 @@ const defaultConfig: ImpressMeConfig = {
   ].map(resolvePath),
   primary: 'default',
   secondary: 'default',
+  theme: themes['planet'],
   shape: 'circle',
   strategy: 'planet',
   transitionDuration: 0,
@@ -32,9 +35,17 @@ const defaultConfig: ImpressMeConfig = {
 export class ImpressMe {
   private readonly config: ImpressMeConfig = {
     ...defaultConfig,
+    ...this.flags.theme,
     ...this.flags,
-    cssFiles: [...defaultConfig.cssFiles, ...this.flags.cssFiles || []],
-    jsFiles: [...defaultConfig.jsFiles, ...this.flags.jsFiles || []]
+    cssFiles: [
+      ...defaultConfig.cssFiles,
+      ...this.flags.cssFiles || [],
+      // 'css/' + this.flags.theme!.themeName + '.theme.css'
+    ],
+    jsFiles: [
+      ...defaultConfig.jsFiles,
+      ...this.flags.jsFiles || []
+    ]
   };
 
   constructor(private readonly flags: Partial<ImpressMeConfig> = {}) {

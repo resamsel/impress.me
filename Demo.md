@@ -1,7 +1,7 @@
 impress.me Demo Presentation
 ====================================
 
-by [resamsel](https://github.com/resamsel)
+April 8, 2020 - by [resamsel](https://github.com/resamsel)
 
 ## 🧭 Intro
 
@@ -11,7 +11,7 @@ by [resamsel](https://github.com/resamsel)
 * Customizable by CSS
 * Quickly achieve amazing results
 
-### How? [](class=shape-circle)
+### How?
 
 * Top level heading is title slide
 * Second level headings: planets 🌎
@@ -22,8 +22,6 @@ by [resamsel](https://github.com/resamsel)
 
 * First param: input markdown file
 * Second param: optional output file
-* `--cssFiles`: multiple CSS files to be included
-* `--transitionDuration`: time between slides in millis
 
 ```bash
 # Convert Demo.md to Demo.html
@@ -31,7 +29,14 @@ impress.me Demo.md
 
 # Convert INPUT.md to My Fancy Presentation.html
 impress.me INPUT.md 'My Fancy Presentation.html'
+```
 
+### CLI Options
+
+* `--cssFiles`: multiple CSS files to be included
+* `--transitionDuration`: time between slides in millis
+
+```bash
 # Convert Demo.md with additional stylesheets
 impress.me Demo.md --cssFiles a.css b.css
 ```
@@ -114,10 +119,6 @@ shown.
 ### Highlight.js Styles
 
 * Default style: monokai
-
-## Logo [](class=skip background, x=1700, y=900, z=0, scale=1)
-
-![logo]
 
 ## Overview [](class=overview)
 

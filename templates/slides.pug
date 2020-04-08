@@ -9,7 +9,7 @@ html(lang="en")
     title #{title}
     style(type='text/css') !{css}
 
-  body(class=`primary-${primary} secondary-${secondary} shape-${shape}`)
+  body(class=`primary-${primary} secondary-${secondary} theme-${themeName} shape-${shape} strategy-${strategy}`)
     div(id='impress' data-max-scale='2' data-width='1920' data-height='1080' data-transition-duration=transitionDuration) !{marked}
     script(type='text/javascript') !{js}
     script(type='text/javascript').
