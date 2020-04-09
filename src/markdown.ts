@@ -1,7 +1,7 @@
 import {ImpressMeConfig, SlideNode, SlideNodeState, SlidePosition} from "./config";
-import {PositionStrategy} from "./position.strategy";
+import {PositionStrategy, PositionStrategyFactory} from "./position";
 import {debug} from "loglevel";
-import {attrItemPattern, attrPattern, createPositionStrategy, resolvePath} from "./helpers";
+import {attrItemPattern, attrPattern, resolvePath} from "./helpers";
 import {existsSync, promises, readFileSync} from "fs";
 import * as marked from "marked";
 import {highlightAuto} from "highlight.js";
@@ -161,7 +161,7 @@ export const markdownToHtml = (file: string, config: ImpressMeConfig): Promise<s
 
       const tokens = marked.lexer(md);
       const headings = tokens.filter(token => token.type === 'heading') as Heading[];
-      const positionStrategy = createPositionStrategy(config);
+      const positionStrategy = new PositionStrategyFactory().create(config);
       const state: SlideNodeState = generateState(headings, positionStrategy);
 
       renderer.heading = processHeading(state, config);
