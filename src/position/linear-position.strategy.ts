@@ -1,6 +1,8 @@
 import {PositionStrategy} from "./position.strategy";
-import {ImpressMeConfig, SlideNode, SlidePosition} from "../config";
 import {findIndex, findRoot, flattenNodes, includeSlide} from "../helpers";
+import {ImpressMeConfig} from "../impress-me-config";
+import {SlidePosition} from "../slide-position";
+import {SlideNode} from "../slide-node";
 
 const slideCount = (node: SlideNode): number => {
   let count = includeSlide(node) ? 1 : 0;

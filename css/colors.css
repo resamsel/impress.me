@@ -1,251 +1,692 @@
+
 .primary-red {
   background: #f44336;
   background: linear-gradient(to right bottom, #f44336, #c62828);
 }
+.secondary-red .step.title {
+  color: #fff;
+}
 .secondary-red a {
-  border-bottom: 1px solid #f44336;
+  color: #f44336;
+  text-decoration: none;
 }
 .secondary-red a:hover,
 .secondary-red a:active {
-  color: #f44336;
+  color: #fff;
+  background: #f44336;
 }
+.secondary-red .impress-progressbar {
+  background: #ef9a9a;
+}
+.secondary-red .impress-progressbar > div {
+  background: #f44336;
+}
+.secondary-red #impress-help {
+  background: #f44336;
+}
+.secondary-red #impress-toolbar button,
+.secondary-red #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #f44336;
+}
+
 
 .primary-pink {
   background: #e91e63;
   background: linear-gradient(to right bottom, #e91e63, #ad1457);
 }
+.secondary-pink .step.title {
+  color: #fff;
+}
 .secondary-pink a {
-  border-bottom: 1px solid #e91e63;
+  color: #e91e63;
+  text-decoration: none;
 }
 .secondary-pink a:hover,
 .secondary-pink a:active {
-  color: #e91e63;
+  color: #fff;
+  background: #e91e63;
 }
+.secondary-pink .impress-progressbar {
+  background: #f48fb1;
+}
+.secondary-pink .impress-progressbar > div {
+  background: #e91e63;
+}
+.secondary-pink #impress-help {
+  background: #e91e63;
+}
+.secondary-pink #impress-toolbar button,
+.secondary-pink #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #e91e63;
+}
+
 
 .primary-purple {
   background: #9c27b0;
   background: linear-gradient(to right bottom, #9c27b0, #6a1b9a);
 }
+.secondary-purple .step.title {
+  color: #fff;
+}
 .secondary-purple a {
-  border-bottom: 1px solid #9c27b0;
+  color: #9c27b0;
+  text-decoration: none;
 }
 .secondary-purple a:hover,
 .secondary-purple a:active {
-  color: #9c27b0;
+  color: #fff;
+  background: #9c27b0;
 }
+.secondary-purple .impress-progressbar {
+  background: #ce93d8;
+}
+.secondary-purple .impress-progressbar > div {
+  background: #9c27b0;
+}
+.secondary-purple #impress-help {
+  background: #9c27b0;
+}
+.secondary-purple #impress-toolbar button,
+.secondary-purple #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #9c27b0;
+}
+
 
 .primary-deepPurple {
   background: #673ab7;
   background: linear-gradient(to right bottom, #673ab7, #4527a0);
 }
+.secondary-deepPurple .step.title {
+  color: #fff;
+}
 .secondary-deepPurple a {
-  border-bottom: 1px solid #673ab7;
+  color: #673ab7;
+  text-decoration: none;
 }
 .secondary-deepPurple a:hover,
 .secondary-deepPurple a:active {
-  color: #673ab7;
+  color: #fff;
+  background: #673ab7;
 }
+.secondary-deepPurple .impress-progressbar {
+  background: #b39ddb;
+}
+.secondary-deepPurple .impress-progressbar > div {
+  background: #673ab7;
+}
+.secondary-deepPurple #impress-help {
+  background: #673ab7;
+}
+.secondary-deepPurple #impress-toolbar button,
+.secondary-deepPurple #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #673ab7;
+}
+
 
 .primary-indigo {
   background: #3f51b5;
   background: linear-gradient(to right bottom, #3f51b5, #283593);
 }
+.secondary-indigo .step.title {
+  color: #fff;
+}
 .secondary-indigo a {
-  border-bottom: 1px solid #3f51b5;
+  color: #3f51b5;
+  text-decoration: none;
 }
 .secondary-indigo a:hover,
 .secondary-indigo a:active {
-  color: #3f51b5;
+  color: #fff;
+  background: #3f51b5;
 }
+.secondary-indigo .impress-progressbar {
+  background: #9fa8da;
+}
+.secondary-indigo .impress-progressbar > div {
+  background: #3f51b5;
+}
+.secondary-indigo #impress-help {
+  background: #3f51b5;
+}
+.secondary-indigo #impress-toolbar button,
+.secondary-indigo #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #3f51b5;
+}
+
 
 .primary-blue {
   background: #2196f3;
   background: linear-gradient(to right bottom, #2196f3, #1565c0);
 }
+.secondary-blue .step.title {
+  color: #fff;
+}
 .secondary-blue a {
-  border-bottom: 1px solid #2196f3;
+  color: #2196f3;
+  text-decoration: none;
 }
 .secondary-blue a:hover,
 .secondary-blue a:active {
-  color: #2196f3;
+  color: #fff;
+  background: #2196f3;
 }
+.secondary-blue .impress-progressbar {
+  background: #90caf9;
+}
+.secondary-blue .impress-progressbar > div {
+  background: #2196f3;
+}
+.secondary-blue #impress-help {
+  background: #2196f3;
+}
+.secondary-blue #impress-toolbar button,
+.secondary-blue #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #2196f3;
+}
+
 
 .primary-lightBlue {
   background: #03a9f4;
   background: linear-gradient(to right bottom, #03a9f4, #0277bd);
 }
+.secondary-lightBlue .step.title {
+  color: #fff;
+}
 .secondary-lightBlue a {
-  border-bottom: 1px solid #03a9f4;
+  color: #03a9f4;
+  text-decoration: none;
 }
 .secondary-lightBlue a:hover,
 .secondary-lightBlue a:active {
-  color: #03a9f4;
+  color: #fff;
+  background: #03a9f4;
 }
+.secondary-lightBlue .impress-progressbar {
+  background: #81d4fa;
+}
+.secondary-lightBlue .impress-progressbar > div {
+  background: #03a9f4;
+}
+.secondary-lightBlue #impress-help {
+  background: #03a9f4;
+}
+.secondary-lightBlue #impress-toolbar button,
+.secondary-lightBlue #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #03a9f4;
+}
+
 
 .primary-cyan {
   background: #00bcd4;
   background: linear-gradient(to right bottom, #00bcd4, #00838f);
 }
+.secondary-cyan .step.title {
+  color: #fff;
+}
 .secondary-cyan a {
-  border-bottom: 1px solid #00bcd4;
+  color: #00bcd4;
+  text-decoration: none;
 }
 .secondary-cyan a:hover,
 .secondary-cyan a:active {
-  color: #00bcd4;
+  color: #fff;
+  background: #00bcd4;
 }
+.secondary-cyan .impress-progressbar {
+  background: #80deea;
+}
+.secondary-cyan .impress-progressbar > div {
+  background: #00bcd4;
+}
+.secondary-cyan #impress-help {
+  background: #00bcd4;
+}
+.secondary-cyan #impress-toolbar button,
+.secondary-cyan #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #00bcd4;
+}
+
 
 .primary-teal {
   background: #009688;
   background: linear-gradient(to right bottom, #009688, #00695c);
 }
+.secondary-teal .step.title {
+  color: #fff;
+}
 .secondary-teal a {
-  border-bottom: 1px solid #009688;
+  color: #009688;
+  text-decoration: none;
 }
 .secondary-teal a:hover,
 .secondary-teal a:active {
-  color: #009688;
+  color: #fff;
+  background: #009688;
 }
+.secondary-teal .impress-progressbar {
+  background: #80cbc4;
+}
+.secondary-teal .impress-progressbar > div {
+  background: #009688;
+}
+.secondary-teal #impress-help {
+  background: #009688;
+}
+.secondary-teal #impress-toolbar button,
+.secondary-teal #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #009688;
+}
+
 
 .primary-green {
   background: #4caf50;
   background: linear-gradient(to right bottom, #4caf50, #2e7d32);
 }
+.secondary-green .step.title {
+  color: #fff;
+}
 .secondary-green a {
-  border-bottom: 1px solid #4caf50;
+  color: #4caf50;
+  text-decoration: none;
 }
 .secondary-green a:hover,
 .secondary-green a:active {
-  color: #4caf50;
+  color: #fff;
+  background: #4caf50;
 }
+.secondary-green .impress-progressbar {
+  background: #a5d6a7;
+}
+.secondary-green .impress-progressbar > div {
+  background: #4caf50;
+}
+.secondary-green #impress-help {
+  background: #4caf50;
+}
+.secondary-green #impress-toolbar button,
+.secondary-green #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #4caf50;
+}
+
 
 .primary-lightGreen {
   background: #8bc34a;
   background: linear-gradient(to right bottom, #8bc34a, #558b2f);
 }
+.secondary-lightGreen .step.title {
+  color: #fff;
+}
 .secondary-lightGreen a {
-  border-bottom: 1px solid #8bc34a;
+  color: #8bc34a;
+  text-decoration: none;
 }
 .secondary-lightGreen a:hover,
 .secondary-lightGreen a:active {
-  color: #8bc34a;
+  color: #fff;
+  background: #8bc34a;
 }
+.secondary-lightGreen .impress-progressbar {
+  background: #c5e1a5;
+}
+.secondary-lightGreen .impress-progressbar > div {
+  background: #8bc34a;
+}
+.secondary-lightGreen #impress-help {
+  background: #8bc34a;
+}
+.secondary-lightGreen #impress-toolbar button,
+.secondary-lightGreen #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #8bc34a;
+}
+
 
 .primary-lime {
   background: #cddc39;
   background: linear-gradient(to right bottom, #cddc39, #9e9d24);
 }
+.secondary-lime .step.title {
+  color: #fff;
+}
 .secondary-lime a {
-  border-bottom: 1px solid #cddc39;
+  color: #cddc39;
+  text-decoration: none;
 }
 .secondary-lime a:hover,
 .secondary-lime a:active {
-  color: #cddc39;
+  color: #fff;
+  background: #cddc39;
 }
+.secondary-lime .impress-progressbar {
+  background: #e6ee9c;
+}
+.secondary-lime .impress-progressbar > div {
+  background: #cddc39;
+}
+.secondary-lime #impress-help {
+  background: #cddc39;
+}
+.secondary-lime #impress-toolbar button,
+.secondary-lime #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #cddc39;
+}
+
 
 .primary-yellow {
   background: #ffeb3b;
   background: linear-gradient(to right bottom, #ffeb3b, #f9a825);
 }
+.secondary-yellow .step.title {
+  color: #fff;
+}
 .secondary-yellow a {
-  border-bottom: 1px solid #ffeb3b;
+  color: #ffeb3b;
+  text-decoration: none;
 }
 .secondary-yellow a:hover,
 .secondary-yellow a:active {
-  color: #ffeb3b;
+  color: #fff;
+  background: #ffeb3b;
 }
+.secondary-yellow .impress-progressbar {
+  background: #fff59d;
+}
+.secondary-yellow .impress-progressbar > div {
+  background: #ffeb3b;
+}
+.secondary-yellow #impress-help {
+  background: #ffeb3b;
+}
+.secondary-yellow #impress-toolbar button,
+.secondary-yellow #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #ffeb3b;
+}
+
 
 .primary-amber {
   background: #ffc107;
   background: linear-gradient(to right bottom, #ffc107, #ff8f00);
 }
+.secondary-amber .step.title {
+  color: #fff;
+}
 .secondary-amber a {
-  border-bottom: 1px solid #ffc107;
+  color: #ffc107;
+  text-decoration: none;
 }
 .secondary-amber a:hover,
 .secondary-amber a:active {
-  color: #ffc107;
+  color: #fff;
+  background: #ffc107;
 }
+.secondary-amber .impress-progressbar {
+  background: #ffe082;
+}
+.secondary-amber .impress-progressbar > div {
+  background: #ffc107;
+}
+.secondary-amber #impress-help {
+  background: #ffc107;
+}
+.secondary-amber #impress-toolbar button,
+.secondary-amber #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #ffc107;
+}
+
 
 .primary-orange {
   background: #ff9800;
   background: linear-gradient(to right bottom, #ff9800, #ef6c00);
 }
+.secondary-orange .step.title {
+  color: #fff;
+}
 .secondary-orange a {
-  border-bottom: 1px solid #ff9800;
+  color: #ff9800;
+  text-decoration: none;
 }
 .secondary-orange a:hover,
 .secondary-orange a:active {
-  color: #ff9800;
+  color: #fff;
+  background: #ff9800;
 }
+.secondary-orange .impress-progressbar {
+  background: #ffcc80;
+}
+.secondary-orange .impress-progressbar > div {
+  background: #ff9800;
+}
+.secondary-orange #impress-help {
+  background: #ff9800;
+}
+.secondary-orange #impress-toolbar button,
+.secondary-orange #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #ff9800;
+}
+
 
 .primary-deepOrange {
   background: #ff5722;
   background: linear-gradient(to right bottom, #ff5722, #d84315);
 }
+.secondary-deepOrange .step.title {
+  color: #fff;
+}
 .secondary-deepOrange a {
-  border-bottom: 1px solid #ff5722;
+  color: #ff5722;
+  text-decoration: none;
 }
 .secondary-deepOrange a:hover,
 .secondary-deepOrange a:active {
-  color: #ff5722;
+  color: #fff;
+  background: #ff5722;
 }
+.secondary-deepOrange .impress-progressbar {
+  background: #ffab91;
+}
+.secondary-deepOrange .impress-progressbar > div {
+  background: #ff5722;
+}
+.secondary-deepOrange #impress-help {
+  background: #ff5722;
+}
+.secondary-deepOrange #impress-toolbar button,
+.secondary-deepOrange #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #ff5722;
+}
+
 
 .primary-brown {
   background: #795548;
   background: linear-gradient(to right bottom, #795548, #4e342e);
 }
+.secondary-brown .step.title {
+  color: #fff;
+}
 .secondary-brown a {
-  border-bottom: 1px solid #795548;
+  color: #795548;
+  text-decoration: none;
 }
 .secondary-brown a:hover,
 .secondary-brown a:active {
-  color: #795548;
+  color: #fff;
+  background: #795548;
 }
+.secondary-brown .impress-progressbar {
+  background: #bcaaa4;
+}
+.secondary-brown .impress-progressbar > div {
+  background: #795548;
+}
+.secondary-brown #impress-help {
+  background: #795548;
+}
+.secondary-brown #impress-toolbar button,
+.secondary-brown #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #795548;
+}
+
 
 .primary-grey {
   background: #9e9e9e;
   background: linear-gradient(to right bottom, #9e9e9e, #424242);
 }
+.secondary-grey .step.title {
+  color: #fff;
+}
 .secondary-grey a {
-  border-bottom: 1px solid #9e9e9e;
+  color: #9e9e9e;
+  text-decoration: none;
 }
 .secondary-grey a:hover,
 .secondary-grey a:active {
-  color: #9e9e9e;
+  color: #fff;
+  background: #9e9e9e;
 }
+.secondary-grey .impress-progressbar {
+  background: #eeeeee;
+}
+.secondary-grey .impress-progressbar > div {
+  background: #9e9e9e;
+}
+.secondary-grey #impress-help {
+  background: #9e9e9e;
+}
+.secondary-grey #impress-toolbar button,
+.secondary-grey #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #9e9e9e;
+}
+
 
 .primary-blueGrey {
   background: #607d8b;
   background: linear-gradient(to right bottom, #607d8b, #37474f);
 }
+.secondary-blueGrey .step.title {
+  color: #fff;
+}
 .secondary-blueGrey a {
-  border-bottom: 1px solid #607d8b;
+  color: #607d8b;
+  text-decoration: none;
 }
 .secondary-blueGrey a:hover,
 .secondary-blueGrey a:active {
-  color: #607d8b;
+  color: #fff;
+  background: #607d8b;
 }
+.secondary-blueGrey .impress-progressbar {
+  background: #b0bec5;
+}
+.secondary-blueGrey .impress-progressbar > div {
+  background: #607d8b;
+}
+.secondary-blueGrey #impress-help {
+  background: #607d8b;
+}
+.secondary-blueGrey #impress-toolbar button,
+.secondary-blueGrey #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: #607d8b;
+}
+
 
 .primary-white {
   background: undefined;
   background: linear-gradient(to right bottom, undefined, undefined);
 }
+.secondary-white .step.title {
+  color: #fff;
+}
 .secondary-white a {
-  border-bottom: 1px solid undefined;
+  color: undefined;
+  text-decoration: none;
 }
 .secondary-white a:hover,
 .secondary-white a:active {
-  color: undefined;
+  color: #fff;
+  background: undefined;
 }
+.secondary-white .impress-progressbar {
+  background: undefined;
+}
+.secondary-white .impress-progressbar > div {
+  background: undefined;
+}
+.secondary-white #impress-help {
+  background: undefined;
+}
+.secondary-white #impress-toolbar button,
+.secondary-white #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: undefined;
+}
+
 
 .primary-black {
   background: undefined;
   background: linear-gradient(to right bottom, undefined, undefined);
 }
+.secondary-black .step.title {
+  color: #fff;
+}
 .secondary-black a {
-  border-bottom: 1px solid undefined;
+  color: undefined;
+  text-decoration: none;
 }
 .secondary-black a:hover,
 .secondary-black a:active {
-  color: undefined;
+  color: #fff;
+  background: undefined;
+}
+.secondary-black .impress-progressbar {
+  background: undefined;
+}
+.secondary-black .impress-progressbar > div {
+  background: undefined;
+}
+.secondary-black #impress-help {
+  background: undefined;
+}
+.secondary-black #impress-toolbar button,
+.secondary-black #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: undefined;
 }

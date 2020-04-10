@@ -23,5 +23,5 @@
 .slide.shape-circle.depth-2:not(.present) > h2,
 .slide.shape-circle.depth-3:not(.present) > h3 {
   transform: translate3d(420px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
-  transition: 1s;
+  transition: ${transitionDuration}ms;
 }

@@ -1,5 +1,7 @@
-import {ImpressMeConfig, SlideNode, SlidePosition} from "../config";
 import {PositionStrategy} from "./position.strategy";
+import {ImpressMeConfig} from "../impress-me-config";
+import {SlidePosition} from "../slide-position";
+import {SlideNode} from "../slide-node";
 
 const defaultPosition = {
   x: 0,

@@ -1,9 +1,9 @@
-import {ImpressMeConfig} from "./config";
 import {existsSync, promises} from "fs";
-import {minifyCss, minifyJs, renderTemplate, resolvePath} from "./helpers";
+import {logEnd, logInit, logStep, minifyCss, minifyJs, renderTemplate, resolvePath} from "./helpers";
 import {markdownToHtml} from "./markdown";
-import {debug} from 'loglevel';
 import {themes} from "./themes";
+import {ImpressMeConfig} from "./impress-me-config";
+import {PositionStrategyFactory} from "./position";
 
 const defaultConfig: ImpressMeConfig = {
   template: 'templates/slides.pug',
@@ -24,6 +24,8 @@ const defaultConfig: ImpressMeConfig = {
   shape: 'circle',
   strategy: 'planet',
   transitionDuration: 0,
+
+  positionStrategyFactory: new PositionStrategyFactory(),
 
   width: 1920,
   height: 1080,
@@ -52,6 +54,7 @@ export class ImpressMe {
   }
 
   convert(input: string, output?: string): Promise<void> {
+    logInit();
     const inputFile = [input, `${input}.md`].find(existsSync);
     if (inputFile === undefined) {
       throw new Error('Input file not found: ' + input);
@@ -60,13 +63,19 @@ export class ImpressMe {
       ? output
       : `${input.replace(/\.[^/.]+$/, "")}.html`;
 
+    logStep('Preparing input')('');
+
     return Promise.all([
-      markdownToHtml(inputFile, this.config),
-      minifyJs(this.config.jsFiles),
-      minifyCss(this.config.cssFiles)
+      markdownToHtml(inputFile, this.config)
+        .then(logStep('Markdown converted')),
+      minifyJs(this.config.jsFiles)
+        .then(logStep('JavaScript files merged')),
+      minifyCss(this.config.cssFiles, (css: string) => css.replace(/\${transitionDuration}/g, `${this.config.transitionDuration}`))
+        .then(logStep('CSS files merged'))
     ])
       .then(([html, js, css]) => renderTemplate(this.config.template, html, js, css, this.config))
+      .then(logStep('Template rendered'))
       .then(html => promises.writeFile(outFile, html))
-      .then(() => debug(`Created ${outFile} from ${inputFile}`));
+      .then(logEnd(`Creating "${outFile}" from "${inputFile}"`));
   }
 }

@@ -1,18 +1,19 @@
-import {ImpressMeConfig, SlideNode, SlideNodeState, SlidePosition} from "./config";
-import {PositionStrategy, PositionStrategyFactory} from "./position";
+import {PositionStrategy} from "./position";
 import {debug} from "loglevel";
-import {attrItemPattern, attrPattern, resolvePath} from "./helpers";
+import {attrItemPattern, attrPattern, logStep, resolvePath} from "./helpers";
 import {existsSync, promises, readFileSync} from "fs";
 import * as marked from "marked";
 import {highlightAuto} from "highlight.js";
+import {ImpressMeConfig} from "./impress-me-config";
+import {SlidePosition} from "./slide-position";
+import {SlideNode} from "./slide-node";
+import {SlideNodeState} from "./slide-node-state";
 import Heading = marked.Tokens.Heading;
 
 const appendHeadingAttributes = (text: string, attrs: Record<string, string>): void => {
   let match = attrPattern.exec(text);
   if (match) {
-    const text = match[1];
     const attr_text = match[3];
-    debug('heading with attributes', text, attr_text);
     while (match = attrItemPattern.exec(attr_text)) {
       const key = match[1].trim();
       const value = match[2].trim();
@@ -45,11 +46,11 @@ const generateState = (headings: marked.Tokens.Heading[], positionStrategy: Posi
     }
     node.classes = node.attrs['class'].split(' ');
 
-    ['title', 'overview'].forEach(id => {
+    ['title', 'overview', 'end'].forEach(id => {
       if (node.classes!.includes(id) && !node.attrs['id']) {
         node.attrs['id'] = id;
       }
-    })
+    });
 
     switch (curr.depth) {
       case 1:
@@ -155,15 +156,18 @@ const processImage = (href: string, title: string, text: string): string => {
 
 export const markdownToHtml = (file: string, config: ImpressMeConfig): Promise<string> => {
   return promises.readFile(file, 'utf8')
-    .then(data => data.toString())
-    .then(md => {
-      const renderer = new marked.Renderer();
-
+    .then(logStep(`Markdown file "${file}" read`))
+    .then<[string, SlideNodeState], never>(md => {
       const tokens = marked.lexer(md);
       const headings = tokens.filter(token => token.type === 'heading') as Heading[];
-      const positionStrategy = new PositionStrategyFactory().create(config);
+      const positionStrategy = config.positionStrategyFactory.create(config);
       const state: SlideNodeState = generateState(headings, positionStrategy);
 
+      return [md, state];
+    })
+    .then(logStep('Node state generated'))
+    .then(([md, state]) => {
+      const renderer = new marked.Renderer();
       renderer.heading = processHeading(state, config);
       renderer.image = processImage;
 

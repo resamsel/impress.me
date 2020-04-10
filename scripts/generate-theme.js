@@ -15,16 +15,37 @@ fs.writeFile(
     .filter(colorName => !excluded.includes(colorName))
     .map(colorName => {
       const color = colors[colorName];
-      return `.primary-${colorName} {
+      return `
+.primary-${colorName} {
   background: ${color['500']};
   background: linear-gradient(to right bottom, ${color['500']}, ${color['800']});
 }
+.secondary-${colorName} .step.title {
+  color: #fff;
+}
 .secondary-${colorName} a {
-  border-bottom: 1px solid ${color['500']};
+  color: ${color['500']};
+  text-decoration: none;
 }
 .secondary-${colorName} a:hover,
 .secondary-${colorName} a:active {
-  color: ${color['500']};
+  color: #fff;
+  background: ${color['500']};
+}
+.secondary-${colorName} .impress-progressbar {
+  background: ${color['200']};
+}
+.secondary-${colorName} .impress-progressbar > div {
+  background: ${color['500']};
+}
+.secondary-${colorName} #impress-help {
+  background: ${color['500']};
+}
+.secondary-${colorName} #impress-toolbar button,
+.secondary-${colorName} #impress-toolbar select {
+  color: #fff;
+  font-weight: bold;
+  background: ${color['500']};
 }
 `;
     })

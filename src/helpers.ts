@@ -1,15 +1,38 @@
 import * as path from "path";
 import * as fs from "fs";
-import {promises} from "fs";
-import {ImpressMeConfig, SlideNode} from "./config";
+import {promises, readFileSync} from "fs";
 import * as CleanCss from "clean-css";
-import {minify} from "uglify-es";
 import {compileFile} from "pug";
+import {ImpressMeConfig} from "./impress-me-config";
+import {SlideNode} from "./slide-node";
+import {debug} from "loglevel";
+import {minify} from 'uglify-es';
 
-export const noSlideClasses = ['title', 'overview', 'background', 'end'];
+export const excludeSlideClasses = ['title', 'overview', 'background', 'end'];
 export const attrPattern = /(.*\S)\s*(\[]\(|<a href=")([^"]*)(\)|"><\/a>)\s*/;
 export const attrItemPattern = /([^=,]+)\s*=\s*([^=,]+)/g;
 const module_path = path.dirname(__dirname);
+
+let startTimestamp = new Date().getTime();
+let timestamp = startTimestamp;
+export const logInit = (): void => {
+  startTimestamp = new Date().getTime();
+  timestamp = startTimestamp;
+};
+
+export const logStep = (message: string): (<T>(input: T) => T) =>
+  input => {
+    const now = new Date().getTime();
+    debug(message + ' - took ' + (now - timestamp) + 'ms');
+    timestamp = now;
+    return input;
+  };
+
+export const logEnd = (message: string): (() => void) =>
+  () => {
+    const now = new Date().getTime();
+    debug(message + ' took ' + (now - startTimestamp) + 'ms');
+  };
 
 export const resolvePath = (path: string): string => {
   return [
@@ -60,27 +83,56 @@ export const flattenNodes = (node: SlideNode): SlideNode[] => {
 };
 
 export const includeSlide = (node: SlideNode): boolean =>
-  noSlideClasses.find(cls => (node.classes || ['title']).includes(cls)) === undefined;
+  excludeSlideClasses.find(cls => (node.classes || ['title']).includes(cls)) === undefined;
 
-const cleanCss = new CleanCss();
+export const toDataUri = (file: string): string =>
+  `data:image/png;base64,${readFileSync(file, 'base64')}`;
 
-export const minifyCss = (cssFiles: string[]) =>
+export const extractUri = (uri: string): string =>
+  uri.replace(/^\s*(url\s*\(\s*)?['"]?([^\s'")]+)['"]?(\s*\))?\s*$/, '$2');
+
+const cssPropertyValueToDataUri = (propertyName: string, propertyValue: string) => {
+  if (propertyName === 'background-image') {
+    if (!propertyValue.startsWith('data:') && !propertyValue.startsWith('url(data:')
+      && !propertyValue.startsWith('http:') && !propertyValue.startsWith('url(http:')
+      && !propertyValue.startsWith('https:') && !propertyValue.startsWith('url(https:')) {
+      return 'url(' + toDataUri(extractUri(propertyValue)) + ')';
+    }
+  }
+  return propertyValue;
+};
+
+const cleanCss = new CleanCss({
+  level: {
+    1: {
+      transform: cssPropertyValueToDataUri
+    }
+  }
+});
+
+export const minifyCss = (cssFiles: string[], processCss: (css: string) => string) =>
   Promise.all(
-    cssFiles.map(file => promises.readFile(file, 'utf8')
-      .then((data: string) => cleanCss.minify(data.toString()).styles)))
+    cssFiles.map(file => promises.readFile(file, {encoding: 'utf8'})
+      .then(processCss)
+      .then((data: string) => cleanCss.minify(data).styles)
+      .then(logStep(`CSS file "${file}" minified`))
+    ))
     .then(outputs => outputs.join('\n'));
 
 
 export const minifyJs = (jsFiles: string[]) =>
   Promise.all(
     jsFiles.map(file => promises.readFile(file, 'utf8')
-      .then((data: string) => minify(data.toString()).code)))
+      .then(logStep(`JavaScript file "${file}" read`))
+      .then((data: string) => minify(data).code)
+      .then(logStep(`JavaScript file "${file}" minified`))
+    ))
     .then(outputs => outputs.join(';'));
 
 export const renderTemplate = (template: string, html: string, js: string, css: string, config: ImpressMeConfig): string =>
   compileFile(resolvePath(template))({
+    title: 'Impress.me Slides',
     ...config,
-    title: config.title || 'Impress Slides',
     js,
     css,
     marked: html

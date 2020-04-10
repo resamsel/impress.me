@@ -68,15 +68,17 @@ impress.me Demo.md --cssFiles a.css b.css
 console.log('Hello World!');
 ```
 
-### Links and Images and more
+### Links and Images and More
 
-* [Inline link](https://github.com/resamsel/impress.me)
-* [Reference style link]
+* Inline [link](https://github.com/resamsel/impress.me)
+* Reference style [link]
 * Inline image:
   ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 * Reference style image:
   ![alt text][logo]
-  
+* Image in link:
+  [![alt text][logo]](https://github.com/resamsel/impress.me)
+
 ### Positioning
 
 * Automatic positioning
@@ -100,27 +102,74 @@ console.log('Hello World!');
 ```markdown
 ## No Options
 
-Will be positioned and scaled automatically.
+Will be positioned and scaled according
+to the positioning strategy.
 
-## Positioning [](x=100, y=100)
+## Custom Position Auto Scale [](x=100, y=100)
 
-Custom position, automatic scaling.
-
-## Sizing [](scale=2)
-
-Custom scaling, position will be computed.
-
-## Last Slide [](class=end)
-
-Special class for hidden heading, only content is
-shown.
+## Custom Scale Auto Position [](scale=2)
 ```
 
-### Highlight.js Styles
+### Special Slides
 
-* Default style: monokai
+* Special handling in styles
+* `class=end`
+  * End slide has no heading
+  * Sets `id=end`, if unset
+* `class=overview`
+  * Overview shows all slides
+  * Sets `id=overview`, if unset
+
+```markdown
+## Last Slide [](class=end)
+
+## Overview [](class=overview)
+```
+
+## Layouts
+
+* Multiple layouts
+* Single focus
+* Pair focus (default)
+
+### Single Focus [](class=focus-single)
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+### Single Focus Image [](class=focus-single)
+
+![Demo Presentation][demo-presentation]
+
+### Single Focus Code [](class=focus-single)
+
+```bash
+echo 'Hello impress.me!'
+```
+
+### Dual Focus [](class=focus-dual)
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+### Dual Focus Image [](class=focus-dual)
+
+![Demo Presentation][demo-presentation]
+
+![Demo Presentation][demo-presentation]
+
+### Dual Focus Code [](class=focus-dual)
+
+```bash
+echo 'Hello impress.me!'
+```
+
+```bash
+echo 'Hello impress.me!'
+```
 
 ## Overview [](class=overview)
 
 [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
-[Reference style link]: http://www.reddit.com
+[demo-presentation]: assets/demo-presentation.png "Demo Presentation"
+[link]: http://www.reddit.com

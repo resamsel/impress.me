@@ -66,16 +66,17 @@ i, em {
 
 a {
   color: rgba(0, 0, 0, .87);
-  border-bottom: 1px solid rgba(0, 0, 0, .4);
-  text-decoration: none;
-
+  margin: 0 -8px;
+  padding: 0 8px;
+  border-radius: 4px;
   transition: 0.5s;
 }
 
 a:hover,
 a:focus {
   color: #000;
-  border-bottom: 1px solid #000;
+  background: #ddd;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }
 
 h1, h2, h3 {
@@ -133,11 +134,11 @@ h1, h2, h3 {
   margin: 0;
   opacity: 1;
 
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -ms-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  transition: opacity 1s;
+  -webkit-transition: opacity ${transitionDuration}ms;
+  -moz-transition: opacity ${transitionDuration}ms;
+  -ms-transition: opacity ${transitionDuration}ms;
+  -o-transition: opacity ${transitionDuration}ms;
+  transition: opacity ${transitionDuration}ms;
 }
 
 .impress-enabled .step.active {
@@ -175,7 +176,7 @@ h1, h2, h3 {
 
 .slide > * {
   opacity: 0;
-  transition: 1s;
+  transition: ${transitionDuration}ms;
 }
 
 .slide > h1,
@@ -197,6 +198,7 @@ h1, h2, h3 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 64px;
 }
 
 .slide.present.depth-2 > h2,
@@ -218,11 +220,6 @@ h1, h2, h3 {
   line-height: 150%;
 }
 
-.slide.depth-2 p:first-of-type,
-.slide.depth-3 p:first-of-type {
-  margin-top: 64px;
-}
-
 .slide ol,
 .slide ul {
   padding-left: 128px;
@@ -231,7 +228,6 @@ h1, h2, h3 {
 .slide > ol,
 .slide > ul {
   font-size: 180%;
-  margin-top: 64px;
   width: 800px;
   overflow: hidden;
 }
@@ -318,15 +314,16 @@ Specific styles for: .title slides
 
 .step.end {
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity ${transitionDuration}ms;
 }
 
 .step.end.active {
   opacity: 1;
 }
 
+.slide.end > h2,
 .slide.end:before {
-  content: none;
+  display: none;
 }
 
 .slide.end img[alt="logo"] {
@@ -385,14 +382,68 @@ Specific styles for: .title slides
   cursor: initial;
 }
 
+/* LAYOUTS */
+
+.slide.focus-single > p,
+.slide.focus-single > pre,
+.slide.focus-dual > p,
+.slide.focus-dual > pre {
+  position: absolute;
+  top: 272px;
+  right: 64px;
+  bottom: 64px;
+  left: 64px;
+}
+
+.slide.focus-single > p,
+.slide.focus-single > pre {
+  width: auto;
+}
+
+.slide.focus-dual > p,
+.slide.focus-dual > pre {
+  width: 45%;
+}
+
+.slide.focus-dual > p:nth-of-type(1),
+.slide.focus-dual > pre:nth-of-type(1) {
+  right: initial;
+}
+
+.slide.focus-dual > p:nth-of-type(2),
+.slide.focus-dual > pre:nth-of-type(2) {
+  left: initial;
+}
+
+.slide.focus-single > p > img,
+.slide.focus-dual > p > img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
+}
+
 /* BUTTONS */
 
 #impress-toolbar button,
 #impress-toolbar select {
   border: none;
   margin: 4px;
-  background: rgba(255, 255, 255, 0.6);
+  padding: 4px 8px;
   border-radius: 2px;
+  opacity: 0.8;
+}
+
+#impress-toolbar select option {
+  background: #fff;
+  color: #000;
+}
+
+#impress-toolbar button#impress-autoplay-playpause {
+  width: auto !important;
+  height: auto !important;
 }
 
 /*
@@ -524,11 +575,11 @@ body.impress-mouse-timeout {
 
       This way user will not see the hint moving down.
   */
-  -webkit-transition: opacity 1s, -webkit-transform 0.5s 1s;
-  -moz-transition: opacity 1s, -moz-transform 0.5s 1s;
-  -ms-transition: opacity 1s, -ms-transform 0.5s 1s;
-  -o-transition: opacity 1s, -o-transform 0.5s 1s;
-  transition: opacity 1s, transform 0.5s 1s;
+  -webkit-transition: opacity ${transitionDuration}ms, -webkit-transform 0.5s ${transitionDuration}ms;
+  -moz-transition: opacity ${transitionDuration}ms, -moz-transform 0.5s ${transitionDuration}ms;
+  -ms-transition: opacity ${transitionDuration}ms, -ms-transform 0.5s ${transitionDuration}ms;
+  -o-transition: opacity ${transitionDuration}ms, -o-transform 0.5s ${transitionDuration}ms;
+  transition: opacity ${transitionDuration}ms, transform 0.5s ${transitionDuration}ms;
 }
 
 /*
@@ -562,11 +613,11 @@ body.impress-mouse-timeout {
       into its correct position and after that we fade it in with opacity
       transition.
   */
-  -webkit-transition: opacity 1s 5s, -webkit-transform 0.5s 4.5s;
-  -moz-transition: opacity 1s 5s, -moz-transform 0.5s 4.5s;
-  -ms-transition: opacity 1s 5s, -ms-transform 0.5s 4.5s;
-  -o-transition: opacity 1s 5s, -o-transform 0.5s 4.5s;
-  transition: opacity 1s 5s, transform 0.5s 4.5s;
+  -webkit-transition: opacity ${transitionDuration}ms 5s, -webkit-transform 0.5s 4.5s;
+  -moz-transition: opacity ${transitionDuration}ms 5s, -moz-transform 0.5s 4.5s;
+  -ms-transition: opacity ${transitionDuration}ms 5s, -ms-transform 0.5s 4.5s;
+  -o-transition: opacity ${transitionDuration}ms 5s, -o-transform 0.5s 4.5s;
+  transition: opacity ${transitionDuration}ms 5s, transform 0.5s 4.5s;
 }
 
 /*
@@ -606,19 +657,47 @@ body.impress-mouse-timeout {
   pointer-events: auto
 }
 
-/*
-    There is one funny thing I just realized.
+.impress-progressbar {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(75, 75, 75, 0.2);
+}
 
-    Thanks to this workaround above everything except #impress element is invisible
-    for click events. That means that the hint element is also not clickable.
-    So basically all of this transforms and delayed transitions trickery was probably
-    not needed at all...
+.impress-progressbar div {
+  width: 0;
+  height: 4px;
+  background: rgba(75, 75, 75, 0.87);
+  transition: width ${transitionDuration}ms linear;
+}
 
-    But it was fun to learn about it, wasn't it?
-*/
+.impress-progress {
+  display: none;
+}
 
-/*
-    That's all I have for you in this file.
-    Thanks for reading. I hope you enjoyed it at least as much as I enjoyed writing it
-    for you.
-*/
+.impress-enabled #impress-help {
+  background-color: rgba(75, 75, 75, 0.87);
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
+  color: #fff;
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  width: 24em;
+  transform: translate(-50%, 0);
+  border-radius: 4px;
+  padding: 8px 16px;
+  z-index: 100;
+}
+
+.impress-enabled #impress-help table {
+  width: 100%;
+}
+.impress-enabled #impress-help tr > td {
+  padding-left: 8px;
+}
+.impress-enabled #impress-help tr > td:first-of-type {
+  text-align: right;
+  padding-right: 8px;
+  width: 38%;
+}

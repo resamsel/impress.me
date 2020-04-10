@@ -11,6 +11,11 @@ html(lang="en")
 
   body(class=`primary-${primary} secondary-${secondary} theme-${themeName} shape-${shape} strategy-${strategy}`)
     div(id='impress' data-max-scale='2' data-width='1920' data-height='1080' data-transition-duration=transitionDuration) !{marked}
+    div(id='impress-toolbar')
+    div(class='impress-progressbar')
+      div
+    div(class='impress-progress')
+    div(id='impress-help')
     script(type='text/javascript') !{js}
     script(type='text/javascript').
       impress().init();
