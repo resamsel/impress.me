@@ -1,25 +1,25 @@
-import {PositionStrategy} from "./position";
-import {debug} from "loglevel";
-import {attrItemPattern, attrPattern, logStep, resolvePath} from "./helpers";
-import {existsSync, promises, readFileSync} from "fs";
-import * as marked from "marked";
-import {Slugger} from "marked";
-import {highlightAuto} from "highlight.js";
-import {ImpressMeConfig} from "./impress-me-config";
-import {SlidePosition} from "./slide-position";
-import {SlideNode} from "./slide-node";
-import {SlideNodeState} from "./slide-node-state";
+import {PositionStrategy} from './position';
+import {debug} from 'loglevel';
+import {attrItemPattern, attrPattern, logStep, resolvePath} from './helpers';
+import {existsSync, promises, readFileSync} from 'fs';
+import * as marked from 'marked';
+import {Slugger} from 'marked';
+import {highlightAuto} from 'highlight.js';
+import {ImpressMeConfig} from './impress-me-config';
+import {SlidePosition} from './slide-position';
+import {SlideNode} from './slide-node';
+import {SlideNodeState} from './slide-node-state';
 import Heading = marked.Tokens.Heading;
 
 const appendHeadingAttributes = (text: string, attrs: Record<string, string>): void => {
   let match = attrPattern.exec(text);
   if (match) {
-    const attr_text = match[3];
-    while ((match = attrItemPattern.exec(attr_text))) {
+    const attrText = match[3];
+    while ((match = attrItemPattern.exec(attrText))) {
       const key = match[1].trim();
       const value = match[2].trim();
-      if (key == 'class' || key == 'id' || key == 'style') {
-        attrs['class'] += ' ' + value
+      if (key === 'class' || key === 'id' || key === 'style') {
+        attrs.class += ' ' + value;
       } else {
         attrs['data-' + key] = value;
       }
@@ -28,14 +28,14 @@ const appendHeadingAttributes = (text: string, attrs: Record<string, string>): v
 };
 
 const generateState = (headings: marked.Tokens.Heading[], positionStrategy: PositionStrategy): SlideNodeState => {
-  const state = headings.reduce((state: SlideNodeState, curr: Heading) => {
+  const outerState = headings.reduce((state: SlideNodeState, curr: Heading) => {
     const root = state.root;
     const node: SlideNode = {
       ...curr,
       children: [],
       attrs: {
-        'class': "step slide depth-" + curr.depth
-      }
+        class: 'step slide depth-' + curr.depth,
+      },
     };
 
     state.nodes[curr.text] = node;
@@ -43,60 +43,61 @@ const generateState = (headings: marked.Tokens.Heading[], positionStrategy: Posi
     appendHeadingAttributes(curr.text, node.attrs);
 
     if (node.depth === 1) {
-      node.attrs['class'] += ' screen title';
+      node.attrs.class += ' screen title';
     }
-    node.classes = node.attrs['class'].split(' ');
+    node.classes = node.attrs.class.split(' ');
 
     ['title', 'overview', 'end'].forEach(id => {
-      if (node.classes!.includes(id) && !node.attrs['id']) {
-        node.attrs['id'] = id;
+      if (node.classes!.includes(id) && !node.attrs.id) {
+        node.attrs.id = id;
       }
     });
 
+    let parent;
     switch (curr.depth) {
       case 1:
         return {
           ...state,
-          root: node
+          root: node,
         };
       case 2:
         node.parent = root;
         root.children.push(node);
         return {
           ...state,
-          root
+          root,
         };
       case 3:
-        const parent = root.children[root.children.length - 1];
+        parent = root.children[root.children.length - 1];
         node.parent = parent;
         parent.children.push(node);
         return {
           ...state,
-          root
+          root,
         };
       default:
         return state;
     }
   }, {root: {}, nodes: {}, isOpen: false} as SlideNodeState);
 
-  Object.keys(state.nodes).forEach(key => {
-    const node = state.nodes[key];
+  Object.keys(outerState.nodes).forEach(key => {
+    const node = outerState.nodes[key];
     const pos = positionStrategy.calculate(node);
 
     node.pos = pos;
 
     const posKeys: (keyof SlidePosition)[] = ['x', 'y', 'z', 'scale'];
-    posKeys.forEach(key => {
-      const value = parseFloat(node.attrs['data-' + key]);
-      if (!isNaN(value)) {
-        pos[key] = value;
+    posKeys.forEach(k => {
+      const value = parseFloat(node.attrs['data-' + k]);
+      if (isNaN(value)) {
+        node.attrs['data-' + k] = String(pos[k]);
       } else {
-        node.attrs['data-' + key] = '' + pos[key];
+        pos[k] = value;
       }
     });
   });
 
-  return state;
+  return outerState;
 };
 
 const processHeading = (state: SlideNodeState, config: ImpressMeConfig):
@@ -129,12 +130,12 @@ const processHeading = (state: SlideNodeState, config: ImpressMeConfig):
       config.title = config.title || text;
     }
 
-    if (node.attrs['id'] === undefined) {
-      node.attrs['id'] = slug;
+    if (node.attrs.id === undefined) {
+      node.attrs.id = slug;
     }
 
     const attrList = Object.keys(node.attrs)
-      .filter(key => node.attrs.hasOwnProperty(key))
+      .filter(key => node.attrs[key] !== undefined)
       .map(key => `${key}="${node.attrs[key]}"`);
     html += '<div ' + attrList.join(' ') + '>';
     state.isOpen = true;
@@ -184,9 +185,9 @@ export const markdownToHtml = (file: string, config: ImpressMeConfig): Promise<s
         pedantic: false,
         smartLists: true,
         smartypants: false,
-        renderer: renderer,
+        renderer,
         langPrefix: 'hljs ',
-        highlight: (code: string, lang: string) => highlightAuto(code, [lang]).value
+        highlight: (code: string, lang: string) => highlightAuto(code, [lang]).value,
       });
 
       let markedHtml = marked(md);

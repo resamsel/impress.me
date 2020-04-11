@@ -1,4 +1,4 @@
-import {existsSync, promises} from "fs";
+import {existsSync, promises} from 'fs';
 import {
   logEnd,
   logInit,
@@ -9,12 +9,12 @@ import {
   renderTemplate,
   replaceCssVars,
   resolvePath,
-  toOutputFilename
-} from "./helpers";
-import {markdownToHtml} from "./markdown";
-import {themes} from "./themes";
-import {ImpressMeConfig} from "./impress-me-config";
-import {PositionStrategyFactory} from "./position";
+  toOutputFilename,
+} from './helpers';
+import {markdownToHtml} from './markdown';
+import {themes} from './themes';
+import {ImpressMeConfig} from './impress-me-config';
+import {PositionStrategyFactory} from './position';
 
 const defaultConfig: ImpressMeConfig = {
   template: 'templates/slides.pug',
@@ -24,14 +24,14 @@ const defaultConfig: ImpressMeConfig = {
     'css/rounded.shape.css',
     'css/colors.css',
     'css/newspaper.theme.css',
-    'highlight.js/styles/monokai.css'
+    'highlight.js/styles/monokai.css',
   ].map(resolvePath),
   jsFiles: [
-    'impress.js/js/impress.js'
+    'impress.js/js/impress.js',
   ].map(resolvePath),
   primary: 'default',
   secondary: 'default',
-  theme: themes['planet'],
+  theme: themes.planet,
   shape: 'circle',
   strategy: 'planet',
   transitionDuration: 0,
@@ -42,25 +42,26 @@ const defaultConfig: ImpressMeConfig = {
   height: 1080,
   shapeSize: 1680,
   shapeOffset: 400,
-  stepDistance: 1920 * 0.6
+  stepDistance: 1920 * 0.6,
 };
 
 export class ImpressMe {
-  private readonly config: ImpressMeConfig = {
-    ...defaultConfig,
-    ...this.flags.theme,
-    ...this.flags,
-    cssFiles: [
-      ...defaultConfig.cssFiles,
-      ...this.flags.cssFiles || []
-    ],
-    jsFiles: [
-      ...defaultConfig.jsFiles,
-      ...this.flags.jsFiles || []
-    ]
-  };
+  private readonly config: ImpressMeConfig;
 
-  constructor(private readonly flags: Partial<ImpressMeConfig> = {}) {
+  constructor(readonly flags: Partial<ImpressMeConfig> = {}) {
+    this.config = {
+      ...defaultConfig,
+      ...this.flags.theme,
+      ...this.flags,
+      cssFiles: [
+        ...defaultConfig.cssFiles,
+        ...this.flags.cssFiles || [],
+      ],
+      jsFiles: [
+        ...defaultConfig.jsFiles,
+        ...this.flags.jsFiles || [],
+      ],
+    };
   }
 
   convert(input: string, output?: string): Promise<void> {
@@ -71,7 +72,7 @@ export class ImpressMe {
       throw new Error('Input file not found: ' + input);
     }
 
-    const outFile = output !== undefined ? output : toOutputFilename(input);
+    const outFile = output === undefined ? toOutputFilename(input) : output;
 
     logStart('Input/output prepared');
     return Promise.all([
@@ -80,7 +81,7 @@ export class ImpressMe {
       mergeJs(this.config.jsFiles)
         .then(logStep('JavaScript files merged')),
       mergeCss(this.config.cssFiles, replaceCssVars(this.config))
-        .then(logStep('CSS files merged'))
+        .then(logStep('CSS files merged')),
     ])
       .then(([html, js, css]) => renderTemplate(this.config.template, html, js, css, this.config))
       .then(logStep('Template rendered'))

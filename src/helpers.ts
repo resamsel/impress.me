@@ -1,17 +1,17 @@
-import * as path from "path";
-import * as fs from "fs";
-import {promises, readFileSync} from "fs";
-import * as CleanCss from "clean-css";
-import {compileFile} from "pug";
-import {ImpressMeConfig} from "./impress-me-config";
-import {SlideNode} from "./slide-node";
-import {debug} from "loglevel";
+import * as path from 'path';
+import * as fs from 'fs';
+import {promises, readFileSync} from 'fs';
+import * as CleanCss from 'clean-css';
+import {compileFile} from 'pug';
+import {ImpressMeConfig} from './impress-me-config';
+import {SlideNode} from './slide-node';
+import {debug} from 'loglevel';
 import {minify} from 'uglify-es';
 
 export const excludeSlideClasses = ['title', 'overview', 'background', 'end'];
 export const attrPattern = /(.*\S)\s*(\[]\(|<a href=")([^"]*)(\)|"><\/a>)\s*/;
 export const attrItemPattern = /([^=,]+)\s*=\s*([^=,]+)/g;
-const module_path = path.dirname(__dirname);
+const modulePath = path.dirname(__dirname);
 
 let startTimestamp = new Date().getTime();
 let timestamp = startTimestamp;
@@ -42,16 +42,16 @@ export const logEnd = (message: string): (() => void) =>
   };
 
 export const toOutputFilename = (input: string) => {
-  return `${input.replace(/\.[^/.]+$/, "")}.html`;
+  return `${input.replace(/\.[^/.]+$/, '')}.html`;
 };
 
-export const resolvePath = (path: string): string => {
+export const resolvePath = (p: string): string => {
   return [
-    module_path + '/' + path,
-    path,
-    'node_modules/' + path,
-    '../' + path
-  ].find(fs.existsSync) || path;
+    modulePath + '/' + p,
+    p,
+    'node_modules/' + p,
+    '../' + p,
+  ].find(fs.existsSync) || p;
 };
 
 export const findRoot = (node: SlideNode): SlideNode => {
@@ -70,12 +70,12 @@ export const findIndex = (root: SlideNode, node: SlideNode): number => {
     return 0;
   }
   let index = 0;
-  for (let child of root.children) {
+  for (const child of root.children) {
     index += 1;
     if (child === node) {
       return index;
     }
-    for (let child2 of child.children) {
+    for (const child2 of child.children) {
       index += 1;
       if (child2 === node) {
         return index;
@@ -104,9 +104,9 @@ export const extractUri = (uri: string): string =>
 
 const cssPropertyValueToDataUri = (propertyName: string, propertyValue: string) => {
   if (propertyName === 'background-image') {
-    if (!propertyValue.startsWith('data:') && !propertyValue.startsWith('url(data:')
-      && !propertyValue.startsWith('http:') && !propertyValue.startsWith('url(http:')
-      && !propertyValue.startsWith('https:') && !propertyValue.startsWith('url(https:')) {
+    if (!propertyValue.startsWith('data:') && !propertyValue.startsWith('url(data:') &&
+      !propertyValue.startsWith('http:') && !propertyValue.startsWith('url(http:') &&
+      !propertyValue.startsWith('https:') && !propertyValue.startsWith('url(https:')) {
       return 'url(' + toDataUri(extractUri(propertyValue)) + ')';
     }
   }
@@ -116,9 +116,9 @@ const cssPropertyValueToDataUri = (propertyName: string, propertyValue: string) 
 const cleanCss = new CleanCss({
   level: {
     1: {
-      transform: cssPropertyValueToDataUri
-    }
-  }
+      transform: cssPropertyValueToDataUri,
+    },
+  },
 });
 
 export const replaceCssVars = (config: ImpressMeConfig): ((css: string) => string) => {
@@ -135,7 +135,6 @@ export const mergeCss = (cssFiles: string[], preProcessCss: (css: string) => str
     ))
     .then(outputs => outputs.join('\n'));
 
-
 export const mergeJs = (jsFiles: string[]) =>
   Promise.all(
     jsFiles.map(file => promises.readFile(file, 'utf8')
@@ -145,11 +144,13 @@ export const mergeJs = (jsFiles: string[]) =>
     ))
     .then(outputs => outputs.join(';'));
 
-export const renderTemplate = (template: string, html: string, js: string, css: string, config: ImpressMeConfig): string =>
-  compileFile(resolvePath(template))({
+// eslint-disable-next-line max-params
+export const renderTemplate = (template: string, html: string, js: string, css: string, config: ImpressMeConfig): string => {
+  return compileFile(resolvePath(template))({
     title: 'Impress.me Slides',
     ...config,
     js,
     css,
-    marked: html
+    marked: html,
   });
+};

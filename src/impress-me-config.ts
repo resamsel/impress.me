@@ -1,5 +1,5 @@
-import {Theme} from "./theme";
-import {PositionStrategyFactory} from "./position";
+import {Theme} from './theme';
+import {PositionStrategyFactory} from './position';
 
 export interface ImpressMeConfig {
   template: string;

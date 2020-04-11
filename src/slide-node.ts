@@ -1,4 +1,4 @@
-import {SlidePosition} from "./slide-position";
+import {SlidePosition} from './slide-position';
 
 export interface SlideNode {
   parent?: SlideNode;

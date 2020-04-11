@@ -1,4 +1,4 @@
-import {SlideNode} from "./slide-node";
+import {SlideNode} from './slide-node';
 
 export interface SlideNodeState {
   root: SlideNode;
