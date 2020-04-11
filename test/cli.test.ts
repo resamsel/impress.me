@@ -64,4 +64,11 @@ describe('impress.me', () => {
     .it('runs impress.me Demo.md primary=blue secondary=purple theme=slides shape=none transitionDuration=0 debug', ctx => {
       expect(ctx.stdout).to.contain('Creating "Demo.html" from "Demo.md"');
     });
+
+  test
+    .stdout()
+    .do(() => cmd.run(['Demo.md', '--primary=blue', '--secondary=purple', '--theme=slides', '--shape=none', '--transitionDuration=0', '--strategy=newspaper', '--debug']))
+    .it('runs impress.me Demo.md primary=blue secondary=purple theme=slides shape=none transitionDuration=0 strategy=newspaper debug', ctx => {
+      expect(ctx.stdout).to.contain('Creating "Demo.html" from "Demo.md"');
+    });
 });
