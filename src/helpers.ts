@@ -15,9 +15,16 @@ const module_path = path.dirname(__dirname);
 
 let startTimestamp = new Date().getTime();
 let timestamp = startTimestamp;
+
 export const logInit = (): void => {
   startTimestamp = new Date().getTime();
   timestamp = startTimestamp;
+};
+
+export const logStart = (message: string): void => {
+  const now = new Date().getTime();
+  debug(message + ' - took ' + (now - timestamp) + 'ms');
+  timestamp = now;
 };
 
 export const logStep = (message: string): (<T>(input: T) => T) =>
@@ -33,6 +40,10 @@ export const logEnd = (message: string): (() => void) =>
     const now = new Date().getTime();
     debug(message + ' took ' + (now - startTimestamp) + 'ms');
   };
+
+export const toOutputFilename = (input: string) => {
+  return `${input.replace(/\.[^/.]+$/, "")}.html`;
+};
 
 export const resolvePath = (path: string): string => {
   return [
@@ -110,22 +121,27 @@ const cleanCss = new CleanCss({
   }
 });
 
-export const minifyCss = (cssFiles: string[], processCss: (css: string) => string) =>
+export const replaceCssVars = (config: ImpressMeConfig): ((css: string) => string) => {
+  return (css: string) =>
+    css.replace(/\${transitionDuration}/g, `${config.transitionDuration}ms`);
+};
+
+export const mergeCss = (cssFiles: string[], preProcessCss: (css: string) => string) =>
   Promise.all(
     cssFiles.map(file => promises.readFile(file, {encoding: 'utf8'})
-      .then(processCss)
+      .then(preProcessCss)
       .then((data: string) => cleanCss.minify(data).styles)
-      .then(logStep(`CSS file "${file}" minified`))
+      .then(logStep(`CSS file minified: "${file}"`))
     ))
     .then(outputs => outputs.join('\n'));
 
 
-export const minifyJs = (jsFiles: string[]) =>
+export const mergeJs = (jsFiles: string[]) =>
   Promise.all(
     jsFiles.map(file => promises.readFile(file, 'utf8')
-      .then(logStep(`JavaScript file "${file}" read`))
+      .then(logStep(`JavaScript file read: "${file}"`))
       .then((data: string) => minify(data).code)
-      .then(logStep(`JavaScript file "${file}" minified`))
+      .then(logStep(`JavaScript file minified: "${file}"`))
     ))
     .then(outputs => outputs.join(';'));
 

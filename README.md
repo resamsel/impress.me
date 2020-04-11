@@ -12,9 +12,11 @@ Create impress.js presentations from markdown documents with style
 
 <!-- tocstop -->
 
-## Demo
+## Demo [](class=focus-dual)
 
 See [Demo.md](Demo.md) for an example markdown document that will create great results.
+
+![Demo Presentation][demo-presentation]
 
 ## Usage
 <!-- usage -->
@@ -30,3 +32,5 @@ USAGE
 ...
 ```
 <!-- usagestop -->
+
+[demo-presentation]: assets/demo-presentation.png "Demo Presentation"

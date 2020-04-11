@@ -1,3 +1,7 @@
+:root {
+  --transitionDuration: ${transitionDuration};
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -14,8 +18,8 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
+  font-size: 100%;
   vertical-align: baseline;
 }
 
@@ -39,7 +43,6 @@ blockquote, q {
 
 blockquote:before, blockquote:after,
 q:before, q:after {
-  content: '';
   content: none;
 }
 
@@ -76,7 +79,7 @@ a:hover,
 a:focus {
   color: #000;
   background: #ddd;
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
 }
 
 h1, h2, h3 {
@@ -119,10 +122,6 @@ h1, h2, h3 {
   padding: 40px;
   margin: 20px auto;
 
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -o-box-sizing: border-box;
   box-sizing: border-box;
 
   font-family: 'PT Sans', sans-serif;
@@ -134,11 +133,7 @@ h1, h2, h3 {
   margin: 0;
   opacity: 1;
 
-  -webkit-transition: opacity ${transitionDuration}ms;
-  -moz-transition: opacity ${transitionDuration}ms;
-  -ms-transition: opacity ${transitionDuration}ms;
-  -o-transition: opacity ${transitionDuration}ms;
-  transition: opacity ${transitionDuration}ms;
+  transition: opacity var(--transitionDuration);
 }
 
 .impress-enabled .step.active {
@@ -176,7 +171,7 @@ h1, h2, h3 {
 
 .slide > * {
   opacity: 0;
-  transition: ${transitionDuration}ms;
+  transition: var(--transitionDuration);
 }
 
 .slide > h1,
@@ -306,6 +301,17 @@ Specific styles for: .title slides
   opacity: 1;
 }
 
+.step.title a,
+.step.title a {
+  text-decoration: underline;
+}
+
+.step.title a:hover,
+.step.title a:active {
+  background: transparent;
+  box-shadow: none;
+}
+
 .step.title:before {
   display: none;
 }
@@ -314,7 +320,7 @@ Specific styles for: .title slides
 
 .step.end {
   opacity: 0;
-  transition: opacity ${transitionDuration}ms;
+  transition: opacity var(--transitionDuration);
 }
 
 .step.end.active {
@@ -425,27 +431,6 @@ Specific styles for: .title slides
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
 }
 
-/* BUTTONS */
-
-#impress-toolbar button,
-#impress-toolbar select {
-  border: none;
-  margin: 4px;
-  padding: 4px 8px;
-  border-radius: 2px;
-  opacity: 0.8;
-}
-
-#impress-toolbar select option {
-  background: #fff;
-  color: #000;
-}
-
-#impress-toolbar button#impress-autoplay-playpause {
-  width: auto !important;
-  height: auto !important;
-}
-
 /*
     We also make other steps visible and give them a pointer cursor using the
     `impress-on-` class.
@@ -453,20 +438,6 @@ Specific styles for: .title slides
 .impress-on-overview .step {
   opacity: 1;
   cursor: pointer;
-}
-
-/*
-    This version of impress.js supports plugins, and in particular, a UI toolbar
-    plugin that allows easy navigation between steps and autoplay.
-*/
-.impress-enabled div#impress-toolbar {
-  position: fixed;
-  right: 8px;
-  bottom: 8px;
-}
-
-.impress-enabled div#impress-toolbar > span {
-  margin-right: 10px;
 }
 
 /*
@@ -575,11 +546,7 @@ body.impress-mouse-timeout {
 
       This way user will not see the hint moving down.
   */
-  -webkit-transition: opacity ${transitionDuration}ms, -webkit-transform 0.5s ${transitionDuration}ms;
-  -moz-transition: opacity ${transitionDuration}ms, -moz-transform 0.5s ${transitionDuration}ms;
-  -ms-transition: opacity ${transitionDuration}ms, -ms-transform 0.5s ${transitionDuration}ms;
-  -o-transition: opacity ${transitionDuration}ms, -o-transform 0.5s ${transitionDuration}ms;
-  transition: opacity ${transitionDuration}ms, transform 0.5s ${transitionDuration}ms;
+  transition: opacity var(--transitionDuration), transform 0.5s var(--transitionDuration);
 }
 
 /*
@@ -613,11 +580,7 @@ body.impress-mouse-timeout {
       into its correct position and after that we fade it in with opacity
       transition.
   */
-  -webkit-transition: opacity ${transitionDuration}ms 5s, -webkit-transform 0.5s 4.5s;
-  -moz-transition: opacity ${transitionDuration}ms 5s, -moz-transform 0.5s 4.5s;
-  -ms-transition: opacity ${transitionDuration}ms 5s, -ms-transform 0.5s 4.5s;
-  -o-transition: opacity ${transitionDuration}ms 5s, -o-transform 0.5s 4.5s;
-  transition: opacity ${transitionDuration}ms 5s, transform 0.5s 4.5s;
+  transition: opacity var(--transitionDuration) 5s, transform 0.5s 4.5s;
 }
 
 /*
@@ -642,15 +605,55 @@ body.impress-mouse-timeout {
     So use it wisely ... or don't use at all.
 */
 .impress-enabled {
-  pointer-events: none
+  pointer-events: none;
 }
 
 .impress-enabled #impress {
-  pointer-events: auto
+  pointer-events: auto;
 }
 
+/*
+ * PLUGINS
+ */
+
+/*
+    This version of impress.js supports plugins, and in particular, a UI toolbar
+    plugin that allows easy navigation between steps and autoplay.
+*/
 .impress-enabled #impress-toolbar {
-  pointer-events: auto
+  pointer-events: auto;
+  position: fixed;
+  right: 8px;
+  bottom: 8px;
+}
+
+.impress-enabled #impress-toolbar button,
+.impress-enabled #impress-toolbar select {
+  border: none;
+  margin: 4px;
+  padding: 4px 16px;
+  border-radius: 2px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.impress-enabled #impress-toolbar button:hover,
+.impress-enabled #impress-toolbar select:hover {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.impress-enabled #impress-toolbar select option {
+  background: #fff;
+  color: #000;
+}
+
+.impress-enabled #impress-toolbar button#impress-autoplay-playpause {
+  width: auto !important;
+  height: auto !important;
+}
+
+.impress-enabled #impress-toolbar > span {
+  margin-right: 10px;
 }
 
 .impress-enabled #impress-console-button {
@@ -669,7 +672,7 @@ body.impress-mouse-timeout {
   width: 0;
   height: 4px;
   background: rgba(75, 75, 75, 0.87);
-  transition: width ${transitionDuration}ms linear;
+  transition: width var(--transitionDuration) linear;
 }
 
 .impress-progress {
@@ -677,9 +680,10 @@ body.impress-mouse-timeout {
 }
 
 .impress-enabled #impress-help {
-  background-color: rgba(75, 75, 75, 0.87);
+  background-color: #fff;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
-  color: #fff;
+  color: #000;
+  opacity: 0.87;
   position: fixed;
   left: 50%;
   bottom: 32px;
@@ -693,9 +697,11 @@ body.impress-mouse-timeout {
 .impress-enabled #impress-help table {
   width: 100%;
 }
+
 .impress-enabled #impress-help tr > td {
   padding-left: 8px;
 }
+
 .impress-enabled #impress-help tr > td:first-of-type {
   text-align: right;
   padding-right: 8px;

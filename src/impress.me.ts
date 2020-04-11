@@ -1,5 +1,16 @@
 import {existsSync, promises} from "fs";
-import {logEnd, logInit, logStep, minifyCss, minifyJs, renderTemplate, resolvePath} from "./helpers";
+import {
+  logEnd,
+  logInit,
+  logStart,
+  logStep,
+  mergeCss,
+  mergeJs,
+  renderTemplate,
+  replaceCssVars,
+  resolvePath,
+  toOutputFilename
+} from "./helpers";
 import {markdownToHtml} from "./markdown";
 import {themes} from "./themes";
 import {ImpressMeConfig} from "./impress-me-config";
@@ -41,8 +52,7 @@ export class ImpressMe {
     ...this.flags,
     cssFiles: [
       ...defaultConfig.cssFiles,
-      ...this.flags.cssFiles || [],
-      // 'css/' + this.flags.theme!.themeName + '.theme.css'
+      ...this.flags.cssFiles || []
     ],
     jsFiles: [
       ...defaultConfig.jsFiles,
@@ -55,22 +65,21 @@ export class ImpressMe {
 
   convert(input: string, output?: string): Promise<void> {
     logInit();
+
     const inputFile = [input, `${input}.md`].find(existsSync);
     if (inputFile === undefined) {
       throw new Error('Input file not found: ' + input);
     }
-    const outFile = output !== undefined
-      ? output
-      : `${input.replace(/\.[^/.]+$/, "")}.html`;
 
-    logStep('Preparing input')('');
+    const outFile = output !== undefined ? output : toOutputFilename(input);
 
+    logStart('Input/output prepared');
     return Promise.all([
       markdownToHtml(inputFile, this.config)
         .then(logStep('Markdown converted')),
-      minifyJs(this.config.jsFiles)
+      mergeJs(this.config.jsFiles)
         .then(logStep('JavaScript files merged')),
-      minifyCss(this.config.cssFiles, (css: string) => css.replace(/\${transitionDuration}/g, `${this.config.transitionDuration}`))
+      mergeCss(this.config.cssFiles, replaceCssVars(this.config))
         .then(logStep('CSS files merged'))
     ])
       .then(([html, js, css]) => renderTemplate(this.config.template, html, js, css, this.config))

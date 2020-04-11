@@ -6,7 +6,9 @@ const excluded = [
   'darkIcons',
   'darkText',
   'lightText',
-  'lightIcons'
+  'lightIcons',
+  'black',
+  'white',
 ];
 
 fs.writeFile(
@@ -14,14 +16,13 @@ fs.writeFile(
   Object.keys(colors)
     .filter(colorName => !excluded.includes(colorName))
     .map(colorName => {
-      const color = colors[colorName];
-      return `
+      const color = colors[colorName]
+      return `/*
+ * ${colorName}
+ */
 .primary-${colorName} {
   background: ${color['500']};
   background: linear-gradient(to right bottom, ${color['500']}, ${color['800']});
-}
-.secondary-${colorName} .step.title {
-  color: #fff;
 }
 .secondary-${colorName} a {
   color: ${color['500']};
@@ -32,13 +33,20 @@ fs.writeFile(
   color: #fff;
   background: ${color['500']};
 }
+.secondary-${colorName} .step.title {
+  color: #fff;
+}
+.secondary-${colorName} .step.title a {
+  color: #fff;
+}
+.secondary-${colorName} .step.title a:hover,
+.secondary-${colorName} .step.title a:active {
+  color: ${color['200']};
+}
 .secondary-${colorName} .impress-progressbar {
   background: ${color['200']};
 }
 .secondary-${colorName} .impress-progressbar > div {
-  background: ${color['500']};
-}
-.secondary-${colorName} #impress-help {
   background: ${color['500']};
 }
 .secondary-${colorName} #impress-toolbar button,

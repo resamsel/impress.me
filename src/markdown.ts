@@ -3,6 +3,7 @@ import {debug} from "loglevel";
 import {attrItemPattern, attrPattern, logStep, resolvePath} from "./helpers";
 import {existsSync, promises, readFileSync} from "fs";
 import * as marked from "marked";
+import {Slugger} from "marked";
 import {highlightAuto} from "highlight.js";
 import {ImpressMeConfig} from "./impress-me-config";
 import {SlidePosition} from "./slide-position";
@@ -14,7 +15,7 @@ const appendHeadingAttributes = (text: string, attrs: Record<string, string>): v
   let match = attrPattern.exec(text);
   if (match) {
     const attr_text = match[3];
-    while (match = attrItemPattern.exec(attr_text)) {
+    while ((match = attrItemPattern.exec(attr_text))) {
       const key = match[1].trim();
       const value = match[2].trim();
       if (key == 'class' || key == 'id' || key == 'style') {
@@ -98,8 +99,9 @@ const generateState = (headings: marked.Tokens.Heading[], positionStrategy: Posi
   return state;
 };
 
-const processHeading = (state: SlideNodeState, config: ImpressMeConfig): ((text: string, level: number) => string) => {
-  return (text: string, level: number) => {
+const processHeading = (state: SlideNodeState, config: ImpressMeConfig):
+  ((text: string, level: number, raw: string, slugger: Slugger) => string) => {
+  return (text: string, level: number, raw: string, slugger: Slugger) => {
     const h = 'h' + level;
     const nodeKey = text
       .replace('<a href="', '[](')
@@ -122,8 +124,13 @@ const processHeading = (state: SlideNodeState, config: ImpressMeConfig): ((text:
       text = match[1];
     }
 
+    const slug = slugger.slug(text);
     if (level === 1) {
       config.title = config.title || text;
+    }
+
+    if (node.attrs['id'] === undefined) {
+      node.attrs['id'] = slug;
     }
 
     const attrList = Object.keys(node.attrs)
