@@ -1,5 +1,5 @@
 import {expect, test} from '@oclif/test';
-import cmd = require('../src/cli');
+import cmd = require('../../src/cli');
 
 describe('impress.me', () => {
   // test
