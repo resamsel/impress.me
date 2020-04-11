@@ -441,14 +441,6 @@ Specific styles for: .title slides
 }
 
 /*
-    With help from the mouse-timeout plugin, we can hide the toolbar and
-    have it show only when you move/click/touch the mouse.
-*/
-body.impress-mouse-timeout div#impress-toolbar {
-  display: none;
-}
-
-/*
     In fact, we can hide the mouse cursor itself too, when mouse isn't used.
 */
 body.impress-mouse-timeout {
@@ -623,33 +615,96 @@ body.impress-mouse-timeout {
 .impress-enabled #impress-toolbar {
   pointer-events: auto;
   position: fixed;
-  right: 8px;
-  bottom: 8px;
+  height: 56px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 0 8px rgba(0, 0, 0, .4);
+  background-color: #fff;
+  padding: 12px 0;
+  display: flex;
+  justify-content: center;
+  transition: bottom var(--transitionDuration);
+}
+
+body.impress-mouse-timeout #impress-toolbar {
+  bottom: -80px;
 }
 
 .impress-enabled #impress-toolbar button,
 .impress-enabled #impress-toolbar select {
   border: none;
-  margin: 4px;
-  padding: 4px 16px;
-  border-radius: 2px;
+  margin: 0 4px;
   font-size: 24px;
   cursor: pointer;
 }
 
-.impress-enabled #impress-toolbar button:hover,
+.impress-enabled #impress-toolbar button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.impress-enabled #impress-toolbar button:active {
+  background-color: lightgray;
+}
+
+.impress-enabled #impress-toolbar button:focus {
+  outline: none;
+}
+
+.impress-enabled #impress-toolbar #impress-autoplay-playpause {
+  transform: translate(-50%, -50%);
+  width: 56px !important;
+  height: 56px !important;
+}
+
+.impress-enabled #impress-toolbar #impress-navigation-ui-prev {
+  padding-top: 6px;
+  transform: translate(-50%, -50%) translate(-64px, 0);
+}
+
+.impress-enabled #impress-toolbar #impress-navigation-ui-next {
+  padding-top: 6px;
+  transform: translate(-50%, -50%) translate(64px, 0);
+}
+
+.impress-enabled #impress-toolbar select {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translate(0, -50%);
+  display: block;
+  color: #444;
+  line-height: 1.3;
+  padding: .6em 1.4em .5em .8em;
+  width: 20%;
+  max-width: 20%;
+  box-sizing: border-box;
+  margin: 0;
+  border: 1px solid #aaa;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
+  border-radius: 4px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  text-transform: capitalize;
+}
+
 .impress-enabled #impress-toolbar select:hover {
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  border-color: #888;
 }
 
 .impress-enabled #impress-toolbar select option {
+  font-weight: normal;
+  line-height: 1.3;
   background: #fff;
   color: #000;
-}
-
-.impress-enabled #impress-toolbar button#impress-autoplay-playpause {
-  width: auto !important;
-  height: auto !important;
 }
 
 .impress-enabled #impress-toolbar > span {
@@ -663,12 +718,22 @@ body.impress-mouse-timeout {
 .impress-progressbar {
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: 80px;
   left: 0;
-  background: rgba(75, 75, 75, 0.2);
+  background-color: #e6e6e6;
+  transition: bottom var(--transitionDuration);
+}
+
+body.impress-mouse-timeout .impress-progressbar {
+  bottom: 0;
+}
+
+body.impress-mouse-timeout .impress-progressbar div:after {
+  opacity: 0;
 }
 
 .impress-progressbar div {
+  position: relative;
   width: 0;
   height: 4px;
   background: rgba(75, 75, 75, 0.87);
@@ -679,19 +744,37 @@ body.impress-mouse-timeout {
   display: none;
 }
 
+.impress-progressbar div:after {
+  content: '';
+  display: block;
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transition: opacity var(--transitionDuration);
+}
+
 .impress-enabled #impress-help {
   background-color: #fff;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
   color: #000;
   opacity: 0.87;
   position: fixed;
-  left: 50%;
-  bottom: 32px;
+  right: 16px;
+  bottom: 104px;
   width: 24em;
-  transform: translate(-50%, 0);
   border-radius: 4px;
   padding: 8px 16px;
   z-index: 100;
+  transition: bottom var(--transitionDuration);
+}
+
+body.impress-mouse-timeout #impress-help {
+  bottom: 16px;
 }
 
 .impress-enabled #impress-help table {

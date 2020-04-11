@@ -107,7 +107,11 @@ const cssPropertyValueToDataUri = (propertyName: string, propertyValue: string) 
     if (!propertyValue.startsWith('data:') && !propertyValue.startsWith('url(data:') &&
       !propertyValue.startsWith('http:') && !propertyValue.startsWith('url(http:') &&
       !propertyValue.startsWith('https:') && !propertyValue.startsWith('url(https:')) {
-      return 'url(' + toDataUri(extractUri(propertyValue)) + ')';
+      try {
+        return 'url(' + toDataUri(extractUri(propertyValue)) + ')';
+      } catch (e) {
+        // ignore
+      }
     }
   }
   return propertyValue;

@@ -16,7 +16,7 @@ fs.writeFile(
   Object.keys(colors)
     .filter(colorName => !excluded.includes(colorName))
     .map(colorName => {
-      const color = colors[colorName]
+      const color = colors[colorName];
       return `/*
  * ${colorName}
  */
@@ -43,14 +43,13 @@ fs.writeFile(
 .secondary-${colorName} .step.title a:active {
   color: ${color['200']};
 }
-.secondary-${colorName} .impress-progressbar {
-  background: ${color['200']};
-}
 .secondary-${colorName} .impress-progressbar > div {
   background: ${color['500']};
 }
-.secondary-${colorName} #impress-toolbar button,
-.secondary-${colorName} #impress-toolbar select {
+.secondary-${colorName} .impress-progressbar > div:after {
+  background: ${color['500']};
+}
+.secondary-${colorName} #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: ${color['500']};
@@ -58,5 +57,5 @@ fs.writeFile(
 `;
     })
     .join('\n'),
-  () => console.log('CSS themes file written')
+  () => console.log('CSS themes file written'),
 );

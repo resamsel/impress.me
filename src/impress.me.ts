@@ -28,6 +28,7 @@ const defaultConfig: ImpressMeConfig = {
   ].map(resolvePath),
   jsFiles: [
     'impress.js/js/impress.js',
+    'js/navigation-ui-icons.js',
   ].map(resolvePath),
   primary: 'default',
   secondary: 'default',

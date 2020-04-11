@@ -5,22 +5,18 @@
   background: #f44336;
   background: linear-gradient(to right bottom, #f44336, #c62828);
 }
-
 .secondary-red a {
   color: #f44336;
   text-decoration: none;
 }
-
 .secondary-red a:hover,
 .secondary-red a:active {
   color: #fff;
   background: #f44336;
 }
-
 .secondary-red .step.title {
   color: #fff;
 }
-
 .secondary-red .step.title a {
   color: #fff;
 }
@@ -30,16 +26,15 @@
   color: #ef9a9a;
 }
 
-.secondary-red .impress-progressbar {
-  background: #ef9a9a;
-}
-
 .secondary-red .impress-progressbar > div {
   background: #f44336;
 }
 
-.secondary-red #impress-toolbar button,
-.secondary-red #impress-toolbar select {
+.secondary-red .impress-progressbar > div:after {
+  background: #f44336;
+}
+
+.secondary-red #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #f44336;
@@ -52,18 +47,15 @@
   background: #e91e63;
   background: linear-gradient(to right bottom, #e91e63, #ad1457);
 }
-
 .secondary-pink a {
   color: #e91e63;
   text-decoration: none;
 }
-
 .secondary-pink a:hover,
 .secondary-pink a:active {
   color: #fff;
   background: #e91e63;
 }
-
 .secondary-pink .step.title {
   color: #fff;
 }
@@ -77,16 +69,15 @@
   color: #f48fb1;
 }
 
-.secondary-pink .impress-progressbar {
-  background: #f48fb1;
-}
-
 .secondary-pink .impress-progressbar > div {
   background: #e91e63;
 }
 
-.secondary-pink #impress-toolbar button,
-.secondary-pink #impress-toolbar select {
+.secondary-pink .impress-progressbar > div:after {
+  background: #e91e63;
+}
+
+.secondary-pink #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #e91e63;
@@ -99,18 +90,15 @@
   background: #9c27b0;
   background: linear-gradient(to right bottom, #9c27b0, #6a1b9a);
 }
-
 .secondary-purple a {
   color: #9c27b0;
   text-decoration: none;
 }
-
 .secondary-purple a:hover,
 .secondary-purple a:active {
   color: #fff;
   background: #9c27b0;
 }
-
 .secondary-purple .step.title {
   color: #fff;
 }
@@ -124,16 +112,15 @@
   color: #ce93d8;
 }
 
-.secondary-purple .impress-progressbar {
-  background: #ce93d8;
-}
-
 .secondary-purple .impress-progressbar > div {
   background: #9c27b0;
 }
 
-.secondary-purple #impress-toolbar button,
-.secondary-purple #impress-toolbar select {
+.secondary-purple .impress-progressbar > div:after {
+  background: #9c27b0;
+}
+
+.secondary-purple #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #9c27b0;
@@ -146,18 +133,15 @@
   background: #673ab7;
   background: linear-gradient(to right bottom, #673ab7, #4527a0);
 }
-
 .secondary-deepPurple a {
   color: #673ab7;
   text-decoration: none;
 }
-
 .secondary-deepPurple a:hover,
 .secondary-deepPurple a:active {
   color: #fff;
   background: #673ab7;
 }
-
 .secondary-deepPurple .step.title {
   color: #fff;
 }
@@ -171,16 +155,15 @@
   color: #b39ddb;
 }
 
-.secondary-deepPurple .impress-progressbar {
-  background: #b39ddb;
-}
-
 .secondary-deepPurple .impress-progressbar > div {
   background: #673ab7;
 }
 
-.secondary-deepPurple #impress-toolbar button,
-.secondary-deepPurple #impress-toolbar select {
+.secondary-deepPurple .impress-progressbar > div:after {
+  background: #673ab7;
+}
+
+.secondary-deepPurple #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #673ab7;
@@ -193,18 +176,15 @@
   background: #3f51b5;
   background: linear-gradient(to right bottom, #3f51b5, #283593);
 }
-
 .secondary-indigo a {
   color: #3f51b5;
   text-decoration: none;
 }
-
 .secondary-indigo a:hover,
 .secondary-indigo a:active {
   color: #fff;
   background: #3f51b5;
 }
-
 .secondary-indigo .step.title {
   color: #fff;
 }
@@ -218,16 +198,15 @@
   color: #9fa8da;
 }
 
-.secondary-indigo .impress-progressbar {
-  background: #9fa8da;
-}
-
 .secondary-indigo .impress-progressbar > div {
   background: #3f51b5;
 }
 
-.secondary-indigo #impress-toolbar button,
-.secondary-indigo #impress-toolbar select {
+.secondary-indigo .impress-progressbar > div:after {
+  background: #3f51b5;
+}
+
+.secondary-indigo #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #3f51b5;
@@ -240,18 +219,15 @@
   background: #2196f3;
   background: linear-gradient(to right bottom, #2196f3, #1565c0);
 }
-
 .secondary-blue a {
   color: #2196f3;
   text-decoration: none;
 }
-
 .secondary-blue a:hover,
 .secondary-blue a:active {
   color: #fff;
   background: #2196f3;
 }
-
 .secondary-blue .step.title {
   color: #fff;
 }
@@ -265,16 +241,15 @@
   color: #90caf9;
 }
 
-.secondary-blue .impress-progressbar {
-  background: #90caf9;
-}
-
 .secondary-blue .impress-progressbar > div {
   background: #2196f3;
 }
 
-.secondary-blue #impress-toolbar button,
-.secondary-blue #impress-toolbar select {
+.secondary-blue .impress-progressbar > div:after {
+  background: #2196f3;
+}
+
+.secondary-blue #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #2196f3;
@@ -287,18 +262,15 @@
   background: #03a9f4;
   background: linear-gradient(to right bottom, #03a9f4, #0277bd);
 }
-
 .secondary-lightBlue a {
   color: #03a9f4;
   text-decoration: none;
 }
-
 .secondary-lightBlue a:hover,
 .secondary-lightBlue a:active {
   color: #fff;
   background: #03a9f4;
 }
-
 .secondary-lightBlue .step.title {
   color: #fff;
 }
@@ -312,16 +284,15 @@
   color: #81d4fa;
 }
 
-.secondary-lightBlue .impress-progressbar {
-  background: #81d4fa;
-}
-
 .secondary-lightBlue .impress-progressbar > div {
   background: #03a9f4;
 }
 
-.secondary-lightBlue #impress-toolbar button,
-.secondary-lightBlue #impress-toolbar select {
+.secondary-lightBlue .impress-progressbar > div:after {
+  background: #03a9f4;
+}
+
+.secondary-lightBlue #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #03a9f4;
@@ -334,18 +305,15 @@
   background: #00bcd4;
   background: linear-gradient(to right bottom, #00bcd4, #00838f);
 }
-
 .secondary-cyan a {
   color: #00bcd4;
   text-decoration: none;
 }
-
 .secondary-cyan a:hover,
 .secondary-cyan a:active {
   color: #fff;
   background: #00bcd4;
 }
-
 .secondary-cyan .step.title {
   color: #fff;
 }
@@ -359,16 +327,15 @@
   color: #80deea;
 }
 
-.secondary-cyan .impress-progressbar {
-  background: #80deea;
-}
-
 .secondary-cyan .impress-progressbar > div {
   background: #00bcd4;
 }
 
-.secondary-cyan #impress-toolbar button,
-.secondary-cyan #impress-toolbar select {
+.secondary-cyan .impress-progressbar > div:after {
+  background: #00bcd4;
+}
+
+.secondary-cyan #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #00bcd4;
@@ -381,18 +348,15 @@
   background: #009688;
   background: linear-gradient(to right bottom, #009688, #00695c);
 }
-
 .secondary-teal a {
   color: #009688;
   text-decoration: none;
 }
-
 .secondary-teal a:hover,
 .secondary-teal a:active {
   color: #fff;
   background: #009688;
 }
-
 .secondary-teal .step.title {
   color: #fff;
 }
@@ -406,16 +370,15 @@
   color: #80cbc4;
 }
 
-.secondary-teal .impress-progressbar {
-  background: #80cbc4;
-}
-
 .secondary-teal .impress-progressbar > div {
   background: #009688;
 }
 
-.secondary-teal #impress-toolbar button,
-.secondary-teal #impress-toolbar select {
+.secondary-teal .impress-progressbar > div:after {
+  background: #009688;
+}
+
+.secondary-teal #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #009688;
@@ -428,18 +391,15 @@
   background: #4caf50;
   background: linear-gradient(to right bottom, #4caf50, #2e7d32);
 }
-
 .secondary-green a {
   color: #4caf50;
   text-decoration: none;
 }
-
 .secondary-green a:hover,
 .secondary-green a:active {
   color: #fff;
   background: #4caf50;
 }
-
 .secondary-green .step.title {
   color: #fff;
 }
@@ -453,16 +413,15 @@
   color: #a5d6a7;
 }
 
-.secondary-green .impress-progressbar {
-  background: #a5d6a7;
-}
-
 .secondary-green .impress-progressbar > div {
   background: #4caf50;
 }
 
-.secondary-green #impress-toolbar button,
-.secondary-green #impress-toolbar select {
+.secondary-green .impress-progressbar > div:after {
+  background: #4caf50;
+}
+
+.secondary-green #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #4caf50;
@@ -475,18 +434,15 @@
   background: #8bc34a;
   background: linear-gradient(to right bottom, #8bc34a, #558b2f);
 }
-
 .secondary-lightGreen a {
   color: #8bc34a;
   text-decoration: none;
 }
-
 .secondary-lightGreen a:hover,
 .secondary-lightGreen a:active {
   color: #fff;
   background: #8bc34a;
 }
-
 .secondary-lightGreen .step.title {
   color: #fff;
 }
@@ -500,16 +456,15 @@
   color: #c5e1a5;
 }
 
-.secondary-lightGreen .impress-progressbar {
-  background: #c5e1a5;
-}
-
 .secondary-lightGreen .impress-progressbar > div {
   background: #8bc34a;
 }
 
-.secondary-lightGreen #impress-toolbar button,
-.secondary-lightGreen #impress-toolbar select {
+.secondary-lightGreen .impress-progressbar > div:after {
+  background: #8bc34a;
+}
+
+.secondary-lightGreen #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #8bc34a;
@@ -522,18 +477,15 @@
   background: #cddc39;
   background: linear-gradient(to right bottom, #cddc39, #9e9d24);
 }
-
 .secondary-lime a {
   color: #cddc39;
   text-decoration: none;
 }
-
 .secondary-lime a:hover,
 .secondary-lime a:active {
   color: #fff;
   background: #cddc39;
 }
-
 .secondary-lime .step.title {
   color: #fff;
 }
@@ -547,16 +499,15 @@
   color: #e6ee9c;
 }
 
-.secondary-lime .impress-progressbar {
-  background: #e6ee9c;
-}
-
 .secondary-lime .impress-progressbar > div {
   background: #cddc39;
 }
 
-.secondary-lime #impress-toolbar button,
-.secondary-lime #impress-toolbar select {
+.secondary-lime .impress-progressbar > div:after {
+  background: #cddc39;
+}
+
+.secondary-lime #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #cddc39;
@@ -569,18 +520,15 @@
   background: #ffeb3b;
   background: linear-gradient(to right bottom, #ffeb3b, #f9a825);
 }
-
 .secondary-yellow a {
   color: #ffeb3b;
   text-decoration: none;
 }
-
 .secondary-yellow a:hover,
 .secondary-yellow a:active {
   color: #fff;
   background: #ffeb3b;
 }
-
 .secondary-yellow .step.title {
   color: #fff;
 }
@@ -594,16 +542,15 @@
   color: #fff59d;
 }
 
-.secondary-yellow .impress-progressbar {
-  background: #fff59d;
-}
-
 .secondary-yellow .impress-progressbar > div {
   background: #ffeb3b;
 }
 
-.secondary-yellow #impress-toolbar button,
-.secondary-yellow #impress-toolbar select {
+.secondary-yellow .impress-progressbar > div:after {
+  background: #ffeb3b;
+}
+
+.secondary-yellow #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #ffeb3b;
@@ -616,18 +563,15 @@
   background: #ffc107;
   background: linear-gradient(to right bottom, #ffc107, #ff8f00);
 }
-
 .secondary-amber a {
   color: #ffc107;
   text-decoration: none;
 }
-
 .secondary-amber a:hover,
 .secondary-amber a:active {
   color: #fff;
   background: #ffc107;
 }
-
 .secondary-amber .step.title {
   color: #fff;
 }
@@ -641,16 +585,15 @@
   color: #ffe082;
 }
 
-.secondary-amber .impress-progressbar {
-  background: #ffe082;
-}
-
 .secondary-amber .impress-progressbar > div {
   background: #ffc107;
 }
 
-.secondary-amber #impress-toolbar button,
-.secondary-amber #impress-toolbar select {
+.secondary-amber .impress-progressbar > div:after {
+  background: #ffc107;
+}
+
+.secondary-amber #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #ffc107;
@@ -663,18 +606,15 @@
   background: #ff9800;
   background: linear-gradient(to right bottom, #ff9800, #ef6c00);
 }
-
 .secondary-orange a {
   color: #ff9800;
   text-decoration: none;
 }
-
 .secondary-orange a:hover,
 .secondary-orange a:active {
   color: #fff;
   background: #ff9800;
 }
-
 .secondary-orange .step.title {
   color: #fff;
 }
@@ -688,16 +628,15 @@
   color: #ffcc80;
 }
 
-.secondary-orange .impress-progressbar {
-  background: #ffcc80;
-}
-
 .secondary-orange .impress-progressbar > div {
   background: #ff9800;
 }
 
-.secondary-orange #impress-toolbar button,
-.secondary-orange #impress-toolbar select {
+.secondary-orange .impress-progressbar > div:after {
+  background: #ff9800;
+}
+
+.secondary-orange #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #ff9800;
@@ -710,18 +649,15 @@
   background: #ff5722;
   background: linear-gradient(to right bottom, #ff5722, #d84315);
 }
-
 .secondary-deepOrange a {
   color: #ff5722;
   text-decoration: none;
 }
-
 .secondary-deepOrange a:hover,
 .secondary-deepOrange a:active {
   color: #fff;
   background: #ff5722;
 }
-
 .secondary-deepOrange .step.title {
   color: #fff;
 }
@@ -735,16 +671,15 @@
   color: #ffab91;
 }
 
-.secondary-deepOrange .impress-progressbar {
-  background: #ffab91;
-}
-
 .secondary-deepOrange .impress-progressbar > div {
   background: #ff5722;
 }
 
-.secondary-deepOrange #impress-toolbar button,
-.secondary-deepOrange #impress-toolbar select {
+.secondary-deepOrange .impress-progressbar > div:after {
+  background: #ff5722;
+}
+
+.secondary-deepOrange #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #ff5722;
@@ -757,18 +692,15 @@
   background: #795548;
   background: linear-gradient(to right bottom, #795548, #4e342e);
 }
-
 .secondary-brown a {
   color: #795548;
   text-decoration: none;
 }
-
 .secondary-brown a:hover,
 .secondary-brown a:active {
   color: #fff;
   background: #795548;
 }
-
 .secondary-brown .step.title {
   color: #fff;
 }
@@ -782,16 +714,15 @@
   color: #bcaaa4;
 }
 
-.secondary-brown .impress-progressbar {
-  background: #bcaaa4;
-}
-
 .secondary-brown .impress-progressbar > div {
   background: #795548;
 }
 
-.secondary-brown #impress-toolbar button,
-.secondary-brown #impress-toolbar select {
+.secondary-brown .impress-progressbar > div:after {
+  background: #795548;
+}
+
+.secondary-brown #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #795548;
@@ -804,18 +735,15 @@
   background: #9e9e9e;
   background: linear-gradient(to right bottom, #9e9e9e, #424242);
 }
-
 .secondary-grey a {
   color: #9e9e9e;
   text-decoration: none;
 }
-
 .secondary-grey a:hover,
 .secondary-grey a:active {
   color: #fff;
   background: #9e9e9e;
 }
-
 .secondary-grey .step.title {
   color: #fff;
 }
@@ -829,16 +757,15 @@
   color: #eeeeee;
 }
 
-.secondary-grey .impress-progressbar {
-  background: #eeeeee;
-}
-
 .secondary-grey .impress-progressbar > div {
   background: #9e9e9e;
 }
 
-.secondary-grey #impress-toolbar button,
-.secondary-grey #impress-toolbar select {
+.secondary-grey .impress-progressbar > div:after {
+  background: #9e9e9e;
+}
+
+.secondary-grey #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #9e9e9e;
@@ -851,18 +778,15 @@
   background: #607d8b;
   background: linear-gradient(to right bottom, #607d8b, #37474f);
 }
-
 .secondary-blueGrey a {
   color: #607d8b;
   text-decoration: none;
 }
-
 .secondary-blueGrey a:hover,
 .secondary-blueGrey a:active {
   color: #fff;
   background: #607d8b;
 }
-
 .secondary-blueGrey .step.title {
   color: #fff;
 }
@@ -876,16 +800,15 @@
   color: #b0bec5;
 }
 
-.secondary-blueGrey .impress-progressbar {
-  background: #b0bec5;
-}
-
 .secondary-blueGrey .impress-progressbar > div {
   background: #607d8b;
 }
 
-.secondary-blueGrey #impress-toolbar button,
-.secondary-blueGrey #impress-toolbar select {
+.secondary-blueGrey .impress-progressbar > div:after {
+  background: #607d8b;
+}
+
+.secondary-blueGrey #impress-toolbar button#impress-autoplay-playpause {
   color: #fff;
   font-weight: bold;
   background: #607d8b;
