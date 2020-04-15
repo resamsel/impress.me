@@ -3,7 +3,7 @@ impress.me Demo Presentation
 
 April 8, 2020 - by [resamsel](https://github.com/resamsel)
 
-## 🧭 Intro
+## 🧭 Intro [](class=primary-amber)
 
 * Write presentation in Markdown
 * Convert to interactive impress.js presentation
@@ -41,7 +41,7 @@ impress.me INPUT.md 'My Fancy Presentation.html'
 impress.me Demo.md --cssFiles a.css b.css
 ```
 
-## 🧰 Features
+## 🧰 Features [](class=primary-blue)
 
 * Markdown
 
@@ -85,7 +85,7 @@ console.log('Hello World!');
 * Square root function
 * More to come
 
-## 🖌️ Customization
+## 🖌️ Customization [](class=primary-green)
 
 * Step CSS classes
 * `step`: defines a step in the presentation
@@ -126,7 +126,7 @@ to the positioning strategy.
 ## Overview [](class=overview)
 ```
 
-## Layouts
+## Layouts [](class=primary-red)
 
 * Multiple layouts
 * Single focus

@@ -7,6 +7,7 @@ import {ImpressMeConfig} from './impress-me-config';
 import {SlideNode} from './slide-node';
 import {debug} from 'loglevel';
 import {minify} from 'uglify-es';
+import * as sass from 'sass';
 
 export const excludeSlideClasses = ['title', 'overview', 'background', 'end'];
 export const attrPattern = /(.*\S)\s*(\[]\(|<a href=")([^"]*)(\)|"><\/a>)\s*/;
@@ -125,19 +126,32 @@ const cleanCss = new CleanCss({
   },
 });
 
-export const replaceCssVars = (config: ImpressMeConfig): ((css: string) => string) => {
-  return (css: string) =>
-    css.replace(/\${transitionDuration}/g, `${config.transitionDuration}ms`);
+export const insertCssVars = (config: ImpressMeConfig): ((css: string) => string) => {
+  return (css: string) => `$transitionDuration: ${config.transitionDuration}ms;${css}`;
 };
 
-export const mergeCss = (cssFiles: string[], preProcessCss: (css: string) => string) =>
+const sassRender = (data: string): Promise<string> => {
+  return new Promise<string>((resolve, reject) => {
+    try {
+      const result = sass.renderSync({
+        data,
+        outputStyle: 'compressed',
+        includePaths: [resolvePath('css')],
+      });
+      return resolve(result.css.toString('utf8'));
+    } catch (error) {
+      return reject(error);
+    }
+  });
+};
+
+export const mergeCss = (cssFiles: string[], preProcess: (css: string) => string) =>
   Promise.all(
-    cssFiles.map(file => promises.readFile(file, {encoding: 'utf8'})
-      .then(preProcessCss)
-      .then((data: string) => cleanCss.minify(data).styles)
-      .then(logStep(`CSS file minified: "${file}"`))
-    ))
-    .then(outputs => outputs.join('\n'));
+    cssFiles.map(file => promises.readFile(file, {encoding: 'utf8'})))
+    .then(outputs => outputs.join('\n'))
+    .then(preProcess)
+    .then(sassRender)
+    .then((data: string) => cleanCss.minify(data).styles);
 
 export const mergeJs = (jsFiles: string[]) =>
   Promise.all(

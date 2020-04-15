@@ -1,0 +1,24 @@
+.shape-rounded .slide:not([class*="shape-"]),
+.slide.shape-rounded {
+  &:before {
+    content: '';
+    position: absolute;
+    background-color: rgba(255, 255, 255, .87);
+    border-radius: 64px;
+    width: 1600px;
+    height: 1080px;
+    transform: translate3d(-220px, -100px, -1px) scale(0.9);
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+  }
+
+  &.depth-2 > h2,
+  &.depth-3 > h3 {
+    max-width: 680px;
+  }
+
+  &.depth-2:not(.present) > h2,
+  &.depth-3:not(.present) > h3 {
+    transform: translate3d(580px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
+    transition: $transitionDuration;
+  }
+}

@@ -1,5 +1,6 @@
 import {existsSync, promises} from 'fs';
 import {
+  insertCssVars,
   logEnd,
   logInit,
   logStart,
@@ -7,7 +8,6 @@ import {
   mergeCss,
   mergeJs,
   renderTemplate,
-  replaceCssVars,
   resolvePath,
   toOutputFilename,
 } from './helpers';
@@ -19,11 +19,7 @@ import {PositionStrategyFactory} from './position';
 const defaultConfig: ImpressMeConfig = {
   template: 'templates/slides.pug',
   cssFiles: [
-    'css/impress.me.css',
-    'css/circle.shape.css',
-    'css/rounded.shape.css',
-    'css/colors.css',
-    'css/newspaper.theme.css',
+    'css/impress.me.scss',
     'highlight.js/styles/monokai.css',
   ].map(resolvePath),
   jsFiles: [
@@ -81,7 +77,7 @@ export class ImpressMe {
         .then(logStep('Markdown converted')),
       mergeJs(this.config.jsFiles)
         .then(logStep('JavaScript files merged')),
-      mergeCss(this.config.cssFiles, replaceCssVars(this.config))
+      mergeCss(this.config.cssFiles, insertCssVars(this.config))
         .then(logStep('CSS files merged')),
     ])
       .then(([html, js, css]) => renderTemplate(this.config.template, html, js, css, this.config))

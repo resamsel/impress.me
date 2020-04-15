@@ -1,0 +1,1044 @@
+/*
+ * red
+ */
+body.primary-red {
+  background: #f44336;
+  background: linear-gradient(to right bottom, #f44336, #c62828);
+}
+
+[class*=shape-] .primary-red.slide {
+  color: #fff;
+
+  &:before {
+    background: #f44336;
+  }
+}
+
+.secondary-red {
+  a {
+    color: #f44336;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #f44336;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #ef9a9a;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #f44336;
+
+    &:after {
+      background: #f44336;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #f44336;
+  }
+}
+
+/*
+ * pink
+ */
+body.primary-pink {
+  background: #e91e63;
+  background: linear-gradient(to right bottom, #e91e63, #ad1457);
+}
+
+[class*=shape-] .primary-pink.slide {
+  color: #fff;
+
+  &:before {
+    background: #e91e63;
+  }
+}
+
+.secondary-pink {
+  a {
+    color: #e91e63;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #e91e63;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #f48fb1;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #e91e63;
+
+    &:after {
+      background: #e91e63;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #e91e63;
+  }
+}
+
+/*
+ * purple
+ */
+body.primary-purple {
+  background: #9c27b0;
+  background: linear-gradient(to right bottom, #9c27b0, #6a1b9a);
+}
+
+[class*=shape-] .primary-purple.slide {
+  color: #fff;
+
+  &:before {
+    background: #9c27b0;
+  }
+}
+
+.secondary-purple {
+  a {
+    color: #9c27b0;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #9c27b0;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #ce93d8;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #9c27b0;
+
+    &:after {
+      background: #9c27b0;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #9c27b0;
+  }
+}
+
+/*
+ * deepPurple
+ */
+body.primary-deepPurple {
+  background: #673ab7;
+  background: linear-gradient(to right bottom, #673ab7, #4527a0);
+}
+
+[class*=shape-] .primary-deepPurple.slide {
+  color: #fff;
+
+  &:before {
+    background: #673ab7;
+  }
+}
+
+.secondary-deepPurple {
+  a {
+    color: #673ab7;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #673ab7;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #b39ddb;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #673ab7;
+
+    &:after {
+      background: #673ab7;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #673ab7;
+  }
+}
+
+/*
+ * indigo
+ */
+body.primary-indigo {
+  background: #3f51b5;
+  background: linear-gradient(to right bottom, #3f51b5, #283593);
+}
+
+[class*=shape-] .primary-indigo.slide {
+  color: #fff;
+
+  &:before {
+    background: #3f51b5;
+  }
+}
+
+.secondary-indigo {
+  a {
+    color: #3f51b5;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #3f51b5;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #9fa8da;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #3f51b5;
+
+    &:after {
+      background: #3f51b5;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #3f51b5;
+  }
+}
+
+/*
+ * blue
+ */
+body.primary-blue {
+  background: #2196f3;
+  background: linear-gradient(to right bottom, #2196f3, #1565c0);
+}
+
+[class*=shape-] .primary-blue.slide {
+  color: #fff;
+
+  &:before {
+    background: #2196f3;
+  }
+}
+
+.secondary-blue {
+  a {
+    color: #2196f3;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #2196f3;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #90caf9;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #2196f3;
+
+    &:after {
+      background: #2196f3;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #2196f3;
+  }
+}
+
+/*
+ * lightBlue
+ */
+body.primary-lightBlue {
+  background: #03a9f4;
+  background: linear-gradient(to right bottom, #03a9f4, #0277bd);
+}
+
+[class*=shape-] .primary-lightBlue.slide {
+  color: #fff;
+
+  &:before {
+    background: #03a9f4;
+  }
+}
+
+.secondary-lightBlue {
+  a {
+    color: #03a9f4;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #03a9f4;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #81d4fa;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #03a9f4;
+
+    &:after {
+      background: #03a9f4;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #03a9f4;
+  }
+}
+
+/*
+ * cyan
+ */
+body.primary-cyan {
+  background: #00bcd4;
+  background: linear-gradient(to right bottom, #00bcd4, #00838f);
+}
+
+[class*=shape-] .primary-cyan.slide {
+  color: #fff;
+
+  &:before {
+    background: #00bcd4;
+  }
+}
+
+.secondary-cyan {
+  a {
+    color: #00bcd4;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #00bcd4;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #80deea;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #00bcd4;
+
+    &:after {
+      background: #00bcd4;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #00bcd4;
+  }
+}
+
+/*
+ * teal
+ */
+body.primary-teal {
+  background: #009688;
+  background: linear-gradient(to right bottom, #009688, #00695c);
+}
+
+[class*=shape-] .primary-teal.slide {
+  color: #fff;
+
+  &:before {
+    background: #009688;
+  }
+}
+
+.secondary-teal {
+  a {
+    color: #009688;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #009688;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #80cbc4;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #009688;
+
+    &:after {
+      background: #009688;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #009688;
+  }
+}
+
+/*
+ * green
+ */
+body.primary-green {
+  background: #4caf50;
+  background: linear-gradient(to right bottom, #4caf50, #2e7d32);
+}
+
+[class*=shape-] .primary-green.slide {
+  color: #fff;
+
+  &:before {
+    background: #4caf50;
+  }
+}
+
+.secondary-green {
+  a {
+    color: #4caf50;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #4caf50;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #a5d6a7;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #4caf50;
+
+    &:after {
+      background: #4caf50;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #4caf50;
+  }
+}
+
+/*
+ * lightGreen
+ */
+body.primary-lightGreen {
+  background: #8bc34a;
+  background: linear-gradient(to right bottom, #8bc34a, #558b2f);
+}
+
+[class*=shape-] .primary-lightGreen.slide {
+  color: #fff;
+
+  &:before {
+    background: #8bc34a;
+  }
+}
+
+.secondary-lightGreen {
+  a {
+    color: #8bc34a;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #8bc34a;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #c5e1a5;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #8bc34a;
+
+    &:after {
+      background: #8bc34a;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #8bc34a;
+  }
+}
+
+/*
+ * lime
+ */
+body.primary-lime {
+  background: #cddc39;
+  background: linear-gradient(to right bottom, #cddc39, #9e9d24);
+}
+
+[class*=shape-] .primary-lime.slide {
+  color: #fff;
+
+  &:before {
+    background: #cddc39;
+  }
+}
+
+.secondary-lime {
+  a {
+    color: #cddc39;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #cddc39;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #e6ee9c;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #cddc39;
+
+    &:after {
+      background: #cddc39;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #cddc39;
+  }
+}
+
+/*
+ * yellow
+ */
+body.primary-yellow {
+  background: #ffeb3b;
+  background: linear-gradient(to right bottom, #ffeb3b, #f9a825);
+}
+
+[class*=shape-] .primary-yellow.slide {
+  color: #fff;
+
+  &:before {
+    background: #ffeb3b;
+  }
+}
+
+.secondary-yellow {
+  a {
+    color: #ffeb3b;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #ffeb3b;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #fff59d;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #ffeb3b;
+
+    &:after {
+      background: #ffeb3b;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #ffeb3b;
+  }
+}
+
+/*
+ * amber
+ */
+body.primary-amber {
+  background: #ffc107;
+  background: linear-gradient(to right bottom, #ffc107, #ff8f00);
+}
+
+[class*=shape-] .primary-amber.slide {
+  color: #fff;
+
+  &:before {
+    background: #ffc107;
+  }
+}
+
+.secondary-amber {
+  a {
+    color: #ffc107;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #ffc107;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #ffe082;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #ffc107;
+
+    &:after {
+      background: #ffc107;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #ffc107;
+  }
+}
+
+/*
+ * orange
+ */
+body.primary-orange {
+  background: #ff9800;
+  background: linear-gradient(to right bottom, #ff9800, #ef6c00);
+}
+
+[class*=shape-] .primary-orange.slide {
+  color: #fff;
+
+  &:before {
+    background: #ff9800;
+  }
+}
+
+.secondary-orange {
+  a {
+    color: #ff9800;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #ff9800;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #ffcc80;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #ff9800;
+
+    &:after {
+      background: #ff9800;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #ff9800;
+  }
+}
+
+/*
+ * deepOrange
+ */
+body.primary-deepOrange {
+  background: #ff5722;
+  background: linear-gradient(to right bottom, #ff5722, #d84315);
+}
+
+[class*=shape-] .primary-deepOrange.slide {
+  color: #fff;
+
+  &:before {
+    background: #ff5722;
+  }
+}
+
+.secondary-deepOrange {
+  a {
+    color: #ff5722;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #ff5722;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #ffab91;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #ff5722;
+
+    &:after {
+      background: #ff5722;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #ff5722;
+  }
+}
+
+/*
+ * brown
+ */
+body.primary-brown {
+  background: #795548;
+  background: linear-gradient(to right bottom, #795548, #4e342e);
+}
+
+[class*=shape-] .primary-brown.slide {
+  color: #fff;
+
+  &:before {
+    background: #795548;
+  }
+}
+
+.secondary-brown {
+  a {
+    color: #795548;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #795548;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #bcaaa4;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #795548;
+
+    &:after {
+      background: #795548;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #795548;
+  }
+}
+
+/*
+ * grey
+ */
+body.primary-grey {
+  background: #9e9e9e;
+  background: linear-gradient(to right bottom, #9e9e9e, #424242);
+}
+
+[class*=shape-] .primary-grey.slide {
+  color: #fff;
+
+  &:before {
+    background: #9e9e9e;
+  }
+}
+
+.secondary-grey {
+  a {
+    color: #9e9e9e;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #9e9e9e;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #eeeeee;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #9e9e9e;
+
+    &:after {
+      background: #9e9e9e;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #9e9e9e;
+  }
+}
+
+/*
+ * blueGrey
+ */
+body.primary-blueGrey {
+  background: #607d8b;
+  background: linear-gradient(to right bottom, #607d8b, #37474f);
+}
+
+[class*=shape-] .primary-blueGrey.slide {
+  color: #fff;
+
+  &:before {
+    background: #607d8b;
+  }
+}
+
+.secondary-blueGrey {
+  a {
+    color: #607d8b;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: #fff;
+      background: #607d8b;
+    }
+  }
+
+  .step.title {
+    color: #fff;
+
+    a {
+      color: #fff;
+
+      &:hover,
+      &:active {
+        color: #b0bec5;
+      }
+    }
+  }
+
+  .impress-progressbar > div {
+    background: #607d8b;
+
+    &:after {
+      background: #607d8b;
+    }
+  }
+
+  #impress-toolbar button#impress-autoplay-playpause {
+    color: #fff;
+    background: #607d8b;
+  }
+}
