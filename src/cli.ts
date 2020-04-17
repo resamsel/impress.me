@@ -2,7 +2,9 @@ import {Command, flags} from '@oclif/command';
 import {ImpressMe} from './impress.me';
 import * as log from 'loglevel';
 import {handle} from '@oclif/errors';
-import {themes} from './themes';
+import {themeMap} from './theme';
+import {strategies, Strategy} from './strategy';
+import {Shape, shapes} from './shape';
 
 class ImpressMeCommand extends Command {
   static description = 'create impress.js presentations from markdown documents in style';
@@ -24,19 +26,19 @@ class ImpressMeCommand extends Command {
     theme: flags.option({
       char: 't',
       description: 'choose the theme for the presentation (shape and strategy)',
-      options: Object.keys(themes),
+      options: Object.keys(themeMap),
       parse: x => x,
       default: 'planet',
     }),
     shape: flags.option({
       description: 'define the shape of the slides',
-      options: ['circle', 'rounded', 'none'],
-      parse: x => x,
+      options: shapes,
+      parse: x => x as Shape,
     }),
     strategy: flags.option({
       description: 'define the slide positioning strategy',
-      options: ['planet', 'linear', 'newspaper'],
-      parse: x => x,
+      options: strategies,
+      parse: x => x as Strategy,
     }),
     cssFiles: flags.string({
       char: 'c',
@@ -67,7 +69,7 @@ class ImpressMeCommand extends Command {
       log.setLevel('info');
     }
 
-    await new ImpressMe({...parsed.flags, theme: themes[parsed.flags.theme as string]})
+    await new ImpressMe({...parsed.flags, theme: themeMap[parsed.flags.theme as string]})
       .convert(parsed.args.input, parsed.args.output)
       .catch(handle);
   }

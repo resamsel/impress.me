@@ -33,4 +33,4 @@ USAGE
 ```
 <!-- usagestop -->
 
-[demo-presentation]: assets/demo-presentation.png "Demo Presentation"
+[demo-presentation]: images/demo-presentation.png "Demo Presentation"

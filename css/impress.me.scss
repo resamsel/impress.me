@@ -153,18 +153,6 @@ h1, h2, h3 {
   letter-spacing: -1px;
 }
 
-.slide q {
-  display: block;
-  font-size: 50px;
-  line-height: 72px;
-
-  margin-top: 100px;
-}
-
-.slide q strong {
-  white-space: nowrap;
-}
-
 .slide > * {
   opacity: 0;
   transition: $transitionDuration;
@@ -175,6 +163,18 @@ h1, h2, h3 {
 .slide > h3,
 .slide.present > * {
   opacity: 1;
+}
+
+.slide q {
+  display: block;
+  font-size: 50px;
+  line-height: 72px;
+
+  margin-top: 100px;
+}
+
+.slide q strong {
+  white-space: nowrap;
 }
 
 .slide.depth-2 > p,
@@ -384,49 +384,6 @@ Specific styles for: .title slides
   cursor: initial;
 }
 
-/* LAYOUTS */
-
-.slide.focus-single > p,
-.slide.focus-single > pre,
-.slide.focus-dual > p,
-.slide.focus-dual > pre {
-  position: absolute;
-  top: 272px;
-  right: 64px;
-  bottom: 64px;
-  left: 64px;
-}
-
-.slide.focus-single > p,
-.slide.focus-single > pre {
-  width: auto;
-}
-
-.slide.focus-dual > p,
-.slide.focus-dual > pre {
-  width: 45%;
-}
-
-.slide.focus-dual > p:nth-of-type(1),
-.slide.focus-dual > pre:nth-of-type(1) {
-  right: initial;
-}
-
-.slide.focus-dual > p:nth-of-type(2),
-.slide.focus-dual > pre:nth-of-type(2) {
-  left: initial;
-}
-
-.slide.focus-single > p > img,
-.slide.focus-dual > p > img {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-  margin: auto;
-  border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
-}
-
 /*
     We also make other steps visible and give them a pointer cursor using the
     `impress-on-` class.
@@ -441,126 +398,6 @@ Specific styles for: .title slides
 */
 body.impress-mouse-timeout {
   cursor: none;
-}
-
-
-/*
-    Now, when we have all the steps styled let's give users a hint how to navigate
-    around the presentation.
-
-    The best way to do this would be to use JavaScript, show a delayed hint for a
-    first time users, then hide it and store a status in cookie or localStorage...
-
-    But I wanted to have some CSS fun and avoid additional scripting...
-
-    Let me explain it first, so maybe the transition magic will be more readable
-    when you read the code.
-
-    First of all I wanted the hint to appear only when user is idle for a while.
-    You can't detect the 'idle' state in CSS, but I delayed a appearing of the
-    hint by 5s using transition-delay.
-
-    You also can't detect in CSS if the user is a first-time visitor, so I had to
-    make an assumption that I'll only show the hint on the first step. And when
-    the step is changed hide the hint, because I can assume that user already
-    knows how to navigate.
-
-    To summarize it - hint is shown when the user is on the first step for longer
-    than 5 seconds.
-
-    The other problem I had was caused by the fact that I wanted the hint to fade
-    in and out. It can be easily achieved by transitioning the opacity property.
-    But that also meant that the hint was always on the screen, even if totally
-    transparent. It covered part of the screen and you couldn't correctly clicked
-    through it.
-    Unfortunately you cannot transition between display `block` and `none` in pure
-    CSS, so I needed a way to not only fade out the hint but also move it out of
-    the screen.
-
-    I solved this problem by positioning the hint below the bottom of the screen
-    with CSS transform and moving it up to show it. But I also didn't want this move
-    to be visible. I wanted the hint only to fade in and out visually, so I delayed
-    the fade in transition, so it starts when the hint is already in its correct
-    position on the screen.
-
-    I know, it sounds complicated ... maybe it would be easier with the code?
-*/
-
-.hint {
-  /*
-      We hide the hint until presentation is started and from browsers not supporting
-      impress.js, as they will have a linear scrollable view ...
-  */
-  display: none;
-
-  /*
-      ... and give it some fixed position and nice styles.
-  */
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 200px;
-
-  background: rgba(0, 0, 0, 0.5);
-  color: #EEE;
-  text-align: center;
-
-  font-size: 50px;
-  padding: 20px;
-
-  z-index: 100;
-
-  /*
-      By default we don't want the hint to be visible, so we make it transparent ...
-  */
-  opacity: 0;
-
-  /*
-      ... and position it below the bottom of the screen (relative to it's fixed position)
-  */
-  transform: translateY(400px);
-
-  /*
-      Now let's imagine that the hint is visible and we want to fade it out and move out
-      of the screen.
-
-      So we define the transition on the opacity property with 1s duration and another
-      transition on transform property delayed by 1s so it will happen after the fade out
-      on opacity finished.
-
-      This way user will not see the hint moving down.
-  */
-  transition: opacity $transitionDuration, transform 0.5s $transitionDuration;
-}
-
-/*
-    Now we 'enable' the hint when presentation is initialized ...
-*/
-.impress-enabled .hint {
-  display: block
-}
-
-/*
-    ... and we will show it when the first step (with id 'bored') is active.
-*/
-.impress-on-bored .hint {
-  /*
-      We remove the transparency and position the hint in its default fixed
-      position.
-  */
-  opacity: 1;
-
-  transform: translateY(0px);
-
-  /*
-      Now for fade in transition we have the oposite situation from the one
-      above.
-
-      First after 4.5s delay we animate the transform property to move the hint
-      into its correct position and after that we fade it in with opacity
-      transition.
-  */
-  transition: opacity $transitionDuration 5s, transform 0.5s 4.5s;
 }
 
 /*
@@ -604,10 +441,14 @@ body.impress-mouse-timeout {
   pointer-events: auto
 }
 
+@import "impress.layout";
+@import "impress.hint";
 @import "impress.help";
 @import "impress.toolbar";
 @import "impress.progress";
-@import "circle.shape.scss";
-@import "rounded.shape.scss";
-@import "colors.scss";
-@import "newspaper.theme.scss";
+@import "shape.circle";
+@import "shape.rounded";
+@import "theme.newspaper";
+@import "theme.gallery";
+@import "theme.slides";
+@import "colors";

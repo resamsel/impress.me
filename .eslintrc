@@ -15,5 +15,15 @@
         "SwitchCase": 1
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "scripts/*.ts"
+      ],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ]
 }

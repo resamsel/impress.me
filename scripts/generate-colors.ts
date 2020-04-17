@@ -18,7 +18,7 @@ const colorTemplate = (colorName: string, color: any) => `
  */
 body.primary-${colorName} {
   background: ${color['500']};
-  background: linear-gradient(to right bottom, ${color['500']}, ${color['800']});
+  background: linear-gradient(to right bottom, ${color['800']}, ${color['500']});
 }
 
 [class*=shape-] .primary-${colorName}.slide {
@@ -75,5 +75,5 @@ fs.writeFile(
     .filter(colorName => !excluded.includes(colorName))
     .map(colorName => colorTemplate(colorName, colors[colorName]))
     .join(''),
-  () => console.log('CSS themes file written'), // eslint-disable-line no-console
+  () => console.log('Colors style file written'),
 );

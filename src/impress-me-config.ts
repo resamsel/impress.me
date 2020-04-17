@@ -1,5 +1,7 @@
 import {Theme} from './theme';
 import {PositionStrategyFactory} from './position';
+import {Strategy} from './strategy';
+import {Shape} from './shape';
 
 export interface ImpressMeConfig {
   template: string;
@@ -13,8 +15,8 @@ export interface ImpressMeConfig {
   cssFiles: string[];
   jsFiles: string[];
   theme: Theme;
-  shape: string;
-  strategy: string;
+  shape: Shape;
+  strategy: Strategy;
   positionStrategyFactory: PositionStrategyFactory;
   transitionDuration: number;
   title?: string;

@@ -188,6 +188,6 @@ temp/
 # End of https://www.gitignore.io/api/node,intellij+iml
 
 /lib
-/*.html
-/examples/*.html
+*.html
+/gallery
 /.idea

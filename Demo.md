@@ -171,5 +171,5 @@ echo 'Hello impress.me!'
 ## Overview [](class=overview)
 
 [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
-[demo-presentation]: assets/demo-presentation.png "Demo Presentation"
+[demo-presentation]: images/demo-presentation.png "Demo Presentation"
 [link]: http://www.reddit.com

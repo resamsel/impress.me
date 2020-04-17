@@ -1,9 +1,10 @@
+
 /*
  * red
  */
 body.primary-red {
   background: #f44336;
-  background: linear-gradient(to right bottom, #f44336, #c62828);
+  background: linear-gradient(to right bottom, #c62828, #f44336);
 }
 
 [class*=shape-] .primary-red.slide {
@@ -58,7 +59,7 @@ body.primary-red {
  */
 body.primary-pink {
   background: #e91e63;
-  background: linear-gradient(to right bottom, #e91e63, #ad1457);
+  background: linear-gradient(to right bottom, #ad1457, #e91e63);
 }
 
 [class*=shape-] .primary-pink.slide {
@@ -113,7 +114,7 @@ body.primary-pink {
  */
 body.primary-purple {
   background: #9c27b0;
-  background: linear-gradient(to right bottom, #9c27b0, #6a1b9a);
+  background: linear-gradient(to right bottom, #6a1b9a, #9c27b0);
 }
 
 [class*=shape-] .primary-purple.slide {
@@ -168,7 +169,7 @@ body.primary-purple {
  */
 body.primary-deepPurple {
   background: #673ab7;
-  background: linear-gradient(to right bottom, #673ab7, #4527a0);
+  background: linear-gradient(to right bottom, #4527a0, #673ab7);
 }
 
 [class*=shape-] .primary-deepPurple.slide {
@@ -223,7 +224,7 @@ body.primary-deepPurple {
  */
 body.primary-indigo {
   background: #3f51b5;
-  background: linear-gradient(to right bottom, #3f51b5, #283593);
+  background: linear-gradient(to right bottom, #283593, #3f51b5);
 }
 
 [class*=shape-] .primary-indigo.slide {
@@ -278,7 +279,7 @@ body.primary-indigo {
  */
 body.primary-blue {
   background: #2196f3;
-  background: linear-gradient(to right bottom, #2196f3, #1565c0);
+  background: linear-gradient(to right bottom, #1565c0, #2196f3);
 }
 
 [class*=shape-] .primary-blue.slide {
@@ -333,7 +334,7 @@ body.primary-blue {
  */
 body.primary-lightBlue {
   background: #03a9f4;
-  background: linear-gradient(to right bottom, #03a9f4, #0277bd);
+  background: linear-gradient(to right bottom, #0277bd, #03a9f4);
 }
 
 [class*=shape-] .primary-lightBlue.slide {
@@ -388,7 +389,7 @@ body.primary-lightBlue {
  */
 body.primary-cyan {
   background: #00bcd4;
-  background: linear-gradient(to right bottom, #00bcd4, #00838f);
+  background: linear-gradient(to right bottom, #00838f, #00bcd4);
 }
 
 [class*=shape-] .primary-cyan.slide {
@@ -443,7 +444,7 @@ body.primary-cyan {
  */
 body.primary-teal {
   background: #009688;
-  background: linear-gradient(to right bottom, #009688, #00695c);
+  background: linear-gradient(to right bottom, #00695c, #009688);
 }
 
 [class*=shape-] .primary-teal.slide {
@@ -498,7 +499,7 @@ body.primary-teal {
  */
 body.primary-green {
   background: #4caf50;
-  background: linear-gradient(to right bottom, #4caf50, #2e7d32);
+  background: linear-gradient(to right bottom, #2e7d32, #4caf50);
 }
 
 [class*=shape-] .primary-green.slide {
@@ -553,7 +554,7 @@ body.primary-green {
  */
 body.primary-lightGreen {
   background: #8bc34a;
-  background: linear-gradient(to right bottom, #8bc34a, #558b2f);
+  background: linear-gradient(to right bottom, #558b2f, #8bc34a);
 }
 
 [class*=shape-] .primary-lightGreen.slide {
@@ -608,7 +609,7 @@ body.primary-lightGreen {
  */
 body.primary-lime {
   background: #cddc39;
-  background: linear-gradient(to right bottom, #cddc39, #9e9d24);
+  background: linear-gradient(to right bottom, #9e9d24, #cddc39);
 }
 
 [class*=shape-] .primary-lime.slide {
@@ -663,7 +664,7 @@ body.primary-lime {
  */
 body.primary-yellow {
   background: #ffeb3b;
-  background: linear-gradient(to right bottom, #ffeb3b, #f9a825);
+  background: linear-gradient(to right bottom, #f9a825, #ffeb3b);
 }
 
 [class*=shape-] .primary-yellow.slide {
@@ -718,7 +719,7 @@ body.primary-yellow {
  */
 body.primary-amber {
   background: #ffc107;
-  background: linear-gradient(to right bottom, #ffc107, #ff8f00);
+  background: linear-gradient(to right bottom, #ff8f00, #ffc107);
 }
 
 [class*=shape-] .primary-amber.slide {
@@ -773,7 +774,7 @@ body.primary-amber {
  */
 body.primary-orange {
   background: #ff9800;
-  background: linear-gradient(to right bottom, #ff9800, #ef6c00);
+  background: linear-gradient(to right bottom, #ef6c00, #ff9800);
 }
 
 [class*=shape-] .primary-orange.slide {
@@ -828,7 +829,7 @@ body.primary-orange {
  */
 body.primary-deepOrange {
   background: #ff5722;
-  background: linear-gradient(to right bottom, #ff5722, #d84315);
+  background: linear-gradient(to right bottom, #d84315, #ff5722);
 }
 
 [class*=shape-] .primary-deepOrange.slide {
@@ -883,7 +884,7 @@ body.primary-deepOrange {
  */
 body.primary-brown {
   background: #795548;
-  background: linear-gradient(to right bottom, #795548, #4e342e);
+  background: linear-gradient(to right bottom, #4e342e, #795548);
 }
 
 [class*=shape-] .primary-brown.slide {
@@ -938,7 +939,7 @@ body.primary-brown {
  */
 body.primary-grey {
   background: #9e9e9e;
-  background: linear-gradient(to right bottom, #9e9e9e, #424242);
+  background: linear-gradient(to right bottom, #424242, #9e9e9e);
 }
 
 [class*=shape-] .primary-grey.slide {
@@ -993,7 +994,7 @@ body.primary-grey {
  */
 body.primary-blueGrey {
   background: #607d8b;
-  background: linear-gradient(to right bottom, #607d8b, #37474f);
+  background: linear-gradient(to right bottom, #37474f, #607d8b);
 }
 
 [class*=shape-] .primary-blueGrey.slide {

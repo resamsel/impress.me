@@ -1,0 +1,10 @@
+.theme-slides {
+  .slide.depth-2 > h2,
+  .slide.depth-3 > h3 {
+    transform: none !important;
+  }
+
+  .slide > * {
+    opacity: 1;
+  }
+}

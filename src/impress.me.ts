@@ -12,9 +12,11 @@ import {
   toOutputFilename,
 } from './helpers';
 import {markdownToHtml} from './markdown';
-import {themes} from './themes';
 import {ImpressMeConfig} from './impress-me-config';
 import {PositionStrategyFactory} from './position';
+import {Strategy} from './strategy';
+import {Shape} from './shape';
+import {themeMap} from './theme';
 
 const defaultConfig: ImpressMeConfig = {
   template: 'templates/slides.pug',
@@ -28,9 +30,9 @@ const defaultConfig: ImpressMeConfig = {
   ].map(resolvePath),
   primary: 'default',
   secondary: 'default',
-  theme: themes.planet,
-  shape: 'circle',
-  strategy: 'planet',
+  theme: themeMap.planet,
+  shape: Shape.Circle,
+  strategy: Strategy.Planet,
   transitionDuration: 0,
 
   positionStrategyFactory: new PositionStrategyFactory(),
@@ -45,18 +47,18 @@ const defaultConfig: ImpressMeConfig = {
 export class ImpressMe {
   private readonly config: ImpressMeConfig;
 
-  constructor(readonly flags: Partial<ImpressMeConfig> = {}) {
+  constructor(readonly overrides: Partial<ImpressMeConfig> = {}) {
     this.config = {
       ...defaultConfig,
-      ...this.flags.theme,
-      ...this.flags,
+      ...this.overrides.theme,
+      ...this.overrides,
       cssFiles: [
         ...defaultConfig.cssFiles,
-        ...this.flags.cssFiles || [],
+        ...this.overrides.cssFiles || [],
       ],
       jsFiles: [
         ...defaultConfig.jsFiles,
-        ...this.flags.jsFiles || [],
+        ...this.overrides.jsFiles || [],
       ],
     };
   }

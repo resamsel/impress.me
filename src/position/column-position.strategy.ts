@@ -1,24 +1,25 @@
 import {PositionStrategy} from './position.strategy';
-import {debug} from 'loglevel';
-import {findIndex, findRoot, flattenNodes} from '../helpers';
+import {findIndex} from '../helpers';
 import {ImpressMeConfig} from '../impress-me-config';
 import {SlidePosition} from '../slide-position';
 import {SlideNode} from '../slide-node';
+import {Shape} from '../shape';
+import {overviewPosition} from './linear-position.strategy';
 
-export class NewspaperPositionStrategy implements PositionStrategy {
-  private readonly width: number;
+export class ColumnPositionStrategy implements PositionStrategy {
+  private readonly width = 1920;
 
-  private readonly height = 1080;
+  private readonly height: number;
 
   private readonly scale = 0.4;
 
   private readonly offset: SlidePosition;
 
   constructor(readonly config: ImpressMeConfig) {
-    this.width = this.config.shape === 'none' ? 1080 : 1920;
+    this.height = this.config.shape === Shape.Circle ? 1920 : 1080;
     this.offset = {
       x: -(this.config.width / 2) - (this.width * this.scale / 2),
-      y: 0,
+      y: (this.height - 1080) * 0.2,
       z: 0,
       scale: this.scale,
     };
@@ -27,24 +28,7 @@ export class NewspaperPositionStrategy implements PositionStrategy {
   calculate(node: SlideNode): SlidePosition {
     // debug('calculate', node);
     if (node.classes && node.classes.includes('overview')) {
-      const root = findRoot(node);
-      const nodes = flattenNodes(root);
-      const minX = -(this.config.width / 2) - 16;
-      const minY = -(this.config.height / 2) - 16;
-      const maxX = nodes.map(n => n.pos ? n.pos.x + (this.width / 2 * this.scale) : 0)
-        .reduce((max, curr) => Math.max(max, curr), this.config.width / 2) + 16;
-      const maxY = nodes.map(n => n.pos ? n.pos.y + (this.width / 2 * this.scale) : 0)
-        .reduce((max, curr) => Math.max(max, curr), this.config.height / 2) + 16;
-      const totalWidth = maxX - minX;
-      const totalHeight = maxY - minY;
-      debug('overview pos', maxX, maxY);
-      return {
-        x: (minX + maxX) / 2,
-        y: (minY + maxY) / 2,
-        z: 0,
-        // we want to show a bit more than just all of the steps
-        scale: Math.max(totalWidth / this.config.width, totalHeight / this.config.height),
-      };
+      return overviewPosition(node, this.config, this.width, this.scale);
     }
 
     let siblingIndex: number;
