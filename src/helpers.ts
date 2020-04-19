@@ -8,6 +8,7 @@ import {SlideNode} from './slide-node';
 import {debug} from 'loglevel';
 import {minify} from 'uglify-es';
 import * as sass from 'sass';
+import {Shape, shapeConfig} from './shape';
 
 export const excludeSlideClasses = ['title', 'overview', 'background', 'end'];
 export const attrPattern = /(.*\S)\s*(\[]\(|<a href=")([^"]*)(\)|"><\/a>)\s*/;
@@ -95,7 +96,7 @@ export const flattenNodes = (node: SlideNode): SlideNode[] => {
 };
 
 export const includeSlide = (node: SlideNode): boolean =>
-  excludeSlideClasses.find(cls => (node.classes || ['title']).includes(cls)) === undefined;
+  excludeSlideClasses.find(cls => (node.classes || []).includes(cls)) === undefined;
 
 export const toDataUri = (file: string): string =>
   `data:image/png;base64,${readFileSync(file, 'base64')}`;
@@ -126,9 +127,18 @@ const cleanCss = new CleanCss({
   },
 });
 
-export const insertCssVars = (config: ImpressMeConfig): ((css: string) => string) => {
-  return (css: string) => `$transitionDuration: ${config.transitionDuration}ms;${css}`;
-};
+const cssVars: [string, (config: ImpressMeConfig) => string][] = [
+  ['transitionDuration', config => `${config.transitionDuration}ms`],
+  ['shapeCircleWidth', () => `${shapeConfig[Shape.Circle].width}px`],
+  ['shapeCircleHeight', () => `${shapeConfig[Shape.Circle].height}px`],
+  ['shapeCircleOffsetX', () => `${shapeConfig[Shape.Circle].offset.x}px`],
+  ['shapeCircleOffsetY', () => `${shapeConfig[Shape.Circle].offset.y}px`],
+];
+
+export const insertCssVars = (config: ImpressMeConfig): ((css: string) => string) =>
+  (css: string) => cssVars.map(([name, fn]) => `$${name}: ${fn(config)}`)
+    .concat([css])
+    .join(';');
 
 const sassRender = (data: string): Promise<string> => {
   return new Promise<string>((resolve, reject) => {

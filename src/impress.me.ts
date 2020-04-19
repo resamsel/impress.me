@@ -18,7 +18,7 @@ import {Strategy} from './strategy';
 import {Shape} from './shape';
 import {themeMap} from './theme';
 
-const defaultConfig: ImpressMeConfig = {
+export const defaultConfig: ImpressMeConfig = {
   template: 'templates/slides.pug',
   cssFiles: [
     'css/impress.me.scss',
