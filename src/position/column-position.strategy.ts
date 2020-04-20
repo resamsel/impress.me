@@ -1,10 +1,10 @@
 import {PositionStrategy} from './position.strategy';
 import {findIndex} from '../helpers';
 import {ImpressMeConfig} from '../impress-me-config';
-import {SlidePosition} from '../slide-position';
 import {SlideNode} from '../slide-node';
 import {Shape} from '../shape';
 import {overviewPosition} from './linear-position.strategy';
+import {Transformation} from '../transformation';
 
 export class ColumnPositionStrategy implements PositionStrategy {
   private readonly width = 1920;
@@ -13,7 +13,7 @@ export class ColumnPositionStrategy implements PositionStrategy {
 
   private readonly scale = 0.4;
 
-  private readonly offset: SlidePosition;
+  private readonly offset: Transformation;
 
   constructor(readonly config: ImpressMeConfig) {
     this.height = this.config.shape === Shape.Circle ? 1920 : 1080;
@@ -25,7 +25,7 @@ export class ColumnPositionStrategy implements PositionStrategy {
     };
   }
 
-  calculate(node: SlideNode): SlidePosition {
+  calculate(node: SlideNode): Transformation {
     // debug('calculate', node);
     if (node.classes && node.classes.includes('overview')) {
       return overviewPosition(node, this.config, this.width, this.scale);

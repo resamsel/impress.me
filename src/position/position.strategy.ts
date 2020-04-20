@@ -1,6 +1,6 @@
-import {SlidePosition} from '../slide-position';
 import {SlideNode} from '../slide-node';
+import {Transformation} from '../transformation';
 
 export interface PositionStrategy {
-  calculate(node: SlideNode): SlidePosition;
+  calculate(node: SlideNode): Transformation;
 }

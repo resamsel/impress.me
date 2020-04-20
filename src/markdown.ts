@@ -6,9 +6,9 @@ import * as marked from 'marked';
 import {Slugger} from 'marked';
 import {highlightAuto} from 'highlight.js';
 import {ImpressMeConfig} from './impress-me-config';
-import {SlidePosition} from './slide-position';
 import {SlideNode} from './slide-node';
 import {SlideNodeState} from './slide-node-state';
+import {Transformation} from './transformation';
 import Heading = marked.Tokens.Heading;
 
 const appendHeadingAttributes = (text: string, attrs: Record<string, string>): void => {
@@ -86,11 +86,13 @@ const generateState = (headings: marked.Tokens.Heading[], positionStrategy: Posi
 
     node.pos = pos;
 
-    const posKeys: (keyof SlidePosition)[] = ['x', 'y', 'z', 'scale'];
+    const posKeys: (keyof Transformation)[] = ['x', 'y', 'z', 'scale', 'rotate', 'rotate-x', 'rotate-y'];
     posKeys.forEach(k => {
       const value = parseFloat(node.attrs['data-' + k]);
       if (isNaN(value)) {
-        node.attrs['data-' + k] = String(pos[k]);
+        if (pos[k] !== undefined) {
+          node.attrs['data-' + k] = String(pos[k]);
+        }
       } else {
         pos[k] = value;
       }

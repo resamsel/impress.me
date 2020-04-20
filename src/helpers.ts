@@ -133,6 +133,10 @@ const cssVars: [string, (config: ImpressMeConfig) => string][] = [
   ['shapeCircleHeight', () => `${shapeConfig[Shape.Circle].height}px`],
   ['shapeCircleOffsetX', () => `${shapeConfig[Shape.Circle].offset.x}px`],
   ['shapeCircleOffsetY', () => `${shapeConfig[Shape.Circle].offset.y}px`],
+  ['shapeRoundedWidth', () => `${shapeConfig[Shape.Rounded].width}px`],
+  ['shapeRoundedHeight', () => `${shapeConfig[Shape.Rounded].height}px`],
+  ['shapeRoundedOffsetX', () => `${shapeConfig[Shape.Rounded].offset.x}px`],
+  ['shapeRoundedOffsetY', () => `${shapeConfig[Shape.Rounded].offset.y}px`],
 ];
 
 export const insertCssVars = (config: ImpressMeConfig): ((css: string) => string) =>

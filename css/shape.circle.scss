@@ -1,3 +1,8 @@
+$shapeCircleWidth: 1680px !default;
+$shapeCircleHeight: 1080px !default;
+$shapeCircleOffsetX: 1680px !default;
+$shapeCircleOffsetY: 1080px !default;
+
 .shape-circle .slide:not([class*="shape-"]),
 .slide.shape-circle {
   &:before {
@@ -20,6 +25,6 @@
 
   &.depth-2:not(.present) > h2,
   &.depth-3:not(.present) > h3 {
-    transform: translate3d(-$shapeCircleOffsetX, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
+    transform: translate3d(-$shapeCircleOffsetX - 70px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
   }
 }

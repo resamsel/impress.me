@@ -1,9 +1,8 @@
 import {PositionStrategy} from './position.strategy';
 import {findIndex, findRoot, flattenNodes} from '../helpers';
 import {ImpressMeConfig} from '../impress-me-config';
-import {SlidePosition} from '../slide-position';
 import {SlideNode} from '../slide-node';
-import {debug} from 'loglevel';
+import {Transformation} from '../transformation';
 
 export const overviewPosition = (node: SlideNode, config: ImpressMeConfig, width: number, scale: number) => {
   const root = findRoot(node);
@@ -20,7 +19,6 @@ export const overviewPosition = (node: SlideNode, config: ImpressMeConfig, width
     .reduce((max, curr) => Math.max(max, curr), config.height / 2) + 16;
   const totalWidth = maxX - minX;
   const totalHeight = maxY - minY;
-  debug('overview pos', maxX, maxY);
   return {
     x: (minX + maxX) / 2,
     y: (minY + maxY) / 2,
@@ -35,7 +33,7 @@ export class LinearPositionStrategy implements PositionStrategy {
 
   private readonly scale = 0.4;
 
-  private readonly offset: SlidePosition;
+  private readonly offset: Transformation;
 
   constructor(readonly config: ImpressMeConfig) {
     this.offset = {
@@ -46,27 +44,25 @@ export class LinearPositionStrategy implements PositionStrategy {
     };
   }
 
-  calculate(node: SlideNode): SlidePosition {
+  calculate(node: SlideNode): Transformation {
     // debug('calculate', node);
     if (node.classes && node.classes.includes('overview')) {
       return overviewPosition(node, this.config, this.width, this.scale);
     }
 
-    let step;
-    switch (node.depth) {
-      case 1:
-        return {
-          x: 0,
-          y: 0,
-          z: 0,
-          scale: 1,
-        };
-      default:
-        step = findIndex(findRoot(node), node);
-        return {
-          ...this.offset,
-          x: this.offset.x + (step * this.config.width * this.offset.scale),
-        };
+    if (node.depth === 1) {
+      return {
+        x: 0,
+        y: 0,
+        z: 0,
+        scale: 1,
+      };
     }
+
+    const step = findIndex(findRoot(node), node);
+    return {
+      ...this.offset,
+      x: this.offset.x + (step * this.config.width * this.offset.scale),
+    };
   }
 }

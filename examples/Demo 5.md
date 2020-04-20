@@ -3,7 +3,7 @@ impress.me Demo Presentation
 
 April 8, 2020 - by [resamsel](https://github.com/resamsel)
 
-## 🧭 Intro [](class=primary-amber)
+## 🧭 Intro 12345 [](class=primary-red)
 
 * Write presentation in Markdown
 * Convert to interactive impress.js presentation
@@ -51,13 +51,13 @@ impress.me Demo.md --cssFiles a.css b.css
 
 ### Satellite 8
 
-## Heading 2
+## Heading 2 [](class=primary-deepPurple)
 
-## Heading 3
+## Heading 3 [](class=primary-lightBlue)
 
-## Heading 4
+## Heading 4 [](class=primary-green)
 
-## Heading 5
+## Heading 5 [](class=primary-amber)
 
 ## Overview [](class=overview)
 

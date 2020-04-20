@@ -1,4 +1,4 @@
-import {SlidePosition} from './slide-position';
+import {Translation} from './translation';
 
 export enum Shape {
   Circle = 'circle',
@@ -11,7 +11,7 @@ export const shapes = [Shape.Circle, Shape.Rounded, Shape.None];
 export interface ShapeConfig {
   width: number;
   height: number;
-  offset: SlidePosition;
+  offset: Translation;
 }
 
 export const shapeConfig: Record<Shape, ShapeConfig> = {
@@ -22,17 +22,15 @@ export const shapeConfig: Record<Shape, ShapeConfig> = {
       x: -500,
       y: 0,
       z: 0,
-      scale: 0,
     },
   },
   [Shape.Rounded]: {
-    width: 1680,
+    width: 1600,
     height: 1680,
     offset: {
       x: 0,
       y: 0,
       z: 0,
-      scale: 0,
     },
   },
   [Shape.None]: {
@@ -42,7 +40,6 @@ export const shapeConfig: Record<Shape, ShapeConfig> = {
       x: 0,
       y: 0,
       z: 0,
-      scale: 0,
     },
   },
 };

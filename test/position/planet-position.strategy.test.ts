@@ -1,5 +1,5 @@
 import {PlanetPositionStrategy, PositionStrategy} from '../../src/position';
-import {defaultConfig, ImpressMeConfig, SlideNode, SlidePosition} from '../../src';
+import {defaultConfig, ImpressMeConfig, SlideNode, Transformation} from '../../src';
 import {expect} from '@oclif/test';
 
 const config: ImpressMeConfig = defaultConfig;
@@ -10,7 +10,7 @@ const updatePositions = (strategy: PositionStrategy, node: SlideNode): void => {
   node.children.forEach(child => updatePositions(strategy, child));
 };
 
-const assertPosition = (pos: SlidePosition, config: ImpressMeConfig, radius: number, text = 'node'): void => {
+const assertPosition = (pos: Transformation, config: ImpressMeConfig, radius: number, text = 'node'): void => {
   expect(pos!.x).to.be
     .above(-config.width / 2, `x of ${text}`)
     .below(config.width / 2, `x of ${text}`);
