@@ -51,9 +51,13 @@ impress.me Demo.md --cssFiles a.css b.css
 
 ### Satellite 8
 
-## Heading 2 [](class=primary-deepPurple)
+## Heading 2 [](class=primary-deepPurple focus-headline)
 
-## Heading 3 [](class=primary-lightBlue)
+### Satellite 4 of 2 [](class=focus-headline)
+
+## Focus Image [](class=primary-lightBlue focus-image)
+
+![Demo Presentation][demo-presentation]
 
 ## Heading 4 [](class=primary-green)
 

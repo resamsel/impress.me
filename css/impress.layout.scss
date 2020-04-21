@@ -1,3 +1,25 @@
+.slide.present.focus-headline {
+  &.depth-2 > h2,
+  &.depth-3 > h3 {
+    transform: translate3d(440px, 440px, 0) translate3d(-50%, -50%, 0);
+  }
+}
+
+/* focus image without headline */
+.slide.present.focus-image {
+  &.depth-2 > h2,
+  &.depth-3 > h3 {
+    transform: translate3d(440px, 440px, 0) translate3d(-50%, -50%, 0);
+    opacity: 0;
+  }
+
+  img {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
 .slide.focus-single,
 .slide.focus-dual {
   > p,
