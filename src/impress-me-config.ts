@@ -4,6 +4,7 @@ import {Strategy} from './strategy';
 import {Shape} from './shape';
 
 export interface ImpressMeConfig {
+  basePath: string;
   template: string;
   width: number;
   height: number;

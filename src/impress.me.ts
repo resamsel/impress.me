@@ -17,8 +17,10 @@ import {PositionStrategyFactory} from './position';
 import {Strategy} from './strategy';
 import {Shape} from './shape';
 import {themeMap} from './theme';
+import {dirname} from 'path';
 
 export const defaultConfig: ImpressMeConfig = {
+  basePath: '.',
   template: 'templates/slides.pug',
   cssFiles: [
     'css/impress.me.scss',
@@ -70,6 +72,8 @@ export class ImpressMe {
     if (inputFile === undefined) {
       throw new Error('Input file not found: ' + input);
     }
+
+    this.config.basePath = dirname(inputFile);
 
     const outFile = output === undefined ? toOutputFilename(input) : output;
 

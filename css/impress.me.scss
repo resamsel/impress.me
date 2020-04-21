@@ -138,121 +138,6 @@ h1, h2, h3 {
   opacity: 1;
 }
 
-/* Slide steps */
-
-.slide {
-  display: block;
-
-  width: 1920px;
-  height: 1080px;
-  padding: 40px 60px;
-
-  color: rgba(0, 0, 0, .87);
-
-  font-family: 'PT Sans', sans-serif;
-  font-size: 30px;
-  line-height: 36px;
-  letter-spacing: -1px;
-}
-
-.slide > * {
-  opacity: 0;
-  transition: $transitionDuration;
-}
-
-.slide > h1,
-.slide > h2,
-.slide > h3,
-.slide.present > * {
-  opacity: 1;
-}
-
-.slide q {
-  display: block;
-  font-size: 50px;
-  line-height: 72px;
-
-  margin-top: 100px;
-}
-
-.slide q strong {
-  white-space: nowrap;
-}
-
-.slide.depth-2 > p,
-.slide.depth-3 > p {
-  width: 1000px;
-}
-
-.slide.depth-2 > h2,
-.slide.depth-3 > h3 {
-  display: inline-block;
-  width: auto;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-bottom: 64px;
-}
-
-.slide.present.depth-2 > h2,
-.slide.present.depth-3 > h3 {
-  white-space: normal;
-}
-
-.slide {
-  padding: 100px 32px;
-  position: relative;
-
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-.slide p {
-  font-size: 150%;
-  line-height: 150%;
-}
-
-.slide ol,
-.slide ul {
-  padding-left: 128px;
-}
-
-.slide > ol,
-.slide > ul {
-  font-size: 180%;
-  width: 800px;
-  overflow: hidden;
-}
-
-.slide ul > li {
-  list-style-type: disc;
-}
-
-/* Slides with code */
-
-.slide > pre {
-  position: absolute;
-  display: block;
-  width: 868px;
-  right: 64px;
-  top: 100px;
-  font-size: 28px;
-  line-height: 38px;
-  transform: translate3d(0, 0, 1px);
-}
-
-.slide > pre > code {
-  padding: 16px;
-  border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
-  overflow: hidden;
-}
-
-.slide code {
-  font-family: 'Fira Code', monospace;
-}
-
 /* DEBUGGING *
 .slide.present {
     background-color: rgba(255, 255, 255, 0.1);
@@ -271,7 +156,7 @@ Specific styles for: .title slides
 .title h2,
 .title h3,
 .title p {
-  margin-left: 5%; /* slide width is 900px, so this is like a 5% margin on both sides */
+  margin-left: 5%;
   width: 90%;
 }
 
@@ -345,36 +230,6 @@ Specific styles for: .title slides
   transform: translate(-50%, -50%);
 }
 
-/* Overview step */
-
-.overview {
-  display: none;
-}
-
-/* Background */
-
-.step.background > h2,
-.step.background:before {
-  display: none;
-  content: '';
-}
-
-.step.background {
-  padding: 0;
-}
-
-.step.background > * {
-  opacity: 1;
-}
-
-.step img[alt="background"] {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  transform: none;
-  top: 0;
-}
-
 /* HIERARCHY */
 
 .step.depth-2,
@@ -443,11 +298,17 @@ body.impress-mouse-timeout {
   pointer-events: auto
 }
 
-@import "impress.layout";
+/* notes */
+.slide.present .notes {
+  opacity: 0;
+}
+
 @import "impress.hint";
 @import "impress.help";
 @import "impress.toolbar";
 @import "impress.progress";
+@import "impress.slide";
+@import "impress.layout";
 @import "shape.circle";
 @import "shape.rounded";
 @import "theme.newspaper";

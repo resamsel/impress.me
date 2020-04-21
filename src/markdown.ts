@@ -1,7 +1,7 @@
 import {PositionStrategy} from './position';
 import {debug} from 'loglevel';
-import {attrItemPattern, attrPattern, logStep, resolvePath} from './helpers';
-import {existsSync, promises, readFileSync} from 'fs';
+import {attrItemPattern, attrPattern, logStep, resolvePath, toDataUri} from './helpers';
+import {existsSync, promises} from 'fs';
 import * as marked from 'marked';
 import {Slugger} from 'marked';
 import {highlightAuto} from 'highlight.js';
@@ -102,6 +102,10 @@ const generateState = (headings: marked.Tokens.Heading[], positionStrategy: Posi
   return outerState;
 };
 
+function cleanEmoji(s: string) {
+  return s.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
+}
+
 const processHeading = (state: SlideNodeState, config: ImpressMeConfig):
   ((text: string, level: number, raw: string, slugger: Slugger) => string) => {
   return (text: string, level: number, raw: string, slugger: Slugger) => {
@@ -127,11 +131,11 @@ const processHeading = (state: SlideNodeState, config: ImpressMeConfig):
       text = match[1];
     }
 
-    const slug = slugger.slug(text);
     if (level === 1) {
       config.title = config.title || text;
     }
 
+    const slug = cleanEmoji(slugger.slug(text));
     if (node.attrs.id === undefined) {
       node.attrs.id = slug;
     }
@@ -146,23 +150,23 @@ const processHeading = (state: SlideNodeState, config: ImpressMeConfig):
   };
 };
 
-const processImage = (href: string, title: string, text: string): string => {
-  if (href === null) {
-    return text;
-  }
+const processImage = (config: ImpressMeConfig): ((href: string, title: string, text: string) => string) =>
+  (href: string, title: string, text: string) => {
+    if (href === null) {
+      return text;
+    }
 
-  const imageSrc = [href, resolvePath(href)].find(existsSync);
-  if (imageSrc !== undefined) {
-    const data = readFileSync(imageSrc, 'base64');
-    href = `data:image/png;base64,${data}`;
-  }
-  let out = '<img src="' + href + '" alt="' + text + '"';
-  if (title) {
-    out += ' title="' + title + '"';
-  }
-  out += '>';
-  return out;
-};
+    const imageSrc = [href, config.basePath + '/' + href, resolvePath(href)].find(existsSync);
+    if (imageSrc !== undefined) {
+      href = toDataUri(imageSrc);
+    }
+    let out = '<img src="' + href + '" alt="' + text + '"';
+    if (title) {
+      out += ' title="' + title + '"';
+    }
+    out += '>';
+    return out;
+  };
 
 export const markdownToHtml = (file: string, config: ImpressMeConfig): Promise<string> => {
   return promises.readFile(file, 'utf8')
@@ -179,7 +183,18 @@ export const markdownToHtml = (file: string, config: ImpressMeConfig): Promise<s
     .then(([md, state]) => {
       const renderer = new marked.Renderer();
       renderer.heading = processHeading(state, config);
-      renderer.image = processImage;
+      renderer.image = processImage(config);
+      const paragraph = renderer.paragraph;
+      renderer.paragraph = (text: string) => {
+        if (text.startsWith('<img src="') || text.startsWith('<a href="')) {
+          // omit wrapping paragraph when it starts with an image or a link
+          return text;
+        }
+
+        debug('paragraph', text);
+
+        return paragraph(text);
+      };
 
       marked.setOptions({
         gfm: true,

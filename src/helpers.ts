@@ -98,8 +98,21 @@ export const flattenNodes = (node: SlideNode): SlideNode[] => {
 export const includeSlide = (node: SlideNode): boolean =>
   excludeSlideClasses.find(cls => (node.classes || []).includes(cls)) === undefined;
 
-export const toDataUri = (file: string): string =>
-  `data:image/png;base64,${readFileSync(file, 'base64')}`;
+export const contentTypeOf = (data: string): string => {
+  debug('contentTypeOf', data.substring(0, 50));
+  if (data.startsWith('<svg') || data.startsWith('<?xml')) {
+    return 'image/svg+xml';
+  }
+
+  return 'image/png';
+};
+
+export const toDataUri = (file: string): string => {
+  const data = readFileSync(file);
+  const contentType = contentTypeOf(data.toString());
+
+  return `data:${contentType};base64,${data.toString('base64')}`;
+};
 
 export const extractUri = (uri: string): string =>
   uri.replace(/^\s*(url\s*\(\s*)?['"]?([^\s'")]+)['"]?(\s*\))?\s*$/, '$2');

@@ -56,8 +56,7 @@ impress.me Demo.md --cssFiles a.css b.css
 ### Satellite 4 of 2 [](class=focus-headline)
 
 ## Focus Image [](class=primary-lightBlue focus-image)
-
-![Demo Presentation][demo-presentation]
+![Why you so slow][y-slow]
 
 ## Heading 4 [](class=primary-green)
 
@@ -67,4 +66,5 @@ impress.me Demo.md --cssFiles a.css b.css
 
 [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
 [demo-presentation]: images/demo-presentation.png "Demo Presentation"
+[y-slow]: y-slow.jpg "Why you so slow"
 [link]: http://www.reddit.com
