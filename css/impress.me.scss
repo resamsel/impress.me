@@ -1,29 +1,106 @@
-$transitionDuration: 1000ms !default;
+$transition-duration: 1000ms !default;
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   border: 0;
   font: inherit;
   font-size: 100%;
+  margin: 0;
+  padding: 0;
   vertical-align: baseline;
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
@@ -31,16 +108,20 @@ body {
   line-height: 1;
 }
 
-ol, ul {
+ol,
+ul {
   line-height: 150%;
 }
 
-blockquote, q {
+blockquote,
+q {
   quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
   content: none;
 }
 
@@ -52,35 +133,39 @@ table {
 /* Defaults */
 
 body {
-  font-family: 'PT Sans', sans-serif;
   background-color: #e0e0e0;
+  font-family: 'PT Sans', sans-serif;
   min-height: 740px;
 }
 
-b, strong {
-  font-weight: bold
+b,
+strong {
+  font-weight: bold;
 }
 
-i, em {
-  font-style: italic
+i,
+em {
+  font-style: italic;
 }
 
 a {
-  color: rgba(0, 0, 0, .87);
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.87);
   margin: 0 -8px;
   padding: 0 8px;
-  border-radius: 4px;
   transition: 0.5s;
 }
 
 a:hover,
 a:focus {
-  color: #000;
   background: #ddd;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  color: #000;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-size: 300%;
   line-height: 120%;
 }
@@ -88,16 +173,16 @@ h1, h2, h3 {
 /* Fallback message */
 
 .fallback-message {
+  background: #eedc94;
+
+  border: 1px solid #e4c652;
+  border-radius: 10px;
   font-family: sans-serif;
   line-height: 1.3;
+  margin: 20px auto;
+  padding: 10px 10px 0;
 
   width: 780px;
-  padding: 10px 10px 0;
-  margin: 20px auto;
-
-  border: 1px solid #E4C652;
-  border-radius: 10px;
-  background: #EEDC94;
 }
 
 .fallback-message p {
@@ -115,23 +200,23 @@ h1, h2, h3 {
 /* Steps */
 
 .step {
-  position: relative;
-  width: 1920px;
-  padding: 40px;
-  margin: 20px auto;
 
   box-sizing: border-box;
 
   font-family: 'PT Sans', sans-serif;
   font-size: 48px;
   line-height: 1.5;
+  margin: 20px auto;
+  padding: 40px;
+  position: relative;
+  width: 1920px;
 }
 
 .impress-enabled .step {
   margin: 0;
   opacity: 1;
 
-  transition: opacity $transitionDuration;
+  transition: opacity $transition-duration;
 }
 
 .impress-enabled .step.active {
@@ -160,14 +245,14 @@ h1, h2, h3 {
     `impress-on-` class.
 */
 .impress-on-overview .step {
-  opacity: 1;
   cursor: pointer;
+  opacity: 1;
 }
 
 /*
     In fact, we can hide the mouse cursor itself too, when mouse isn't used.
 */
-body.impress-mouse-timeout {
+.impress-mouse-timeout {
   cursor: none;
 }
 
@@ -209,7 +294,7 @@ body.impress-mouse-timeout {
     plugin that allows easy navigation between steps and autoplay.
 */
 .impress-enabled #impress-console-button {
-  pointer-events: auto
+  pointer-events: auto;
 }
 
 /* notes */
@@ -217,15 +302,16 @@ body.impress-mouse-timeout {
   opacity: 0;
 }
 
-@import "impress.hint";
-@import "impress.help";
-@import "impress.toolbar";
-@import "impress.progress";
-@import "impress.slide";
-@import "impress.layout";
-@import "shape.circle";
-@import "shape.rounded";
-@import "theme.newspaper";
-@import "theme.gallery";
-@import "theme.slides";
-@import "colors";
+@import 'impress.hint';
+@import 'impress.help';
+@import 'impress.toolbar';
+@import 'impress.progress';
+@import 'impress.slide';
+@import 'impress.layout';
+@import 'shape.circle';
+@import 'shape.rounded';
+@import 'theme.newspaper';
+@import 'theme.gallery';
+@import 'theme.planet';
+@import 'theme.slides';
+@import 'colors';

@@ -41,33 +41,31 @@
 */
 
 .hint {
+
+  background: rgba(0, 0, 0, 0.5);
+  bottom: 200px;
+  color: #eee;
   /*
       We hide the hint until presentation is started and from browsers not supporting
       impress.js, as they will have a linear scrollable view ...
   */
   display: none;
 
-  /*
-      ... and give it some fixed position and nice styles.
-  */
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 200px;
-
-  background: rgba(0, 0, 0, 0.5);
-  color: #EEE;
-  text-align: center;
-
   font-size: 50px;
-  padding: 20px;
-
-  z-index: 100;
+  left: 0;
 
   /*
       By default we don't want the hint to be visible, so we make it transparent ...
   */
   opacity: 0;
+  padding: 20px;
+
+  /*
+      ... and give it some fixed position and nice styles.
+  */
+  position: fixed;
+  right: 0;
+  text-align: center;
 
   /*
       ... and position it below the bottom of the screen (relative to it's fixed position)
@@ -84,14 +82,16 @@
 
       This way user will not see the hint moving down.
   */
-  transition: opacity $transitionDuration, transform 0.5s $transitionDuration;
+  transition: opacity $transition-duration, transform 0.5s $transition-duration;
+
+  z-index: 100;
 }
 
 /*
     Now we 'enable' the hint when presentation is initialized ...
 */
 .impress-enabled .hint {
-  display: block
+  display: block;
 }
 
 /*
@@ -104,7 +104,7 @@
   */
   opacity: 1;
 
-  transform: translateY(0px);
+  transform: translateY(0);
 
   /*
       Now for fade in transition we have the oposite situation from the one
@@ -114,5 +114,5 @@
       into its correct position and after that we fade it in with opacity
       transition.
   */
-  transition: opacity $transitionDuration 5s, transform 0.5s 4.5s;
+  transition: opacity $transition-duration 5s, transform 0.5s 4.5s;
 }

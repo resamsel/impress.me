@@ -9,13 +9,13 @@
 .slide.present.focus-image {
   &.depth-2 > h2,
   &.depth-3 > h3 {
-    transform: translate3d(440px, 440px, 0) translate3d(-50%, -50%, 0);
     opacity: 0;
+    transform: translate3d(440px, 440px, 0) translate3d(-50%, -50%, 0);
   }
 
   img {
-    position: absolute;
     left: 0;
+    position: absolute;
     top: 0;
   }
 }
@@ -39,19 +39,19 @@
   > p,
   > pre,
   > img {
-    position: absolute;
-    top: 272px;
-    right: 64px;
-    left: 64px;
     bottom: 64px;
+    left: 64px;
+    position: absolute;
+    right: 64px;
+    top: 272px;
   }
 
   > img {
+    border-radius: 4px;
     display: block;
     margin: 0 auto;
-    max-width: 100%;
     max-height: calc(100% - 172px);
-    border-radius: 4px;
+    max-width: 100%;
   }
 
   > a {
@@ -103,7 +103,7 @@
 
 /* Image shadow */
 .slide.image-shadow img {
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 /*
@@ -157,7 +157,7 @@ Specific styles for: .title slides
   box-shadow: none;
 }
 
-.step.title:before {
+.step.title::before {
   display: none;
 }
 
@@ -165,7 +165,7 @@ Specific styles for: .title slides
 
 .step.end {
   opacity: 0;
-  transition: opacity $transitionDuration;
+  transition: opacity $transition-duration;
 }
 
 .step.end.active {
@@ -173,22 +173,23 @@ Specific styles for: .title slides
 }
 
 .slide.end > h2,
-.slide.end:before {
+.slide.end::before {
   display: none;
 }
 
-.slide.end img[alt="logo"] {
-  position: absolute;
+/* stylelint-disable-next-line selector-no-qualifying-type */
+.slide.end img[alt='logo'] {
   left: 50%;
+  position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
 }
 
 .end a {
-  position: absolute;
   left: 50%;
-  top: 50%;
   margin-top: 100px;
+  position: absolute;
+  top: 50%;
   transform: translate(-50%, -50%);
 }
 
@@ -201,9 +202,9 @@ Specific styles for: .title slides
 /* Background */
 
 .step.background > h2,
-.step.background:before {
-  display: none;
+.step.background::before {
   content: '';
+  display: none;
 }
 
 .step.background {
@@ -214,10 +215,11 @@ Specific styles for: .title slides
   opacity: 1;
 }
 
-.step img[alt="background"] {
-  position: absolute;
-  width: 100%;
+/* stylelint-disable-next-line selector-no-qualifying-type */
+.step img[alt='background'] {
   left: 0;
-  transform: none;
+  position: absolute;
   top: 0;
+  transform: none;
+  width: 100%;
 }

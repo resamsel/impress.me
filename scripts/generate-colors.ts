@@ -16,7 +16,7 @@ const colorTemplate = (colorName: string, color: any) => `
 /*
  * ${colorName}
  */
-body.primary-${colorName} {
+.primary-${colorName}:not(.slide) {
   background: ${color['500']};
   background: linear-gradient(to right bottom, ${color['800']}, ${color['500']});
 }
@@ -24,7 +24,7 @@ body.primary-${colorName} {
 [class*=shape-] .primary-${colorName}.slide {
   color: #fff;
 
-  &:before {
+  &::before {
     background: ${color['500']};
   }
 }
@@ -36,8 +36,8 @@ body.primary-${colorName} {
 
     &:hover,
     &:active {
-      color: #fff;
       background: ${color['500']};
+      color: #fff;
     }
   }
 
@@ -49,6 +49,7 @@ body.primary-${colorName} {
 
       &:hover,
       &:active {
+        /* stylelint-disable-next-line color-hex-length */
         color: ${color['200']};
       }
     }
@@ -57,14 +58,14 @@ body.primary-${colorName} {
   .impress-progressbar > div {
     background: ${color['500']};
 
-    &:after {
+    &::after {
       background: ${color['500']};
     }
   }
 
-  #impress-toolbar button#impress-autoplay-playpause {
-    color: #fff;
+  #impress-autoplay-playpause {
     background: ${color['500']};
+    color: #fff;
   }
 }
 `;
@@ -73,7 +74,7 @@ fs.writeFile(
   'css/colors.scss',
   Object.keys(colors)
     .filter(colorName => !excluded.includes(colorName))
-    .map(colorName => colorTemplate(colorName, colors[colorName]))
+    .map(colorName => colorTemplate(colorName.toLowerCase(), colors[colorName]))
     .join(''),
   () => console.log('Colors style file written'),
 );

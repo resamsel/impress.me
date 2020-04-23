@@ -1,20 +1,20 @@
-$shapeCircleWidth: 1680px !default;
-$shapeCircleHeight: 1080px !default;
-$shapeCircleOffsetX: 1680px !default;
-$shapeCircleOffsetY: 1080px !default;
+$shape-circle-width: 1680px !default;
+$shape-circle-height: 1080px !default;
+$shape-circle-offset-x: 1680px !default;
+$shape-circle-offset-y: 1080px !default;
 
-.shape-circle .slide:not([class*="shape-"]),
+.shape-circle .slide:not([class*='shape-']),
 .slide.shape-circle {
-  &:before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    background-color: rgba(255, 255, 255, .87);
+  &::before {
+    background-color: rgba(255, 255, 255, 0.87);
     border-radius: 50%;
-    width: $shapeCircleWidth;
-    height: $shapeCircleHeight;
-    transform: translate3d(-50%, -50%, 0) translate3d($shapeCircleOffsetX, $shapeCircleOffsetY, 0);
+    content: '';
+    height: $shape-circle-height;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0) translate3d($shape-circle-offset-x, $shape-circle-offset-y, 0);
+    width: $shape-circle-width;
     z-index: -1;
   }
 
@@ -25,6 +25,6 @@ $shapeCircleOffsetY: 1080px !default;
 
   &.depth-2:not(.present) > h2,
   &.depth-3:not(.present) > h3 {
-    transform: translate3d(-$shapeCircleOffsetX - 70px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
+    transform: translate3d(-$shape-circle-offset-x - 70px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
   }
 }

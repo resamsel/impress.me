@@ -140,15 +140,15 @@ const cleanCss = new CleanCss({
 });
 
 const cssVars: [string, (config: ImpressMeConfig) => string][] = [
-  ['transitionDuration', config => `${config.transitionDuration}ms`],
-  ['shapeCircleWidth', () => `${shapeConfig[Shape.Circle].width}px`],
-  ['shapeCircleHeight', () => `${shapeConfig[Shape.Circle].height}px`],
-  ['shapeCircleOffsetX', () => `${shapeConfig[Shape.Circle].offset.x}px`],
-  ['shapeCircleOffsetY', () => `${shapeConfig[Shape.Circle].offset.y}px`],
-  ['shapeRoundedWidth', () => `${shapeConfig[Shape.Rounded].width}px`],
-  ['shapeRoundedHeight', () => `${shapeConfig[Shape.Rounded].height}px`],
-  ['shapeRoundedOffsetX', () => `${shapeConfig[Shape.Rounded].offset.x}px`],
-  ['shapeRoundedOffsetY', () => `${shapeConfig[Shape.Rounded].offset.y}px`],
+  ['transition-duration', config => `${config.transitionDuration}ms`],
+  ['shape-circle-width', () => `${shapeConfig[Shape.Circle].width}px`],
+  ['shape-circle-height', () => `${shapeConfig[Shape.Circle].height}px`],
+  ['shape-circle-offset-x', () => `${shapeConfig[Shape.Circle].offset.x}px`],
+  ['shape-circle-offset-y', () => `${shapeConfig[Shape.Circle].offset.y}px`],
+  ['shape-rounded-width', () => `${shapeConfig[Shape.Rounded].width}px`],
+  ['shape-rounded-height', () => `${shapeConfig[Shape.Rounded].height}px`],
+  ['shape-rounded-offset-x', () => `${shapeConfig[Shape.Rounded].offset.x}px`],
+  ['shape-rounded-offset-y', () => `${shapeConfig[Shape.Rounded].offset.y}px`],
 ];
 
 export const insertCssVars = (config: ImpressMeConfig): ((css: string) => string) =>
