@@ -191,8 +191,6 @@ export const markdownToHtml = (file: string, config: ImpressMeConfig): Promise<s
           return text;
         }
 
-        debug('paragraph', text);
-
         return paragraph(text);
       };
 

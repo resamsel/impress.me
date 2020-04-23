@@ -1,41 +1,43 @@
-$toolbar-button-size: 56px;
-$toolbar-padding-vertical: 12px;
-$toolbar-height: $toolbar-button-size + 2 * $toolbar-padding-vertical;
+$transitionDuration: 1000ms !default;
+$toolbar-button-size: 5vh !default;
+$toolbar-main-button-size: 6vh !default;
+$toolbar-padding: 2vh !default;
 
 body.impress-mouse-timeout #impress-toolbar {
-  bottom: -$toolbar-height;
+  opacity: 0;
 }
 
 .impress-enabled #impress-toolbar {
   pointer-events: auto;
   position: fixed;
-  height: $toolbar-button-size;
+  height: $toolbar-main-button-size;
   left: 0;
   right: 0;
   bottom: 0;
-  box-shadow: 0 0 8px rgba(0, 0, 0, .4);
-  background-color: #fff;
-  padding: $toolbar-padding-vertical 0;
-  display: flex;
-  justify-content: center;
-  transition: bottom $transitionDuration;
+  padding: $toolbar-padding;
+  transition: opacity $transitionDuration;
 
   button,
   select {
     border: none;
     margin: 0 4px;
-    font-size: 24px;
+    font-size: $toolbar-button-size*0.6;
+    line-height: $toolbar-button-size*0.6;
     cursor: pointer;
   }
 
   button {
     position: absolute;
-    left: 50%;
+    left: 10vh;
     top: 50%;
-    width: 48px;
-    height: 48px;
+    width: $toolbar-button-size;
+    height: $toolbar-button-size;
+    text-align: center;
     border-radius: 50%;
-    background-color: transparent;
+    opacity: 0.6;
+    background-color: #9e9e9e;
+    color: #fff;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
 
     &:active {
       background-color: lightgray;
@@ -43,6 +45,10 @@ body.impress-mouse-timeout #impress-toolbar {
 
     &:focus {
       outline: none;
+    }
+
+    .material-icons {
+      font-size: $toolbar-button-size*0.6;
     }
   }
 
@@ -52,6 +58,7 @@ body.impress-mouse-timeout #impress-toolbar {
     right: 16px;
     transform: translate(0, -50%);
     display: block;
+    opacity: 0.4;
     color: #444;
     line-height: 1.3;
     padding: .6em 1.4em .5em .8em;
@@ -82,23 +89,17 @@ body.impress-mouse-timeout #impress-toolbar {
 
   #impress-autoplay-playpause {
     transform: translate(-50%, -50%);
-    width: $toolbar-button-size !important;
-    height: $toolbar-button-size !important;
-    background-color: #9e9e9e;
-    color: #fff;
+    width: $toolbar-main-button-size !important;
+    height: $toolbar-main-button-size !important;
   }
 
   #impress-navigation-ui-prev {
-    padding-top: 6px;
-    transform: translate(-50%, -50%) translate(-64px, 0);
+    padding-top: $toolbar-padding/2;
+    transform: translate(-50%, -50%) translate(-$toolbar-button-size*1.2, 0);
   }
 
   #impress-navigation-ui-next {
-    padding-top: 6px;
-    transform: translate(-50%, -50%) translate(64px, 0);
-  }
-
-  > span {
-    margin-right: 10px;
+    padding-top: $toolbar-padding/2;
+    transform: translate(-50%, -50%) translate($toolbar-button-size*1.2, 0);
   }
 }

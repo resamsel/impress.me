@@ -38,8 +38,6 @@ export class PlanetPositionStrategy implements PositionStrategy {
   }
 
   calculate(node: SlideNode): Transformation {
-    // debug('PlanetPositionStrategy.calculate()', node);
-
     if (node === undefined) {
       return defaultPosition;
     }

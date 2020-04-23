@@ -99,7 +99,6 @@ export const includeSlide = (node: SlideNode): boolean =>
   excludeSlideClasses.find(cls => (node.classes || []).includes(cls)) === undefined;
 
 export const contentTypeOf = (data: string): string => {
-  debug('contentTypeOf', data.substring(0, 50));
   if (data.startsWith('<svg') || data.startsWith('<?xml')) {
     return 'image/svg+xml';
   }

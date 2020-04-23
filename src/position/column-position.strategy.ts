@@ -26,7 +26,6 @@ export class ColumnPositionStrategy implements PositionStrategy {
   }
 
   calculate(node: SlideNode): Transformation {
-    // debug('calculate', node);
     if (node.classes && node.classes.includes('overview')) {
       return overviewPosition(node, this.config, this.width, this.scale);
     }
