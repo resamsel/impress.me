@@ -1,3 +1,7 @@
+$transitionDuration: 1000ms !default;
+$progressbar-height: .6vh !default;
+$progressbar-dot-size: 1.6vh !default;
+
 body.impress-mouse-timeout .impress-progressbar {
   div:after {
     opacity: 0;
@@ -19,7 +23,7 @@ body.impress-mouse-timeout .impress-progressbar {
   div {
     position: relative;
     width: 0;
-    height: .6vh;
+    height: $progressbar-height;
     background: rgba(0, 0, 0, 0.4);
     background: linear-gradient(to right, rgba(255, 255, 255, 0.87), rgba(0, 0, 0, 0.4));
     transition: width $transitionDuration linear;
@@ -28,10 +32,10 @@ body.impress-mouse-timeout .impress-progressbar {
       // The dot at the end of the progressbar
       content: '';
       display: block;
-      height: 16px;
-      width: 16px;
+      height: $progressbar-dot-size;
+      width: $progressbar-dot-size;
       position: absolute;
-      right: -16px;
+      right: -$progressbar-dot-size;
       top: 50%;
       transform: translate(-50%, -50%);
       background: rgba(127, 127, 127, 1);
