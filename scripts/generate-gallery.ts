@@ -6,8 +6,8 @@ import {mkdirSync, promises} from 'fs';
 
 const captureWebsite = require('capture-website');
 
-if (!fs.existsSync('gallery')) {
-  mkdirSync('gallery', {});
+if (!fs.existsSync('dist/gallery')) {
+  mkdirSync('dist/gallery', {recursive: true});
 }
 
 const title = `Impress.me Gallery
@@ -23,8 +23,8 @@ Promise.all(themes.map(theme => {
 
   return Promise.all(strategies.map(strategy => {
     return Promise.all(shapes.map(shape => {
-      const presentation = `gallery/Demo-${themeName}-${strategy}-${shape}.html`;
-      const screenshot = `gallery/Demo-${themeName}-${strategy}-${shape}.png`;
+      const presentation = `dist/gallery/Demo-${themeName}-${strategy}-${shape}.html`;
+      const screenshot = `dist/gallery/Demo-${themeName}-${strategy}-${shape}.png`;
 
       return new ImpressMe({theme, strategy, shape})
         .convert('Demo.md', presentation)
@@ -53,8 +53,8 @@ Promise.all(themes.map(theme => {
     .then(markdowns => [`## ${themeName}\n`, ...markdowns].join('\n'));
 }))
   .then(markdowns => [title, ...markdowns, overview].join('\n'))
-  .then(markdown => promises.writeFile('gallery/Gallery.md', markdown))
-  .then(() => new ImpressMe({theme: themeMap.gallery}).convert('gallery/Gallery.md'))
+  .then(markdown => promises.writeFile('dist/gallery/Gallery.md', markdown))
+  .then(() => new ImpressMe({theme: themeMap.gallery}).convert('dist/gallery/Gallery.md'))
   .then(() => console.log('Gallery generated'));
 
 // eslint-enable no-console

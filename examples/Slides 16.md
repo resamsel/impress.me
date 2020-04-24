@@ -3,7 +3,7 @@ impress.me Demo Presentation
 
 April 8, 2020 - by [resamsel](https://github.com/resamsel)
 
-## 🧭 Intro 12345 [](class=primary-red)
+## 🧭 Intro [](class=primary-red)
 
 * Write presentation in Markdown
 * Convert to interactive impress.js presentation
@@ -41,30 +41,50 @@ impress.me INPUT.md 'My Fancy Presentation.html'
 impress.me Demo.md --cssFiles a.css b.css
 ```
 
-### Satellite 4
+## Heading 2 [](class=primary-pink)
+### Heading 2/1
+```shell script
+echo 'hello world!'
+```
+### Heading 2/2
+### Heading 2/3
 
-### Satellite 5
+## Heading 3 [](class=primary-purple)
+### Heading 3/1
+### Heading 3/2
+### Heading 3/3
 
-### Satellite 6
+## Heading 4 [](class=primary-deeppurple)
+### Heading 4/1
+### Heading 4/2
+### Heading 4/3
 
-### Satellite 7
+## Heading 5 [](class=primary-indigo)
 
-### Satellite 8
+## Heading 6 [](class=primary-blue)
 
-## Heading 2 [](class=primary-deepPurple focus-headline)
+## Heading 7 [](class=primary-lightblue)
 
-### Satellite 4 of 2 [](class=focus-headline)
+## Heading 8 [](class=primary-cyan)
 
-## Focus Image [](class=primary-lightBlue focus-image)
-![Why you so slow][y-slow]
+## Heading 9 [](class=primary-teal)
 
-## Heading 4 [](class=primary-green)
+## Heading 10 [](class=primary-green)
 
-## Heading 5 [](class=primary-amber)
+## Heading 11 [](class=primary-lightgreen)
+
+## Heading 12 [](class=primary-lime)
+
+## Heading 13 [](class=primary-yellow)
+
+## Heading 14 [](class=primary-amber)
+
+## Heading 15 [](class=primary-orange)
+
+## Heading 16 [](class=primary-deeporange)
 
 ## Overview [](class=overview)
 
 [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
 [demo-presentation]: images/demo-presentation.png "Demo Presentation"
-[y-slow]: y-slow.jpg "Why you so slow"
 [link]: http://www.reddit.com
