@@ -1,5 +1,7 @@
 $shape-rounded-width: 1600px !default;
 $shape-rounded-height: 1080px !default;
+$shape-rounded-offset-x: 0 !default;
+$shape-rounded-offset-y: 0 !default;
 
 .shape-rounded .slide:not([class*='shape-']),
 .slide.shape-rounded {
@@ -9,8 +11,10 @@ $shape-rounded-height: 1080px !default;
     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
     content: '';
     height: $shape-rounded-height;
+    left: 50%;
     position: absolute;
-    transform: translate3d(-220px, -100px, -1px) scale(0.9);
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0) translate3d($shape-rounded-offset-x, $shape-rounded-offset-y, 0) scale(0.9);
     width: $shape-rounded-width;
   }
 
@@ -21,6 +25,6 @@ $shape-rounded-height: 1080px !default;
 
   &.depth-2:not(.present) > h2,
   &.depth-3:not(.present) > h3 {
-    transform: translate3d(580px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
+    transform: translate3d(-$shape-rounded-offset-x - 70px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
   }
 }

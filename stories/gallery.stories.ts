@@ -1,16 +1,16 @@
 export default {title: 'Gallery'};
 
+export const GalleryColumnCircle = () => '<iframe class="fullscreen" src="Demo-gallery-column-circle.html"></iframe>';
+
+export const GalleryColumnNone = () => '<iframe class="fullscreen" src="Demo-gallery-column-none.html"></iframe>';
+
+export const GalleryColumnRounded = () => '<iframe class="fullscreen" src="Demo-gallery-column-rounded.html"></iframe>';
+
 export const GalleryLinearCircle = () => '<iframe class="fullscreen" src="Demo-gallery-linear-circle.html"></iframe>';
 
 export const GalleryLinearNone = () => '<iframe class="fullscreen" src="Demo-gallery-linear-none.html"></iframe>';
 
 export const GalleryLinearRounded = () => '<iframe class="fullscreen" src="Demo-gallery-linear-rounded.html"></iframe>';
-
-export const GalleryPlaneCircle = () => '<iframe class="fullscreen" src="Demo-gallery-plane-circle.html"></iframe>';
-
-export const GalleryPlaneNone = () => '<iframe class="fullscreen" src="Demo-gallery-plane-none.html"></iframe>';
-
-export const GalleryPlaneRounded = () => '<iframe class="fullscreen" src="Demo-gallery-plane-rounded.html"></iframe>';
 
 export const GalleryPlanetCircle = () => '<iframe class="fullscreen" src="Demo-gallery-planet-circle.html"></iframe>';
 
@@ -24,17 +24,17 @@ export const GalleryRowNone = () => '<iframe class="fullscreen" src="Demo-galler
 
 export const GalleryRowRounded = () => '<iframe class="fullscreen" src="Demo-gallery-row-rounded.html"></iframe>';
 
+export const NewspaperColumnCircle = () => '<iframe class="fullscreen" src="Demo-newspaper-column-circle.html"></iframe>';
+
+export const NewspaperColumnNone = () => '<iframe class="fullscreen" src="Demo-newspaper-column-none.html"></iframe>';
+
+export const NewspaperColumnRounded = () => '<iframe class="fullscreen" src="Demo-newspaper-column-rounded.html"></iframe>';
+
 export const NewspaperLinearCircle = () => '<iframe class="fullscreen" src="Demo-newspaper-linear-circle.html"></iframe>';
 
 export const NewspaperLinearNone = () => '<iframe class="fullscreen" src="Demo-newspaper-linear-none.html"></iframe>';
 
 export const NewspaperLinearRounded = () => '<iframe class="fullscreen" src="Demo-newspaper-linear-rounded.html"></iframe>';
-
-export const NewspaperPlaneCircle = () => '<iframe class="fullscreen" src="Demo-newspaper-plane-circle.html"></iframe>';
-
-export const NewspaperPlaneNone = () => '<iframe class="fullscreen" src="Demo-newspaper-plane-none.html"></iframe>';
-
-export const NewspaperPlaneRounded = () => '<iframe class="fullscreen" src="Demo-newspaper-plane-rounded.html"></iframe>';
 
 export const NewspaperPlanetCircle = () => '<iframe class="fullscreen" src="Demo-newspaper-planet-circle.html"></iframe>';
 
@@ -48,17 +48,17 @@ export const NewspaperRowNone = () => '<iframe class="fullscreen" src="Demo-news
 
 export const NewspaperRowRounded = () => '<iframe class="fullscreen" src="Demo-newspaper-row-rounded.html"></iframe>';
 
+export const PlanetColumnCircle = () => '<iframe class="fullscreen" src="Demo-planet-column-circle.html"></iframe>';
+
+export const PlanetColumnNone = () => '<iframe class="fullscreen" src="Demo-planet-column-none.html"></iframe>';
+
+export const PlanetColumnRounded = () => '<iframe class="fullscreen" src="Demo-planet-column-rounded.html"></iframe>';
+
 export const PlanetLinearCircle = () => '<iframe class="fullscreen" src="Demo-planet-linear-circle.html"></iframe>';
 
 export const PlanetLinearNone = () => '<iframe class="fullscreen" src="Demo-planet-linear-none.html"></iframe>';
 
 export const PlanetLinearRounded = () => '<iframe class="fullscreen" src="Demo-planet-linear-rounded.html"></iframe>';
-
-export const PlanetPlaneCircle = () => '<iframe class="fullscreen" src="Demo-planet-plane-circle.html"></iframe>';
-
-export const PlanetPlaneNone = () => '<iframe class="fullscreen" src="Demo-planet-plane-none.html"></iframe>';
-
-export const PlanetPlaneRounded = () => '<iframe class="fullscreen" src="Demo-planet-plane-rounded.html"></iframe>';
 
 export const PlanetPlanetCircle = () => '<iframe class="fullscreen" src="Demo-planet-planet-circle.html"></iframe>';
 
@@ -72,17 +72,17 @@ export const PlanetRowNone = () => '<iframe class="fullscreen" src="Demo-planet-
 
 export const PlanetRowRounded = () => '<iframe class="fullscreen" src="Demo-planet-row-rounded.html"></iframe>';
 
+export const SlidesColumnCircle = () => '<iframe class="fullscreen" src="Demo-slides-column-circle.html"></iframe>';
+
+export const SlidesColumnNone = () => '<iframe class="fullscreen" src="Demo-slides-column-none.html"></iframe>';
+
+export const SlidesColumnRounded = () => '<iframe class="fullscreen" src="Demo-slides-column-rounded.html"></iframe>';
+
 export const SlidesLinearCircle = () => '<iframe class="fullscreen" src="Demo-slides-linear-circle.html"></iframe>';
 
 export const SlidesLinearNone = () => '<iframe class="fullscreen" src="Demo-slides-linear-none.html"></iframe>';
 
 export const SlidesLinearRounded = () => '<iframe class="fullscreen" src="Demo-slides-linear-rounded.html"></iframe>';
-
-export const SlidesPlaneCircle = () => '<iframe class="fullscreen" src="Demo-slides-plane-circle.html"></iframe>';
-
-export const SlidesPlaneNone = () => '<iframe class="fullscreen" src="Demo-slides-plane-none.html"></iframe>';
-
-export const SlidesPlaneRounded = () => '<iframe class="fullscreen" src="Demo-slides-plane-rounded.html"></iframe>';
 
 export const SlidesPlanetCircle = () => '<iframe class="fullscreen" src="Demo-slides-planet-circle.html"></iframe>';
 

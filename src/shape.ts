@@ -26,9 +26,9 @@ export const shapeConfig: Record<Shape, ShapeConfig> = {
   },
   [Shape.Rounded]: {
     width: 1600,
-    height: 1680,
+    height: 1080,
     offset: {
-      x: 0,
+      x: -400,
       y: 0,
       z: 0,
     },

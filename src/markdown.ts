@@ -1,6 +1,6 @@
 import {PositionStrategy} from './position';
-import {debug} from 'loglevel';
-import {attrItemPattern, attrPattern, logStep, resolvePath, toDataUri} from './helpers';
+import {error, warn} from 'loglevel';
+import {attrItemPattern, attrPattern, fileToDataUri, logStep, resolvePath} from './helpers';
 import {existsSync, promises} from 'fs';
 import * as marked from 'marked';
 import {Slugger} from 'marked';
@@ -9,6 +9,7 @@ import {ImpressMeConfig} from './impress-me-config';
 import {SlideNode} from './slide-node';
 import {SlideNodeState} from './slide-node-state';
 import {Transformation} from './transformation';
+import {rendererMap} from './renderers';
 import Heading = marked.Tokens.Heading;
 
 const appendHeadingAttributes = (text: string, attrs: Record<string, string>): void => {
@@ -115,7 +116,7 @@ const processHeading = (state: SlideNodeState, config: ImpressMeConfig):
       .replace('"></a>', ')');
     const node = state.nodes[nodeKey];
     if (node === undefined) {
-      debug('Node not found', nodeKey, Object.keys(state.nodes));
+      warn('Node not found', nodeKey, Object.keys(state.nodes));
     }
 
     if (node === undefined || level > 3) {
@@ -158,7 +159,7 @@ const processImage = (config: ImpressMeConfig): ((href: string, title: string, t
 
     const imageSrc = [href, config.basePath + '/' + href, resolvePath(href)].find(existsSync);
     if (imageSrc !== undefined) {
-      href = toDataUri(imageSrc);
+      href = fileToDataUri(imageSrc);
     }
     let out = '<img src="' + href + '" alt="' + text + '"';
     if (title) {
@@ -167,6 +168,33 @@ const processImage = (config: ImpressMeConfig): ((href: string, title: string, t
     out += '>';
     return out;
   };
+
+const processHighlight = (code: string, paramString: string, callback: (err: any | undefined, code?: string) => void): string | void => {
+  const params = paramString.split(',');
+  const lang = params[0];
+  if (params.includes('render')) {
+    if (rendererMap[lang] !== undefined) {
+      const options = params.slice(2).reduce((opts, curr) => {
+        const [key, value] = curr.split('=');
+        return {
+          ...opts,
+          [key]: value,
+        };
+      }, {});
+      rendererMap[lang].render(code, lang, options)
+        .then(rendered => callback(undefined, rendered))
+        .catch(err => { // eslint-disable-line unicorn/catch-error-name
+          error('Error while rendering code block', err);
+          callback(err);
+        });
+      return;
+    }
+
+    warn('No renderer for language ' + lang + ' found.');
+  }
+
+  callback(undefined, highlightAuto(code, [lang]).value);
+};
 
 export const markdownToHtml = (file: string, config: ImpressMeConfig): Promise<string> => {
   return promises.readFile(file, 'utf8')
@@ -193,23 +221,37 @@ export const markdownToHtml = (file: string, config: ImpressMeConfig): Promise<s
 
         return paragraph(text);
       };
+      const codeFn = renderer.code;
+      renderer.code = (code: string, language: string | undefined, isEscaped: boolean): string => {
+        if (language?.split(',').includes('render')) {
+          return code;
+        }
+        return codeFn.bind(renderer)(code, language, isEscaped);
+      };
 
-      marked.setOptions({
-        gfm: true,
-        breaks: false,
-        pedantic: false,
-        smartLists: true,
-        smartypants: false,
-        renderer,
-        langPrefix: 'hljs ',
-        highlight: (code: string, lang: string) => highlightAuto(code, [lang]).value,
+      return new Promise((resolve, reject) => {
+        marked(
+          md,
+          {
+            gfm: true,
+            breaks: false,
+            pedantic: false,
+            smartLists: true,
+            smartypants: false,
+            renderer,
+            langPrefix: 'hljs ',
+            highlight: processHighlight,
+          },
+          (err, content) => {
+            if (err) {
+              return reject(err);
+            }
+            if (state.isOpen) {
+              content += '</div>';
+            }
+            resolve(content);
+          }
+        );
       });
-
-      let markedHtml = marked(md);
-
-      if (state.isOpen) {
-        markedHtml += '</div>';
-      }
-      return markedHtml;
     });
 };

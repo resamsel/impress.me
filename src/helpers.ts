@@ -106,11 +106,15 @@ export const contentTypeOf = (data: string): string => {
   return 'image/png';
 };
 
-export const toDataUri = (file: string): string => {
-  const data = readFileSync(file);
+export const toDataUri = (data: Buffer): string => {
   const contentType = contentTypeOf(data.toString());
 
   return `data:${contentType};base64,${data.toString('base64')}`;
+};
+
+export const fileToDataUri = (file: string): string => {
+  const data = readFileSync(file);
+  return toDataUri(data);
 };
 
 export const extractUri = (uri: string): string =>
@@ -122,7 +126,7 @@ const cssPropertyValueToDataUri = (propertyName: string, propertyValue: string) 
       !propertyValue.startsWith('http:') && !propertyValue.startsWith('url(http:') &&
       !propertyValue.startsWith('https:') && !propertyValue.startsWith('url(https:')) {
       try {
-        return 'url(' + toDataUri(extractUri(propertyValue)) + ')';
+        return 'url(' + fileToDataUri(extractUri(propertyValue)) + ')';
       } catch (error) {
         // ignore
       }

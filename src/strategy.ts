@@ -1,6 +1,6 @@
 export enum Strategy {
   Linear = 'linear',
-  Column = 'plane',
+  Column = 'column',
   Row = 'row',
   Planet = 'planet'
 }

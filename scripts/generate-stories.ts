@@ -1,5 +1,5 @@
 import {promises} from 'fs';
-import * as path from "path";
+import * as path from 'path';
 
 const header = (title: string): string => `export default {title: '${title}'};
 `;
@@ -23,5 +23,5 @@ const createStory = (title: string, filename: string): string =>
     )
     .then(stories => [header(storiesTitle)].concat(stories))
     .then(contents =>
-      promises.writeFile('stories/' + storiesTitle.toLowerCase() + '.stories.ts', contents.join('\n')))
+      promises.writeFile('stories/' + storiesTitle.toLowerCase() + '.stories.ts', contents.join('\n')));
 });

@@ -4,6 +4,7 @@ export * from './impress-me-config';
 export * from './markdown';
 export * from './position';
 export * from './rotation';
+export * from './renderers';
 export * from './scale';
 export * from './shape';
 export * from './slide-node';

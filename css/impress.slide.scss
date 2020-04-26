@@ -93,24 +93,34 @@ $transition-duration: 1000ms !default;
 
 /* Slides with code */
 
-.slide > pre {
-  display: block;
-  font-size: 28px;
-  line-height: 38px;
-  position: absolute;
-  right: 64px;
-  top: 100px;
-  transform: translate3d(0, 0, 1px);
-  width: 868px;
-}
+.slide {
+  code,
+  .code {
+    font-family: 'Fira Code', monospace;
+  }
 
-.slide > pre > code {
-  border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
-  overflow: hidden;
-  padding: 16px;
-}
+  > pre,
+  > .code {
+    display: block;
+    font-size: 28px;
+    line-height: 38px;
+    position: absolute;
+    right: 64px;
+    top: 100px;
+    transform: translate3d(0, 0, 1px);
+    width: 868px;
+  }
 
-.slide code {
-  font-family: 'Fira Code', monospace;
+  > .code {
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 2vh 2vw;
+  }
+
+  > pre > code {
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    padding: 16px;
+  }
 }

@@ -57,8 +57,8 @@ describe('impress.me', () => {
 
     test
       .stdout()
-      .do(() => cmd.run(['Demo.md', '--primary=blue', '--secondary=purple', '--theme=slides', '--shape=none', '--transitionDuration=0', '--strategy=plane', '--debug']))
-      .it('runs impress.me Demo.md primary=blue secondary=purple theme=slides shape=none transitionDuration=0 strategy=plane debug', ctx => {
+      .do(() => cmd.run(['Demo.md', '--primary=blue', '--secondary=purple', '--theme=slides', '--shape=none', '--transitionDuration=0', '--strategy=column', '--debug']))
+      .it('runs impress.me Demo.md primary=blue secondary=purple theme=slides shape=none transitionDuration=0 strategy=column debug', ctx => {
         expect(ctx.stdout).to.contain('Creating "Demo.html" from "Demo.md"');
       });
   });
