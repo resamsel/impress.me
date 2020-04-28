@@ -1,7 +1,7 @@
 $transition-duration: 1000ms !default;
-$toolbar-button-size: 5vh !default;
-$toolbar-main-button-size: 6vh !default;
-$toolbar-padding: 2vh !default;
+$toolbar-button-size: 3.2vh !default;
+$toolbar-main-button-size: 4vh !default;
+$toolbar-padding: 1.4vh !default;
 
 .impress-mouse-timeout #impress-toolbar {
   opacity: 0;
@@ -22,7 +22,7 @@ $toolbar-padding: 2vh !default;
     border-width: 0;
     cursor: pointer;
     font-size: $toolbar-button-size*0.6;
-    line-height: $toolbar-button-size*0.6;
+    line-height: $toolbar-button-size;
     margin: 0 4px;
     opacity: 0.6;
   }
@@ -53,6 +53,7 @@ $toolbar-padding: 2vh !default;
 
     .material-icons {
       font-size: $toolbar-button-size*0.6;
+      line-height: $toolbar-button-size;
     }
   }
 
@@ -96,11 +97,9 @@ $toolbar-padding: 2vh !default;
 }
 
 #impress-navigation-ui-prev {
-  padding-top: $toolbar-padding/2;
-  transform: translate(-50%, -50%) translate(-$toolbar-button-size*1.2, 0);
+  transform: translate(-50%, -50%) translate(-$toolbar-button-size*1.4, 0);
 }
 
 #impress-navigation-ui-next {
-  padding-top: $toolbar-padding/2;
-  transform: translate(-50%, -50%) translate($toolbar-button-size*1.2, 0);
+  transform: translate(-50%, -50%) translate($toolbar-button-size*1.4, 0);
 }
