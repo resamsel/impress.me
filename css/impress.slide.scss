@@ -3,7 +3,6 @@ $transition-duration: 1000ms !default;
 /* Slide steps */
 
 .slide {
-
   color: rgba(0, 0, 0, 0.87);
   display: block;
 
@@ -39,6 +38,10 @@ $transition-duration: 1000ms !default;
 
 .slide q strong {
   white-space: nowrap;
+}
+
+.slide svg {
+  letter-spacing: 0;
 }
 
 .slide.depth-2 > p,
@@ -114,13 +117,14 @@ $transition-duration: 1000ms !default;
     background-color: #fff;
     border-radius: 4px;
     display: block;
+    height: auto;
     left: 50%;
-    max-width: 100%;
     padding: 16px;
     position: absolute;
     right: unset;
     top: 64px;
     transform: translate3d(0, 0, 1px);
+    width: 45%;
   }
 
   > pre > code {

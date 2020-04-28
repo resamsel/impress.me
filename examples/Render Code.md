@@ -5,9 +5,8 @@ Render Code
 
 ```dot,render
 digraph G {
-    size = "16,9";
-    ratio = expand;
     rankdir = "LR";
+    ranksep = "0 equally";
     bgcolor = "transparent";
 
     node [
@@ -15,8 +14,6 @@ digraph G {
         height = 0.4
         fixedsize = shape
         shape = circle
-        color = black
-        fontcolor = black
         penwidth = 1.6
         style = filled
         fontname = "PT Sans,sans-serif"
@@ -26,34 +23,23 @@ digraph G {
     ];
 
     edge [
-        weight = 2,
-        color = black,
-        arrowhead = none,
-        penwidth = 1.6,
+        weight = 2
+        arrowhead = none
+        penwidth = 1.6
         splines = curved
     ];
 
-    node [group = master, fillcolor = 2];
+    node [group = master fillcolor = 2];
     " " -> A -> D -> E -> G;
-    node [group = "feature-a", fillcolor = 3];
-    A -> H -> I;
-    node [group = "feature-a'", fillcolor = 4];
-    G -> "H'" -> "I'";
-    node [group = "feature-b", fillcolor = 1];
+    node [group = "feature-b" fillcolor = 1];
     " " -> B -> C -> F -> G;
 
-    node [shape = box, fixedsize = false];
+    node [shape = box fixedsize = false];
     edge [penwidth = 0];
 
     node [fillcolor = 2];
     "master" -> G;
     {rank = same; G; "master";}
-    node [fillcolor = 3];
-    "feature/a" -> I;
-    {rank = same; I; "feature/a";}
-    node [fillcolor = 4];
-    "feature/a'" -> "I'";
-    {rank = same; "I'"; "feature/a'";}
     node [fillcolor = 1];
     F -> "feature/b";
     {rank = same; F; "feature/b";}
@@ -63,9 +49,8 @@ digraph G {
 
 ```dot,render
 digraph G {
-    size = "16,9";
-    ratio = expand;
     rankdir = "LR";
+    ranksep = "0 equally";
     bgcolor = "transparent";
 
     node [
@@ -73,8 +58,6 @@ digraph G {
         height = 0.4
         fixedsize = shape
         shape = circle
-        color = black
-        fontcolor = black
         penwidth = 1.6
         style = filled
         fontname = "PT Sans,sans-serif"
@@ -84,23 +67,22 @@ digraph G {
     ];
 
     edge [
-        weight = 2,
-        color = black,
-        arrowhead = none,
-        penwidth = 1.6,
+        weight = 2
+        arrowhead = none
+        penwidth = 1.6
         splines = curved
     ];
 
-    node [group = master, fillcolor = 2];
+    node [group = master fillcolor = 2];
     " " -> A -> D -> E -> G;
-    node [group = "feature-a", fillcolor = 3];
+    node [group = "feature-a" fillcolor = 3];
     A -> H -> I;
-    node [group = "feature-a'", fillcolor = 4];
+    node [group = "feature-a'" fillcolor = 4];
     G -> "H'" -> "I'";
-    node [group = "feature-b", fillcolor = 1];
+    node [group = "feature-b" fillcolor = 1];
     " " -> B -> C -> F -> G;
 
-    node [shape = box, fixedsize = false];
+    node [shape = box fixedsize = false];
     edge [penwidth = 0];
 
     node [fillcolor = 2];
@@ -125,9 +107,8 @@ digraph G {
 
 ```dot,render
 digraph G {
-    size = "16,9";
-    ratio = expand;
     rankdir = "LR";
+    ranksep = "0 equally";
     bgcolor = "transparent";
 
     node [
@@ -135,8 +116,6 @@ digraph G {
         height = 0.4
         fixedsize = shape
         shape = circle
-        color = black
-        fontcolor = black
         penwidth = 1.6
         style = filled
         fontname = "PT Sans,sans-serif"
@@ -146,23 +125,22 @@ digraph G {
     ];
 
     edge [
-        weight = 2,
-        color = black,
-        arrowhead = none,
-        penwidth = 1.6,
+        weight = 2
+        arrowhead = none
+        penwidth = 1.6
         splines = curved
     ];
 
-    node [group = master, fillcolor = 2];
+    node [group = master fillcolor = 2];
     " " -> A -> D -> E -> G;
-    node [group = "feature-a", fillcolor = 3];
+    node [group = "feature-a" fillcolor = 3];
     A -> H -> I;
-    node [group = "feature-a'", fillcolor = 4];
+    node [group = "feature-a'" fillcolor = 4];
     G -> "H'" -> "I'";
-    node [group = "feature-b", fillcolor = 1];
+    node [group = "feature-b" fillcolor = 1];
     " " -> B -> C -> F -> G;
 
-    node [shape = box, fixedsize = false];
+    node [shape = box fixedsize = false];
     edge [penwidth = 0];
 
     node [fillcolor = 2];

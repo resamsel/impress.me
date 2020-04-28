@@ -72,9 +72,8 @@ console.log('Hello World!');
 
 ```dot,render
 digraph G {
-    size = "16,9";
-    ratio = expand;
     rankdir = "LR";
+    ranksep = "0 equally";
     bgcolor = "transparent";
 
     node [
@@ -131,6 +130,7 @@ digraph G {
 ```dot,render
 digraph G {
     rankdir = "LR";
+    ranksep = "0 equally";
     bgcolor = "transparent";
 
     " " -> A -> D -> E -> G;
