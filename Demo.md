@@ -68,9 +68,9 @@ impress.me Demo.md --cssFiles a.css b.css
 console.log('Hello World!');
 ```
 
-### Execute Code [](class=focus-dual)
+### Execute Code [](class=focus-dual image-shadow)
 
-```dot,render,class=image-shadow
+```dot,render
 digraph G {
     size = "16,9";
     ratio = expand;
@@ -78,30 +78,38 @@ digraph G {
     bgcolor = "transparent";
 
     node [
-    width = 0.4,
-    height = 0.4,
-    fixedsize = shape,
-    shape = circle,
-    color = gray15,
-    fontcolor = gray15,
-    penwidth = 3,
-    style = filled,
-    fontname = "Courier-Bold",
-    colorscheme = "pastel19"
+        width = 0.4
+        height = 0.4
+        fixedsize = shape
+        shape = circle
+        color = black
+        fontcolor = black
+        penwidth = 1.6
+        style = filled
+        colorscheme = "pastel19"
+        shape = circle
+        fixedsize = shape
+        fontname = "PT Sans,sans-serif"
     ];
 
-    edge [weight = 2, color = gray15, arrowhead = none, penwidth = 3, splines = curved];
+    edge [
+        weight = 2
+        color = black
+        arrowhead = none
+        penwidth = 1.6
+        splines = curved
+    ];
 
-    node [group = master, fillcolor = 2, shape = circle, fixesize = shape];
+    node [group = master fillcolor = 2];
     " " -> A -> D -> E -> G;
-    node [group = "feature-a", fillcolor = 3];
+    node [group = "feature-a" fillcolor = 3];
     A -> H -> I;
-    node [group = "feature-a'", fillcolor = 4];
+    node [group = "feature-a'" fillcolor = 4];
     G -> "H'" -> "I'";
-    node [group = "feature-b", fillcolor = 1];
+    node [group = "feature-b" fillcolor = 1];
     " " -> B -> C -> F -> G;
 
-    node [shape = box, fixedsize = false];
+    node [shape = box fixedsize = false];
     edge [penwidth = 0];
 
     node [fillcolor = 2];

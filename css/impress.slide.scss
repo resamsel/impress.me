@@ -99,8 +99,7 @@ $transition-duration: 1000ms !default;
     font-family: 'Fira Code', monospace;
   }
 
-  > pre,
-  > .code {
+  > pre {
     display: block;
     font-size: 28px;
     line-height: 38px;
@@ -113,8 +112,15 @@ $transition-duration: 1000ms !default;
 
   > .code {
     background-color: #fff;
-    box-sizing: border-box;
-    padding: 2vh 2vw;
+    border-radius: 4px;
+    display: block;
+    left: 50%;
+    max-width: 100%;
+    padding: 16px;
+    position: absolute;
+    right: unset;
+    top: 64px;
+    transform: translate3d(0, 0, 1px);
   }
 
   > pre > code {
