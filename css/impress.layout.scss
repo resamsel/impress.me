@@ -80,7 +80,7 @@
 
   > .code {
     left: 50%;
-    transform: translate3d(-50%, 0, 1px);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -101,10 +101,6 @@
         left: initial;
       }
     }
-  }
-
-  > .code {
-    transform: translate3d(0, 0, 1px);
   }
 }
 

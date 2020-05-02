@@ -2,27 +2,22 @@ import {PositionStrategy} from './position.strategy';
 import {findIndex} from '../helpers';
 import {ImpressMeConfig} from '../impress-me-config';
 import {SlideNode} from '../slide-node';
-import {Shape, ShapeConfig, shapeConfig} from '../shape';
+import {ShapeConfig, shapeConfig} from '../shape';
 import {overviewPosition} from './linear-position.strategy';
 import {Transformation} from '../transformation';
 
 export class ColumnPositionStrategy implements PositionStrategy {
-  private readonly width = 1920;
-
-  private readonly height: number;
-
-  private readonly scale = 0.4;
+  private readonly shape: ShapeConfig;
 
   private readonly offset: Transformation;
 
-  private readonly shape: ShapeConfig;
+  private readonly scale = 0.4;
 
   constructor(readonly config: ImpressMeConfig) {
     this.shape = shapeConfig[this.config.shape];
-    this.height = this.config.shape === Shape.Circle ? 1920 : 1080;
     this.offset = {
       x: -(this.config.width / 2) - ((this.shape.width + this.shape.siblingOffset.x) * this.scale / 2),
-      y: (this.height - 1080) * 0.2,
+      y: (this.shape.height + this.shape.parentOffset.y - 1080) * 0.2,
       z: 0,
       scale: this.scale,
     };
@@ -30,7 +25,7 @@ export class ColumnPositionStrategy implements PositionStrategy {
 
   calculate(node: SlideNode): Transformation {
     if (node.classes && node.classes.includes('overview')) {
-      return overviewPosition(node, this.config, this.width, this.scale);
+      return overviewPosition(node, this.config, this.shape.width, this.scale);
     }
 
     let siblingIndex: number;

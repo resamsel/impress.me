@@ -41,7 +41,7 @@ const colorTemplate = (colorName: string, color: any) => `
   }
 
   &::before {
-    background: ${color['50']};
+    background: ${color['100']};
   }
 }
 

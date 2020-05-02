@@ -26,7 +26,6 @@ $transition-duration: 1000ms !default;
 .slide > h3,
 .slide.present > * {
   opacity: 1;
-  transform: translate3d(0, 0, 1px);
 }
 
 .slide q {

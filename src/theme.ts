@@ -8,6 +8,11 @@ export interface Theme {
 }
 
 export const themeMap: Record<string, Theme> = {
+  classic: {
+    themeName: 'classic',
+    shape: Shape.None,
+    strategy: Strategy.Linear,
+  },
   planet: {
     themeName: 'planet',
     shape: Shape.Circle,

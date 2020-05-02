@@ -14,14 +14,14 @@ $primary-100: rgba(255, 255, 255, 0.87) !default;
     left: 50%;
     position: absolute;
     top: 50%;
-    transform: translate3d(-50%, -50%, 0) translate3d($shape-square-offset-x, $shape-square-offset-y, 0) rotate($shape-square-rotate);
+    transform: translate3d(-50%, -50%, -1px) translate3d($shape-square-offset-x, $shape-square-offset-y, 0) rotate($shape-square-rotate);
     transition-duration: $transition-duration;
     width: $shape-square-width;
     z-index: -1;
   }
 
   &.present::before {
-    transform: translate3d(-50%, -50%, 0) translate3d($shape-square-offset-x + 100px, $shape-square-offset-y, 0) rotate($shape-square-rotate) scale(0.8);
+    transform: translate3d(-50%, -50%, -1px) translate3d($shape-square-offset-x + 100px, $shape-square-offset-y, 0) rotate($shape-square-rotate) scale(0.7);
   }
 
   &.depth-2:not(.present) > h2,

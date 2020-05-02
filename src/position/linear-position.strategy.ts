@@ -4,18 +4,18 @@ import {ImpressMeConfig} from '../impress-me-config';
 import {SlideNode} from '../slide-node';
 import {Transformation} from '../transformation';
 
-export const overviewPosition = (node: SlideNode, config: ImpressMeConfig, width: number, scale: number) => {
+export const overviewPosition = (node: SlideNode, config: ImpressMeConfig, nodeWidth: number, scale: number) => {
   const root = findRoot(node);
   const nodes = flattenNodes(root);
   // const minX = -(config.width / 2) - 16;
   // const minY = -(config.height / 2) - 16;
-  const minX = nodes.map(n => n.pos ? n.pos.x + (width / 2 * scale) : 0)
+  const minX = nodes.map(n => n.pos ? n.pos.x + (nodeWidth / 2 * scale) : 0)
     .reduce((min, curr) => Math.min(min, curr), -(config.width / 2)) - 16;
-  const minY = nodes.map(n => n.pos ? n.pos.y + (width / 2 * scale) : 0)
+  const minY = nodes.map(n => n.pos ? n.pos.y + (nodeWidth / 2 * scale) : 0)
     .reduce((min, curr) => Math.min(min, curr), -(config.height / 2)) - 16;
-  const maxX = nodes.map(n => n.pos ? n.pos.x + (width / 2 * scale) : 0)
+  const maxX = nodes.map(n => n.pos ? n.pos.x + (nodeWidth / 2 * scale) : 0)
     .reduce((max, curr) => Math.max(max, curr), config.width / 2) + 16;
-  const maxY = nodes.map(n => n.pos ? n.pos.y + (width / 2 * scale) : 0)
+  const maxY = nodes.map(n => n.pos ? n.pos.y + (nodeWidth / 2 * scale) : 0)
     .reduce((max, curr) => Math.max(max, curr), config.height / 2) + 16;
   const totalWidth = maxX - minX;
   const totalHeight = maxY - minY;

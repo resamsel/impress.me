@@ -7,8 +7,6 @@ export enum Shape {
   None = 'none'
 }
 
-export const shapes = [Shape.Circle, Shape.Square, Shape.Rounded, Shape.None];
-
 export interface ShapeConfig {
   width: number;
   height: number;
@@ -23,21 +21,21 @@ export const shapeConfig: Record<Shape, ShapeConfig> = {
     height: 1680,
     offset: {x: -500, y: 0, z: 0},
     parentOffset: {x: 64, y: 0, z: 0},
-    siblingOffset: {x: 200, y: 200, z: 0},
+    siblingOffset: {x: 300, y: 200, z: 0},
   },
   [Shape.Square]: {
-    width: 1400,
-    height: 1400,
+    width: 1600,
+    height: 1600,
     offset: {x: -500, y: 0, z: 0},
     parentOffset: {x: 200, y: 0, z: 0},
-    siblingOffset: {x: 600, y: 100, z: 0},
+    siblingOffset: {x: 320, y: 100, z: 0},
   },
   [Shape.Rounded]: {
-    width: 1600,
-    height: 1080,
-    offset: {x: -400, y: 0, z: 0},
+    width: 1500,
+    height: 1000,
+    offset: {x: -300, y: 0, z: 0},
     parentOffset: {x: 0, y: 0, z: 0},
-    siblingOffset: {x: 128, y: 64, z: 0},
+    siblingOffset: {x: 420, y: 64, z: 0},
   },
   [Shape.None]: {
     width: 1920,
@@ -47,3 +45,5 @@ export const shapeConfig: Record<Shape, ShapeConfig> = {
     siblingOffset: {x: 128, y: 64, z: 0},
   },
 };
+
+export const shapes = Object.keys(shapeConfig) as Shape[];

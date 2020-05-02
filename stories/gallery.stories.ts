@@ -1,5 +1,37 @@
 export default {title: 'Gallery'};
 
+export const ClassicColumnCircle = () => '<iframe class="fullscreen" src="Demo-classic-column-circle.html"></iframe>';
+
+export const ClassicColumnNone = () => '<iframe class="fullscreen" src="Demo-classic-column-none.html"></iframe>';
+
+export const ClassicColumnRounded = () => '<iframe class="fullscreen" src="Demo-classic-column-rounded.html"></iframe>';
+
+export const ClassicColumnSquare = () => '<iframe class="fullscreen" src="Demo-classic-column-square.html"></iframe>';
+
+export const ClassicLinearCircle = () => '<iframe class="fullscreen" src="Demo-classic-linear-circle.html"></iframe>';
+
+export const ClassicLinearNone = () => '<iframe class="fullscreen" src="Demo-classic-linear-none.html"></iframe>';
+
+export const ClassicLinearRounded = () => '<iframe class="fullscreen" src="Demo-classic-linear-rounded.html"></iframe>';
+
+export const ClassicLinearSquare = () => '<iframe class="fullscreen" src="Demo-classic-linear-square.html"></iframe>';
+
+export const ClassicPlanetCircle = () => '<iframe class="fullscreen" src="Demo-classic-planet-circle.html"></iframe>';
+
+export const ClassicPlanetNone = () => '<iframe class="fullscreen" src="Demo-classic-planet-none.html"></iframe>';
+
+export const ClassicPlanetRounded = () => '<iframe class="fullscreen" src="Demo-classic-planet-rounded.html"></iframe>';
+
+export const ClassicPlanetSquare = () => '<iframe class="fullscreen" src="Demo-classic-planet-square.html"></iframe>';
+
+export const ClassicRowCircle = () => '<iframe class="fullscreen" src="Demo-classic-row-circle.html"></iframe>';
+
+export const ClassicRowNone = () => '<iframe class="fullscreen" src="Demo-classic-row-none.html"></iframe>';
+
+export const ClassicRowRounded = () => '<iframe class="fullscreen" src="Demo-classic-row-rounded.html"></iframe>';
+
+export const ClassicRowSquare = () => '<iframe class="fullscreen" src="Demo-classic-row-square.html"></iframe>';
+
 export const GalleryColumnCircle = () => '<iframe class="fullscreen" src="Demo-gallery-column-circle.html"></iframe>';
 
 export const GalleryColumnNone = () => '<iframe class="fullscreen" src="Demo-gallery-column-none.html"></iframe>';
