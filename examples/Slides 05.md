@@ -55,10 +55,10 @@ impress.me Demo.md --cssFiles a.css b.css
 
 ### Satellite 4 of 2 [](class=focus-headline)
 
-## Focus Image [](class=primary-lightblue focus-image)
+## Focus Single [](class=primary-lightblue focus-single)
 ![Why you so slow][y-slow]
 
-## Heading 4 [](class=primary-green)
+## Heading 4 [](class=primary-green shape-none)
 
 ## Heading 5 [](class=primary-amber)
 

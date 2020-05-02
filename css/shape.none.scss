@@ -11,7 +11,7 @@ $shape-none-offset-y: 0 !default;
     left: 50%;
     position: absolute;
     top: 50%;
-    transform: translate3d(-50%, -50%, -1px) translate3d($shape-none-offset-x, $shape-none-offset-y, 0);
+    transform: translate3d(-50%, -50%, -1px) translate3d($shape-none-offset-x, $shape-none-offset-y, 0) scale(1.012);
     width: $shape-none-width;
   }
 

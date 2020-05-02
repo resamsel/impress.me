@@ -6,18 +6,21 @@
 }
 
 /* focus image without headline */
-.slide.present.focus-image {
-  &.depth-2 > h2,
-  &.depth-3 > h3 {
+.slide.focus-image {
+  &.present.depth-2 > h2,
+  &.present.depth-3 > h3 {
     opacity: 0;
-    transform: translate3d(440px, 440px, 0) translate3d(-50%, -50%, 0);
   }
 
   img,
   svg {
-    left: 0;
+    height: 100%;
+    left: 50%;
+    object-fit: contain;
     position: absolute;
-    top: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
   }
 }
 
