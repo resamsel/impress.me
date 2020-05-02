@@ -26,6 +26,7 @@ $transition-duration: 1000ms !default;
 .slide > h3,
 .slide.present > * {
   opacity: 1;
+  transform: translate3d(0, 0, 1px);
 }
 
 .slide q {
@@ -109,7 +110,6 @@ $transition-duration: 1000ms !default;
     position: absolute;
     right: 64px;
     top: 100px;
-    transform: translate3d(0, 0, 1px);
     width: 868px;
   }
 
@@ -123,8 +123,7 @@ $transition-duration: 1000ms !default;
     position: absolute;
     right: unset;
     top: 64px;
-    transform: translate3d(0, 0, 1px);
-    width: 45%;
+    width: 44%;
   }
 
   > pre > code {

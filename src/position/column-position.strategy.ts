@@ -2,7 +2,7 @@ import {PositionStrategy} from './position.strategy';
 import {findIndex} from '../helpers';
 import {ImpressMeConfig} from '../impress-me-config';
 import {SlideNode} from '../slide-node';
-import {Shape} from '../shape';
+import {Shape, ShapeConfig, shapeConfig} from '../shape';
 import {overviewPosition} from './linear-position.strategy';
 import {Transformation} from '../transformation';
 
@@ -15,10 +15,13 @@ export class ColumnPositionStrategy implements PositionStrategy {
 
   private readonly offset: Transformation;
 
+  private readonly shape: ShapeConfig;
+
   constructor(readonly config: ImpressMeConfig) {
+    this.shape = shapeConfig[this.config.shape];
     this.height = this.config.shape === Shape.Circle ? 1920 : 1080;
     this.offset = {
-      x: -(this.config.width / 2) - (this.width * this.scale / 2),
+      x: -(this.config.width / 2) - ((this.shape.width + this.shape.siblingOffset.x) * this.scale / 2),
       y: (this.height - 1080) * 0.2,
       z: 0,
       scale: this.scale,
@@ -47,14 +50,14 @@ export class ColumnPositionStrategy implements PositionStrategy {
           // first h2 step
           return {
             ...this.offset,
-            x: this.offset.x + ((siblingIndex + 1) * this.width * this.offset.scale),
+            x: this.offset.x + ((this.shape.width + this.shape.siblingOffset.x) * this.offset.scale),
           };
         }
         siblings = node.parent!.children;
         previousSibling = siblings[siblingIndex - 1];
         return {
           ...this.offset,
-          x: previousSibling.pos!.x + (this.width * this.offset.scale),
+          x: previousSibling.pos!.x + ((this.shape.width + this.shape.siblingOffset.x) * this.offset.scale),
         };
       }
       default: {
@@ -62,7 +65,7 @@ export class ColumnPositionStrategy implements PositionStrategy {
         return {
           ...this.offset,
           x: node.parent!.pos!.x,
-          y: this.offset.y + (siblingIndex * this.height * this.offset.scale),
+          y: this.offset.y + ((this.shape.height + this.shape.siblingOffset.y) * siblingIndex * this.offset.scale),
         };
       }
     }

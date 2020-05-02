@@ -95,11 +95,10 @@ export class PlanetPositionStrategy implements PositionStrategy {
         const scale = parentPos.scale / 5;
         const shapeSize = this.shapeConfig.width;
         const shapeOffset = this.shapeConfig.offset.x + 100;
-        const satelliteMargin = 192;
-        const stepSizeScaled = (shapeSize + satelliteMargin) * scale;
+        const stepSizeScaled = (shapeSize + this.shapeConfig.siblingOffset.x) * scale;
         const h = parentPos.x + (shapeOffset * parentPos.scale);
         const k = parentPos.y;
-        const r = (shapeSize / 2 * parentPos.scale) + (((shapeSize / 2) + satelliteMargin) * scale);
+        const r = (((shapeSize / 2) + this.shapeConfig.parentOffset.x) * parentPos.scale) + ((shapeSize / 2) * scale);
         const c = r * 2 * Math.PI;
         const offsetRad = (stepSizeScaled / c) * 2 * Math.PI;
         const t = -offsetRad + (offsetRad * siblingIndex);

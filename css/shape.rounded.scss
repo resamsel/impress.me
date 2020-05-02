@@ -7,24 +7,20 @@ $shape-rounded-offset-y: 0 !default;
 .slide.shape-rounded {
   &::before {
     background-color: rgba(255, 255, 255, 0.87);
-    border-radius: 64px;
+    border-radius: 32px;
     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
     content: '';
     height: $shape-rounded-height;
     left: 50%;
     position: absolute;
     top: 50%;
-    transform: translate3d(-50%, -50%, 0) translate3d($shape-rounded-offset-x, $shape-rounded-offset-y, 0) scale(0.9);
+    transform: translate3d(-50%, -50%, 0) translate3d($shape-rounded-offset-x, $shape-rounded-offset-y, 0);
     width: $shape-rounded-width;
-  }
-
-  &.depth-2 > h2,
-  &.depth-3 > h3 {
-    max-width: 680px;
   }
 
   &.depth-2:not(.present) > h2,
   &.depth-3:not(.present) > h3 {
-    transform: translate3d(-$shape-rounded-offset-x - 70px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
+    max-width: $shape-rounded-width/2-100px;
+    transform: translate3d(-50%, -50%, 0) translate3d(-$shape-rounded-offset-x + 100px, $shape-rounded-height/2 - 100px, 0) scale(2);
   }
 }

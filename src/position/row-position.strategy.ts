@@ -2,7 +2,7 @@ import {PositionStrategy} from './position.strategy';
 import {findIndex} from '../helpers';
 import {ImpressMeConfig} from '../impress-me-config';
 import {SlideNode} from '../slide-node';
-import {Shape} from '../shape';
+import {Shape, ShapeConfig, shapeConfig} from '../shape';
 import {overviewPosition} from './linear-position.strategy';
 import {Transformation} from '../transformation';
 
@@ -15,6 +15,8 @@ export class RowPositionStrategy implements PositionStrategy {
 
   private readonly offset: Transformation;
 
+  private readonly shape: ShapeConfig;
+
   constructor(readonly config: ImpressMeConfig) {
     this.height = this.config.shape === Shape.Circle ? 1920 : 1080;
     this.offset = {
@@ -23,6 +25,7 @@ export class RowPositionStrategy implements PositionStrategy {
       z: 0,
       scale: this.scale,
     };
+    this.shape = shapeConfig[this.config.shape];
   }
 
   calculate(node: SlideNode): Transformation {
@@ -47,21 +50,21 @@ export class RowPositionStrategy implements PositionStrategy {
           // first h2 step
           return {
             ...this.offset,
-            y: this.offset.y + (siblingIndex * this.height * this.offset.scale),
+            y: this.offset.y + (siblingIndex * this.shape.height * this.offset.scale),
           };
         }
         siblings = node.parent!.children;
         previousSibling = siblings[siblingIndex - 1];
         return {
           ...this.offset,
-          y: previousSibling.pos!.y + (this.height * this.offset.scale),
+          y: previousSibling.pos!.y + ((this.shape.height + this.shape.siblingOffset.y) * this.offset.scale),
         };
       }
       default: {
         siblingIndex = findIndex(node.parent!, node);
         return {
           ...this.offset,
-          x: this.offset.x + (siblingIndex * this.width * this.offset.scale),
+          x: this.offset.x + (siblingIndex * (this.shape.width + this.shape.siblingOffset.x) * this.offset.scale),
           y: node.parent!.pos!.y,
         };
       }

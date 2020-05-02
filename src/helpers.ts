@@ -8,7 +8,7 @@ import {SlideNode} from './slide-node';
 import {debug} from 'loglevel';
 import {minify} from 'uglify-es';
 import * as sass from 'sass';
-import {Shape, shapeConfig} from './shape';
+import {shapeConfig, shapes} from './shape';
 
 export const excludeSlideClasses = ['title', 'overview', 'background', 'end'];
 export const attrPattern = /(.*\S)\s*(\[]\(|<a href=")([^"]*)(\)|"><\/a>)\s*/;
@@ -143,16 +143,19 @@ const cleanCss = new CleanCss({
   },
 });
 
-const cssVars: [string, (config: ImpressMeConfig) => string][] = [
+type CssVar = [string, (config: ImpressMeConfig) => string];
+
+const shapeCssVars: CssVar[] = shapes.map(shape => [
+  ['shape-' + shape.toLowerCase() + '-width', () => `${shapeConfig[shape].width}px`] as CssVar,
+  ['shape-' + shape.toLowerCase() + '-height', () => `${shapeConfig[shape].height}px`] as CssVar,
+  ['shape-' + shape.toLowerCase() + '-offset-x', () => `${shapeConfig[shape].offset.x}px`] as CssVar,
+  ['shape-' + shape.toLowerCase() + '-offset-y', () => `${shapeConfig[shape].offset.y}px`] as CssVar,
+])
+  .reduce((arr, curr) => [...arr, ...curr], []);
+
+const cssVars: CssVar[] = [
   ['transition-duration', config => `${config.transitionDuration}ms`],
-  ['shape-circle-width', () => `${shapeConfig[Shape.Circle].width}px`],
-  ['shape-circle-height', () => `${shapeConfig[Shape.Circle].height}px`],
-  ['shape-circle-offset-x', () => `${shapeConfig[Shape.Circle].offset.x}px`],
-  ['shape-circle-offset-y', () => `${shapeConfig[Shape.Circle].offset.y}px`],
-  ['shape-rounded-width', () => `${shapeConfig[Shape.Rounded].width}px`],
-  ['shape-rounded-height', () => `${shapeConfig[Shape.Rounded].height}px`],
-  ['shape-rounded-offset-x', () => `${shapeConfig[Shape.Rounded].offset.x}px`],
-  ['shape-rounded-offset-y', () => `${shapeConfig[Shape.Rounded].offset.y}px`],
+  ...shapeCssVars,
 ];
 
 export const insertCssVars = (config: ImpressMeConfig): ((css: string) => string) =>
