@@ -19,7 +19,7 @@ const createStory = (title: string, filename: string): string =>
   const storiesTitle = capitalize(path.basename(storyDir));
   promises.readdir(storyDir)
     .then(filenames =>
-      filenames.filter(f => f.endsWith('.html')).map(f => createStory(cleanTitle(f), `${f}`))
+      filenames.filter(f => f.endsWith('.html')).map(f => createStory(cleanTitle(f), `${f}`)),
     )
     .then(stories => [header(storiesTitle)].concat(stories))
     .then(contents =>

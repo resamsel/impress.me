@@ -250,7 +250,7 @@ export const markdownToHtml = (file: string, config: ImpressMeConfig): Promise<s
               content += '</div>';
             }
             resolve(content);
-          }
+          },
         );
       });
     });

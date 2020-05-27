@@ -37,7 +37,7 @@ Promise.all(themes.map(theme => {
             height: 1080 / 2,
             delay: 10,
             overwrite: true,
-          }
+          },
         ))
         .then(() => console.log('Captured ' + screenshot))
         .then(() => `### ${themeName} ${strategy} ${shape} [](class=focus-single)

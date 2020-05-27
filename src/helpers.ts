@@ -91,7 +91,7 @@ export const findIndex = (root: SlideNode, node: SlideNode): number => {
 export const flattenNodes = (node: SlideNode): SlideNode[] => {
   return node.children.reduce(
     (acc, child) => [...acc, ...flattenNodes(child)],
-    [node]
+    [node],
   );
 };
 
@@ -191,7 +191,7 @@ export const mergeJs = (jsFiles: string[]) =>
     jsFiles.map(file => promises.readFile(file, 'utf8')
       .then(logStep(`JavaScript file read: "${file}"`))
       .then((data: string) => minify(data).code)
-      .then(logStep(`JavaScript file minified: "${file}"`))
+      .then(logStep(`JavaScript file minified: "${file}"`)),
     ))
     .then(outputs => outputs.join(';'));
 
