@@ -1,4 +1,6 @@
 $transition-duration: 1000ms !default;
+$slide-padding-horizontal: 32px !default;
+$slide-padding-vertical: 100px !default;
 
 /* Slide steps */
 
@@ -46,7 +48,7 @@ $transition-duration: 1000ms !default;
 
 .slide.depth-2 > p,
 .slide.depth-3 > p {
-  width: 1000px;
+  width: calc(50% - #{$slide-padding-horizontal * 2});
 }
 
 .slide.depth-2 > h2,
@@ -68,7 +70,7 @@ $transition-duration: 1000ms !default;
   background-color: transparent;
   border-width: 0;
   box-shadow: none;
-  padding: 100px 32px;
+  padding: $slide-padding-vertical $slide-padding-horizontal;
   position: relative;
 }
 
@@ -106,9 +108,9 @@ $transition-duration: 1000ms !default;
     font-size: 28px;
     line-height: 38px;
     position: absolute;
-    right: 64px;
-    top: 100px;
-    width: 868px;
+    right: $slide-padding-horizontal;
+    top: $slide-padding-vertical;
+    width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
   > .code {
@@ -116,12 +118,11 @@ $transition-duration: 1000ms !default;
     border-radius: 4px;
     display: block;
     height: auto;
-    left: 50%;
     padding: 16px;
     position: absolute;
-    right: unset;
-    top: 64px;
-    width: 44%;
+    right: $slide-padding-horizontal;
+    top: $slide-padding-horizontal;
+    width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
   > pre > code {
@@ -150,6 +151,8 @@ $transition-duration: 1000ms !default;
 
   p {
     display: inline;
+    font-size: 150%;
+    line-height: 150%;
   }
 
   footer {

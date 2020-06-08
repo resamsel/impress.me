@@ -1,3 +1,5 @@
+$slide-padding-horizontal: 32px !default;
+
 .slide.present.focus-headline {
   &.depth-2 > h2,
   &.depth-3 > h3 {
@@ -45,9 +47,9 @@
   > img,
   > svg {
     bottom: 64px;
-    left: 64px;
+    left: $slide-padding-horizontal;
     position: absolute;
-    right: 64px;
+    right: $slide-padding-horizontal;
     top: 272px;
   }
 
@@ -94,7 +96,7 @@
     > pre,
     > img,
     > svg {
-      width: 45%;
+      width: calc(50% - #{$slide-padding-horizontal * 2});
 
       &:nth-child(2) {
         right: initial;
