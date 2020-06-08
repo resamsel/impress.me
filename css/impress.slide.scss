@@ -5,99 +5,96 @@ $slide-padding-vertical: 100px !default;
 /* Slide steps */
 
 .slide {
+  background-color: transparent;
+  border-width: 0;
+  box-shadow: none;
   color: rgba(0, 0, 0, 0.87);
   display: block;
-
   font-family: 'PT Sans', sans-serif;
   font-size: 30px;
   height: 1080px;
   letter-spacing: -1px;
   line-height: 36px;
-  padding: 40px 60px;
-
-  width: 1920px;
-}
-
-.slide > * {
-  opacity: 0;
-  transition: $transition-duration;
-}
-
-.slide > h1,
-.slide > h2,
-.slide > h3,
-.slide.present > * {
-  opacity: 1;
-}
-
-.slide q {
-  display: block;
-  font-size: 50px;
-  line-height: 72px;
-
-  margin-top: 100px;
-}
-
-.slide q strong {
-  white-space: nowrap;
-}
-
-.slide svg {
-  letter-spacing: 0;
-}
-
-.slide.depth-2 > p,
-.slide.depth-3 > p {
-  width: calc(50% - #{$slide-padding-horizontal * 2});
-}
-
-.slide.depth-2 > h2,
-.slide.depth-3 > h3 {
-  display: inline-block;
-  margin-bottom: 64px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: auto;
-}
-
-.slide.present.depth-2 > h2,
-.slide.present.depth-3 > h3 {
-  white-space: normal;
-}
-
-.slide {
-  background-color: transparent;
-  border-width: 0;
-  box-shadow: none;
   padding: $slide-padding-vertical $slide-padding-horizontal;
   position: relative;
-}
+  width: 1920px;
 
-.slide > p {
-  font-size: 150%;
-  line-height: 150%;
-}
+  > * {
+    opacity: 0;
+    transition: $transition-duration;
+  }
 
-.slide ol,
-.slide ul {
-  padding-left: 128px;
-}
+  > h1,
+  > h2,
+  > h3,
+  &.present > * {
+    opacity: 1;
+  }
 
-.slide > ol,
-.slide > ul {
-  font-size: 180%;
-  overflow: hidden;
-  width: 800px;
-}
+  q {
+    display: block;
+    font-size: 50px;
+    line-height: 72px;
 
-.slide ul > li {
-  list-style-type: disc;
-}
+    margin-top: 100px;
+  }
 
-/* Slides with code */
+  q strong {
+    white-space: nowrap;
+  }
 
-.slide {
+  svg {
+    letter-spacing: 0;
+    box-sizing: border-box;
+  }
+
+  &.depth-2 > p,
+  &.depth-3 > p {
+    width: calc(50% - #{$slide-padding-horizontal * 2});
+  }
+
+  &.depth-2 > h2,
+  &.depth-3 > h3 {
+    display: inline-block;
+    margin-bottom: 64px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: auto;
+  }
+
+  &.present.depth-2 > h2,
+  &.present.depth-3 > h3 {
+    white-space: normal;
+  }
+
+  > p {
+    font-size: 150%;
+    line-height: 150%;
+  }
+
+  p + ol {
+    // lists and paragraphs should have some spacing
+    margin-top: 32px;
+  }
+
+  > ol,
+  > ul {
+    font-size: 180%;
+    overflow: hidden;
+    width: calc(50% - #{$slide-padding-horizontal * 2});
+  }
+
+  ol,
+  ul {
+    padding-left: 128px;
+  }
+
+  ul > li {
+    list-style-type: disc;
+  }
+
+  /* Slides with code */
   code,
   .code {
     font-family: 'Fira Code', monospace;
@@ -121,7 +118,7 @@ $slide-padding-vertical: 100px !default;
     padding: 16px;
     position: absolute;
     right: $slide-padding-horizontal;
-    top: $slide-padding-horizontal;
+    top: $slide-padding-vertical;
     width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
@@ -131,36 +128,36 @@ $slide-padding-vertical: 100px !default;
     overflow: hidden;
     padding: 16px;
   }
-}
 
-/* Blockquotes */
-.slide > blockquote {
-  border-left: 10px solid #ccc;
-  margin: 1.5em 10px;
-  padding: 0.5em 32px;
-  quotes: '\201C' '\201D' '\2018' '\2019';
-  width: 800px;
+  /* Blockquotes */
+  > blockquote {
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 32px;
+    quotes: '\201C' '\201D';
+    width: calc(50% - #{$slide-padding-horizontal * 2});
 
-  &::before {
-    color: #ccc;
-    content: open-quote;
-    font-size: 4em;
-    line-height: 0.1em;
-    vertical-align: -0.4em;
-  }
+    &::before {
+      color: #ccc;
+      content: open-quote;
+      font-size: 4em;
+      line-height: 0.1em;
+      vertical-align: -0.4em;
+    }
 
-  p {
-    display: inline;
-    font-size: 150%;
-    line-height: 150%;
-  }
+    p {
+      display: inline;
+      font-size: 150%;
+      line-height: 150%;
+    }
 
-  footer {
-    text-align: right;
-  }
+    footer {
+      text-align: right;
+    }
 
-  footer::before {
-    content: '—';
-    margin-right: 0.2em;
+    footer::before {
+      content: '—';
+      margin-right: 0.2em;
+    }
   }
 }
