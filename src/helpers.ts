@@ -47,14 +47,15 @@ export const toOutputFilename = (input: string) => {
   return `${input.replace(/\.[^/.]+$/, '')}.html`;
 };
 
-export const resolvePath = (p: string): string => {
-  return [
-    modulePath + '/' + p,
-    p,
-    'node_modules/' + p,
-    '../' + p,
-  ].find(fs.existsSync) || p;
-};
+const pathPrefixes = [
+  modulePath,
+  '',
+  'node_modules',
+  '..',
+  path.join(__dirname, '..', 'node_modules'),
+];
+
+export const resolvePath = (p: string): string => pathPrefixes.map(prefix => path.join(prefix, p)).find(fs.existsSync) ?? p;
 
 export const findRoot = (node: SlideNode): SlideNode => {
   if (node.parent === undefined) {
@@ -120,28 +121,35 @@ export const fileToDataUri = (file: string): string => {
 export const extractUri = (uri: string): string =>
   uri.replace(/^\s*(url\s*\(\s*)?['"]?([^\s'")]+)['"]?(\s*\))?\s*$/, '$2');
 
-const cssPropertyValueToDataUri = (propertyName: string, propertyValue: string) => {
+const cssPropertyValueToDataUri = (propertyName: string, propertyValue: string, includePaths: string[]) => {
   if (propertyName === 'background-image') {
     if (!propertyValue.startsWith('data:') && !propertyValue.startsWith('url(data:') &&
       !propertyValue.startsWith('http:') && !propertyValue.startsWith('url(http:') &&
       !propertyValue.startsWith('https:') && !propertyValue.startsWith('url(https:')) {
-      try {
-        return 'url(' + fileToDataUri(extractUri(propertyValue)) + ')';
-      } catch (error) {
-        // ignore
+      const uri = extractUri(propertyValue);
+      const filename = includePaths.map(includePath => path.relative('.', `${includePath}/${uri}`))
+        .find(file => fs.existsSync(file));
+      if (filename !== undefined) {
+        try {
+          return 'url(' + fileToDataUri(filename) + ')';
+        } catch (error) {
+          console.warn(`Error while inlining ${filename}: ${error.message}`);
+        }
       }
     }
   }
   return propertyValue;
 };
 
-const cleanCss = new CleanCss({
-  level: {
-    1: {
-      transform: cssPropertyValueToDataUri,
+const cssMinify = (data: string, includePaths: string[]): string => {
+  return new CleanCss({
+    level: {
+      1: {
+        transform: (name: string, value: string) => cssPropertyValueToDataUri(name, value, includePaths),
+      },
     },
-  },
-});
+  }).minify(data).styles;
+};
 
 type CssVar = [string, (config: ImpressMeConfig) => string];
 
@@ -163,13 +171,13 @@ export const insertCssVars = (config: ImpressMeConfig): ((css: string) => string
     .concat([css])
     .join(';');
 
-const sassRender = (data: string): Promise<string> => {
+const sassRender = (data: string, includePaths: string[]): Promise<string> => {
   return new Promise<string>((resolve, reject) => {
     try {
       const result = sass.renderSync({
         data,
         outputStyle: 'compressed',
-        includePaths: [resolvePath('css')],
+        includePaths: includePaths.map(resolvePath),
       });
       return resolve(result.css.toString('utf8'));
     } catch (error) {
@@ -178,13 +186,23 @@ const sassRender = (data: string): Promise<string> => {
   });
 };
 
-export const mergeCss = (cssFiles: string[], preProcess: (css: string) => string) =>
-  Promise.all(
-    cssFiles.map(file => promises.readFile(file, {encoding: 'utf8'})))
+const distinct = <T>(value: T, index: number, self: Array<T>): boolean => {
+  return self.indexOf(value) === index;
+};
+
+const extractFilePaths = (files: string[]): string[] => {
+  return files.map(filename => path.dirname(filename)).filter(distinct);
+};
+
+export const mergeCss = (cssFiles: string[], preProcess: (css: string) => string) => {
+  const includePaths = extractFilePaths(cssFiles);
+  return Promise.all(
+    cssFiles.map(filename => promises.readFile(filename, {encoding: 'utf8'})))
     .then(outputs => outputs.join('\n'))
     .then(preProcess)
-    .then(sassRender)
-    .then((data: string) => cleanCss.minify(data).styles);
+    .then(output => sassRender(output, includePaths))
+    .then((data: string) => cssMinify(data, includePaths));
+};
 
 export const mergeJs = (jsFiles: string[]) =>
   Promise.all(
