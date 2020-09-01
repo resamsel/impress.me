@@ -46,15 +46,22 @@ $slide-padding-horizontal: 32px !default;
   > pre,
   > img,
   > svg,
+  > blockquote,
   > div > p,
   > div > pre,
   > div > img,
-  > div > svg {
+  > div > svg,
+  > div > blockquote {
     bottom: 64px;
     left: $slide-padding-horizontal;
     position: absolute;
     right: $slide-padding-horizontal;
     top: 272px;
+  }
+
+  > blockquote,
+  > div > blockquote {
+    bottom: auto;
   }
 
   > img,
@@ -106,10 +113,12 @@ $slide-padding-horizontal: 32px !default;
     > pre,
     > img,
     > svg,
+    > blockquote,
     > div > p,
     > div > pre,
     > div > img,
-    > div > svg {
+    > div > svg,
+    > div > blockquote {
       width: calc(50% - #{$slide-padding-horizontal * 2});
 
       &:nth-child(2) {
@@ -120,7 +129,61 @@ $slide-padding-horizontal: 32px !default;
         left: initial;
       }
     }
+
+    > blockquote,
+    > div > blockquote {
+      width: calc(50% - #{$slide-padding-horizontal * 4});
+
+      &:nth-child(3) {
+        background-color: #fff;
+      }
+    }
   }
+}
+
+/* Grid Layouts */
+.slide.grid-single,
+.slide.grid-dual {
+  display: grid;
+  grid-column-gap: $slide-padding-horizontal;
+  grid-template-columns: [col-start] 1fr [col-end];
+  grid-template-rows: [header-start] 16vh [content-start] 64vh [content-end];
+
+  > h2,
+  > h3 {
+    grid-column-end: col-end;
+    grid-column-start: col-start;
+
+    margin-bottom: unset;
+  }
+
+  > * {
+    max-width: 100%;
+    position: static;
+    width: auto !important;
+  }
+
+  > div > * {
+    width: auto;
+  }
+
+  > div,
+  blockquote {
+    align-self: start;
+  }
+
+  img,
+  svg {
+    align-self: start;
+    justify-self: center;
+    max-height: 100%;
+    object-fit: contain;
+    width: 100% !important;
+  }
+}
+
+.slide.grid-dual {
+  grid-template-columns: [col-start] 1fr [second] 1fr [col-end];
 }
 
 /* Bigger */
