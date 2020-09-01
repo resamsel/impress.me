@@ -48,8 +48,8 @@ $slide-padding-vertical: 100px !default;
     letter-spacing: 0;
   }
 
-  &.depth-2 > p,
-  &.depth-3 > p {
+  &.depth-2 p,
+  &.depth-3 p {
     width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
@@ -68,7 +68,7 @@ $slide-padding-vertical: 100px !default;
     white-space: normal;
   }
 
-  > p {
+  p {
     font-size: 150%;
     line-height: 150%;
   }
@@ -81,12 +81,12 @@ $slide-padding-vertical: 100px !default;
   > ol,
   > ul {
     font-size: 180%;
-    overflow: hidden;
     width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
   ol,
   ul {
+    overflow: hidden;
     padding-left: 128px;
   }
 
@@ -100,7 +100,7 @@ $slide-padding-vertical: 100px !default;
     font-family: 'Fira Code', monospace;
   }
 
-  > pre {
+  pre {
     display: block;
     font-size: 28px;
     line-height: 38px;
@@ -110,7 +110,7 @@ $slide-padding-vertical: 100px !default;
     width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
-  > .code {
+  .code {
     background-color: #fff;
     border-radius: 4px;
     display: block;
@@ -122,7 +122,7 @@ $slide-padding-vertical: 100px !default;
     width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
-  > pre > code {
+  pre > code {
     border-radius: 4px;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
     overflow: hidden;
@@ -130,7 +130,7 @@ $slide-padding-vertical: 100px !default;
   }
 
   /* Blockquotes */
-  > blockquote {
+  blockquote {
     border-left: 10px solid #ccc;
     margin: 1.5em 10px;
     padding: 0.5em 32px;
