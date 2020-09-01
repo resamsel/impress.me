@@ -73,7 +73,7 @@ impress.me Demo.md --cssFiles a.css b.css
 console.log('Hello World!');
 ```
 
-### Execute Code [](class=focus-dual image-shadow)
+### Execute Code [](class=grid-dual image-shadow)
 
 ```dot,render
 digraph G {
@@ -212,33 +212,33 @@ to the positioning strategy.
 
 ![Demo Presentation][demo-presentation]
 
-### Single Focus [](class=focus-single)
+### Single Focus [](class=grid-single)
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-### Single Focus Image [](class=focus-single)
+### Single Focus Image [](class=grid-single)
 
 ![Demo Presentation][demo-presentation]
 
-### Single Focus Code [](class=focus-single)
+### Single Focus Code [](class=grid-single)
 
 ```bash
 echo 'Hello impress.me!'
 ```
 
-### Dual Focus [](class=focus-dual)
+### Dual Focus [](class=grid-dual)
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-### Dual Focus Image [](class=focus-dual)
+### Dual Focus Image [](class=grid-dual)
 
 ![Demo Presentation][demo-presentation]
 
 ![Demo Presentation][demo-presentation]
 
-### Dual Focus Code [](class=focus-dual)
+### Dual Focus Code [](class=grid-dual)
 
 ```bash
 echo 'Hello impress.me!'
@@ -248,7 +248,15 @@ echo 'Hello impress.me!'
 echo 'Hello impress.me!'
 ```
 
-### Dual Focus Grouped [](class=focus-dual)
+### Dual Focus Blockquote [](class=grid-dual)
+
+> This is a blockquote, spanning multiple lines with a footer at the end
+> <footer>The author</footer>
+
+> This is a blockquote, spanning multiple lines with a footer at the end
+> <footer>The author</footer>
+
+### Dual Focus Grouped [](class=grid-dual)
 
 <div>
 
