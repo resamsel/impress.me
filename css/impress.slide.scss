@@ -48,8 +48,10 @@ $slide-padding-vertical: 100px !default;
     letter-spacing: 0;
   }
 
-  &.depth-2 p,
-  &.depth-3 p {
+  &.depth-2 > p,
+  &.depth-3 > p,
+  &.depth-2 > div > p,
+  &.depth-3 > div > p {
     width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
@@ -68,7 +70,8 @@ $slide-padding-vertical: 100px !default;
     white-space: normal;
   }
 
-  p {
+  > p,
+  > div > p {
     font-size: 150%;
     line-height: 150%;
   }
@@ -79,14 +82,16 @@ $slide-padding-vertical: 100px !default;
   }
 
   > ol,
-  > ul {
+  > ul,
+  > div > ol,
+  > div > ul {
     font-size: 180%;
+    overflow: hidden;
     width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
   ol,
   ul {
-    overflow: hidden;
     padding-left: 128px;
   }
 
@@ -100,7 +105,8 @@ $slide-padding-vertical: 100px !default;
     font-family: 'Fira Code', monospace;
   }
 
-  pre {
+  > pre,
+  > div > pre {
     display: block;
     font-size: 28px;
     line-height: 38px;
