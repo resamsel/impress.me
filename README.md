@@ -25,7 +25,7 @@ $ npm install -g impress.me
 $ impress.me COMMAND
 running command...
 $ impress.me (-v|--version|version)
-impress.me/0.10.6 linux-x64 node-v12.18.2
+impress.me/0.10.7 linux-x64 node-v12.18.2
 $ impress.me --help [COMMAND]
 USAGE
   $ impress.me COMMAND
