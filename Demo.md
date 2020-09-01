@@ -3,7 +3,7 @@ impress.me Demo Presentation
 
 April 8, 2020 - by [resamsel](https://github.com/resamsel)
 
-## 🧭 Intro [](class=primary-amber)
+## 🧭 Intro [](class=primary-amber grid-single)
 
 * Write presentation in Markdown
 * Convert to interactive impress.js presentation
@@ -62,7 +62,7 @@ impress.me Demo.md --cssFiles a.css b.css
 > This is a blockquote, spanning multiple lines with a footer at the end
 > <footer>The author</footer>
 
-### Code
+### Code [](class=grid)
 
 * Uses `highlight.js` for syntax highlighting
 * `Inline Code`: surrounded by back-ticks
@@ -144,7 +144,7 @@ digraph G {
 ```
 ````
 
-### Links and Images and More
+### Links and Images and More [](class=grid)
 
 * Inline [link](https://github.com/resamsel/impress.me)
 * Reference style [link]
