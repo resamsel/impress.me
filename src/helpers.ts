@@ -181,6 +181,7 @@ const sassRender = (data: string, includePaths: string[]): Promise<string> => {
       });
       return resolve(result.css.toString('utf8'));
     } catch (error) {
+      console.log('Error while rendering stylesheet: ' + error.message, includePaths);
       return reject(error);
     }
   });
