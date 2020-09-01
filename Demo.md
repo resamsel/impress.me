@@ -57,6 +57,11 @@ impress.me Demo.md --cssFiles a.css b.css
    1. `  1. ...`: Nested lists
 1. `* ...`: Unordered lists
 
+### Quotes
+
+> This is a blockquote, spanning multiple lines with a footer at the end
+> <footer>The author</footer>
+
 ### Code
 
 * Uses `highlight.js` for syntax highlighting
@@ -241,6 +246,31 @@ echo 'Hello impress.me!'
 
 ```bash
 echo 'Hello impress.me!'
+```
+
+### Dual Focus Grouped [](class=focus-dual)
+
+<div>
+
+> This is a blockquote, spanning multiple lines with a footer at the end
+> <footer>The author</footer>
+
+* Item 1
+* Item 2
+
+</div>
+
+```markdown
+<div>
+
+Left column
+
+* Item 1
+* Item 2
+
+</div>
+
+Right column
 ```
 
 ## Overview [](class=overview)

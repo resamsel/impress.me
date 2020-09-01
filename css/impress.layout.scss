@@ -42,10 +42,14 @@ $slide-padding-horizontal: 32px !default;
     max-width: none;
   }
 
-  p,
-  pre,
-  img,
-  svg {
+  > p,
+  > pre,
+  > img,
+  > svg,
+  > div > p,
+  > div > pre,
+  > div > img,
+  > div > svg {
     bottom: 64px;
     left: $slide-padding-horizontal;
     position: absolute;
@@ -53,8 +57,10 @@ $slide-padding-horizontal: 32px !default;
     top: 272px;
   }
 
-  img,
-  svg {
+  > img,
+  > svg,
+  > div > img,
+  > div > svg {
     border-radius: 4px;
     display: block;
     margin: 0 auto;
@@ -62,11 +68,13 @@ $slide-padding-horizontal: 32px !default;
     max-width: 100%;
   }
 
-  svg {
+  > svg,
+  > div > svg {
     background-color: #fff;
   }
 
-  a {
+  > a,
+  > div > a {
     display: block;
     height: 100%;
     margin: 0 auto;
@@ -79,11 +87,13 @@ $slide-padding-horizontal: 32px !default;
 }
 
 .slide.focus-single {
-  img {
+  > img,
+  > div > img {
     position: initial;
   }
 
-  .code {
+  > .code,
+  > div > .code {
     left: 50%;
     transform: translate3d(-50%, 0, 0);
   }
@@ -92,10 +102,14 @@ $slide-padding-horizontal: 32px !default;
 .slide.focus-dual {
   &.depth-2,
   &.depth-3 {
-    p,
-    pre,
-    img,
-    svg {
+    > p,
+    > pre,
+    > img,
+    > svg,
+    > div > p,
+    > div > pre,
+    > div > img,
+    > div > svg {
       width: calc(50% - #{$slide-padding-horizontal * 2});
 
       &:nth-child(2) {
@@ -162,7 +176,8 @@ Specific styles for: .title slides
   margin-top: 16px;
 }
 
-.step.title p {
+.step.title > p,
+.step.title > div > p {
   opacity: 1;
 }
 
