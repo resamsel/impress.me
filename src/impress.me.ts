@@ -65,7 +65,7 @@ export class ImpressMe {
     };
   }
 
-  convert(input: string, output?: string): Promise<void> {
+  convert(input: string, output?: string): Promise<string> {
     logInit();
 
     const inputFile = [input, `${input}.md`].find(existsSync);
@@ -89,6 +89,7 @@ export class ImpressMe {
       .then(([html, js, css]) => renderTemplate(this.config.template, html, js, css, this.config))
       .then(logStep('Template rendered'))
       .then(html => promises.writeFile(outFile, html))
-      .then(logEnd(`Creating "${outFile}" from "${inputFile}"`));
+      .then(logEnd(`Creating "${outFile}" from "${inputFile}"`))
+      .then(() => outFile);
   }
 }
