@@ -1,7 +1,7 @@
 {
   "name": "impress.me",
   "description": "Create impress.js presentations from markdown documents with style",
-  "version": "0.10.7",
+  "version": "0.11.0",
   "author": "René Panzar",
   "bin": {
     "impress.me": "./bin/run"
