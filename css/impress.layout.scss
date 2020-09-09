@@ -145,7 +145,7 @@ $slide-padding-horizontal: 32px !default;
 .slide.grid,
 .slide.grid-single,
 .slide.grid-dual {
-  grid-column-gap: $slide-padding-horizontal;
+  grid-column-gap: $slide-padding-horizontal * 2;
   grid-template-columns: [col-start] 1fr [col-middle] 1fr [col-end];
   grid-template-rows: [header-start] minmax(20vh, 25%) [content-start] 1fr [content-end];
 
@@ -161,7 +161,7 @@ $slide-padding-horizontal: 32px !default;
   > h3 {
     grid-column-end: col-middle;
     grid-column-start: col-start;
-
+    justify-self: start;
     margin-bottom: unset;
   }
 
@@ -176,6 +176,10 @@ $slide-padding-horizontal: 32px !default;
     width: auto;
   }
 
+  > div > p {
+    width: auto !important;
+  }
+
   > div,
   blockquote {
     align-self: start;
@@ -186,6 +190,7 @@ $slide-padding-horizontal: 32px !default;
   > div > img,
   > div > svg {
     align-self: start;
+    border-radius: 4px;
     justify-self: center;
     max-height: 100%;
     object-fit: contain;
@@ -209,9 +214,8 @@ $slide-padding-horizontal: 32px !default;
 
 .slide.grid-single,
 .slide.grid-dual {
-
   grid-template-columns: [col-start] 1fr [col-end];
-  grid-template-rows: [header-start] 16vh [content-start] 64vh [content-end];
+  grid-template-rows: [header-start] 20% [content-start] 80% [content-end];
 
   > h2,
   > h3 {
