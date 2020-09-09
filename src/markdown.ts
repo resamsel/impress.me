@@ -1,6 +1,6 @@
 import {PositionStrategy} from './position';
 import {error, warn} from 'loglevel';
-import {attrItemPattern, attrPattern, fileToDataUri, logStep, resolvePath} from './helpers';
+import {attrItemPattern, attrPattern, fileToDataUri, logStep, resolvePath, urlToDataUri} from './helpers';
 import {existsSync, promises} from 'fs';
 import * as marked from 'marked';
 import {Slugger} from 'marked';
@@ -157,9 +157,13 @@ const processImage = (config: ImpressMeConfig): ((href: string, title: string, t
       return text;
     }
 
-    const imageSrc = [href, config.basePath + '/' + href, resolvePath(href)].find(existsSync);
-    if (imageSrc !== undefined) {
-      href = fileToDataUri(imageSrc);
+    if (href.startsWith('https://') || href.startsWith('http://')) {
+      href = urlToDataUri(href);
+    } else {
+      const imageSrc = [href, config.basePath + '/' + href, resolvePath(href)].find(existsSync);
+      if (imageSrc !== undefined) {
+        href = fileToDataUri(imageSrc);
+      }
     }
     let out = '<img src="' + href + '" alt="' + text + '"';
     if (title) {

@@ -9,6 +9,7 @@ import {debug} from 'loglevel';
 import {minify} from 'uglify-es';
 import * as sass from 'sass';
 import {shapeConfig, shapes} from './shape';
+import request from 'sync-request';
 
 export const excludeSlideClasses = ['title', 'overview', 'background', 'end'];
 export const attrPattern = /(.*\S)\s*(\[]\(|<a href=")([^"]*)(\)|"><\/a>)\s*/;
@@ -115,6 +116,19 @@ export const toDataUri = (data: Buffer): string => {
 
 export const fileToDataUri = (file: string): string => {
   const data = readFileSync(file);
+  return toDataUri(data);
+};
+
+/**
+ * This is a blocking operation, and will not scale well with large amounts of downloads!
+ */
+export const urlToDataUri = (url: string): string => {
+  const data = request('GET', url, {}).body;
+
+  if (typeof data === 'string') {
+    return toDataUri(Buffer.from(data, 'utf8'));
+  }
+
   return toDataUri(data);
 };
 
