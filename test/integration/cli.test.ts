@@ -6,6 +6,7 @@ describe('impress.me', () => {
   describe('in/out', () => {
     test
       .stdout()
+      .timeout(10000)
       .do(() => cmd.run(['Demo.md', '--debug']))
       .it('runs impress.me Demo.md', ctx => {
         expect(ctx.stdout).to.contain('Creating "Demo.html" from "Demo.md"');
@@ -13,6 +14,7 @@ describe('impress.me', () => {
 
     test
       .stdout()
+      .timeout(10000)
       .do(() => cmd.run(['Demo.md', 'out.html', '--debug']))
       .it('runs impress.me Demo.md out.html', ctx => {
         expect(ctx.stdout).to.contain('Creating "out.html" from "Demo.md"');
@@ -22,6 +24,7 @@ describe('impress.me', () => {
   describe('various params', () => {
     test
       .stdout()
+      .timeout(10000)
       .do(() => cmd.run(['Demo.md', '--primary=blue', '--debug']))
       .it('runs impress.me Demo.md primary=blue debug', ctx => {
         expect(ctx.stdout).to.contain('Creating "Demo.html" from "Demo.md"');
@@ -29,6 +32,7 @@ describe('impress.me', () => {
 
     test
       .stdout()
+      .timeout(10000)
       .do(() => cmd.run(['Demo.md', '--primary=blue', '--secondary=purple', '--debug']))
       .it('runs impress.me Demo.md primary=blue secondary=purple debug', ctx => {
         expect(ctx.stdout).to.contain('Creating "Demo.html" from "Demo.md"');
@@ -36,6 +40,7 @@ describe('impress.me', () => {
 
     test
       .stdout()
+      .timeout(10000)
       .do(() => cmd.run(['Demo.md', '--primary=blue', '--secondary=purple', '--theme=slides', '--shape=circle', '--debug']))
       .it('runs impress.me Demo.md primary=blue secondary=purple theme=slides debug', ctx => {
         expect(ctx.stdout).to.contain('Creating "Demo.html" from "Demo.md"');
@@ -43,6 +48,7 @@ describe('impress.me', () => {
 
     test
       .stdout()
+      .timeout(10000)
       .do(() => cmd.run(['Demo.md', '--primary=blue', '--secondary=purple', '--theme=slides', '--shape=none', '--debug']))
       .it('runs impress.me Demo.md primary=blue secondary=purple theme=slides shape=none debug', ctx => {
         expect(ctx.stdout).to.contain('Creating "Demo.html" from "Demo.md"');
@@ -50,6 +56,7 @@ describe('impress.me', () => {
 
     test
       .stdout()
+      .timeout(10000)
       .do(() => cmd.run(['Demo.md', '--primary=blue', '--secondary=purple', '--theme=slides', '--shape=none', '--transitionDuration=0', '--debug']))
       .it('runs impress.me Demo.md primary=blue secondary=purple theme=slides shape=none transitionDuration=0 debug', ctx => {
         expect(ctx.stdout).to.contain('Creating "Demo.html" from "Demo.md"');
@@ -57,6 +64,7 @@ describe('impress.me', () => {
 
     test
       .stdout()
+      .timeout(10000)
       .do(() => cmd.run(['Demo.md', '--primary=blue', '--secondary=purple', '--theme=slides', '--shape=none', '--transitionDuration=0', '--strategy=column', '--debug']))
       .it('runs impress.me Demo.md primary=blue secondary=purple theme=slides shape=none transitionDuration=0 strategy=column debug', ctx => {
         expect(ctx.stdout).to.contain('Creating "Demo.html" from "Demo.md"');
@@ -67,6 +75,7 @@ describe('impress.me', () => {
     themes.forEach(theme => {
       test
         .stdout()
+        .timeout(10000)
         .do(() => cmd.run(['Demo.md', '--theme=' + theme.themeName, '--debug']))
         .it('runs impress.me Demo.md theme=' + theme.themeName + ' debug', ctx => {
           expect(ctx.stdout).to.contain('Creating "Demo.html" from "Demo.md"');
@@ -78,6 +87,7 @@ describe('impress.me', () => {
     strategies.forEach(strategy => {
       test
         .stdout()
+        .timeout(10000)
         .do(() => cmd.run(['Demo.md', '--strategy=' + strategy, '--debug']))
         .it('runs impress.me Demo.md strategy=' + strategy + ' debug', ctx => {
           expect(ctx.stdout).to.contain('Creating "Demo.html" from "Demo.md"');
@@ -89,6 +99,7 @@ describe('impress.me', () => {
     shapes.forEach(shape => {
       test
         .stdout()
+        .timeout(10000)
         .do(() => cmd.run(['Demo.md', '--shape=' + shape, '--debug']))
         .it('runs impress.me Demo.md shape=' + shape + ' debug', ctx => {
           expect(ctx.stdout).to.contain('Creating "Demo.html" from "Demo.md"');

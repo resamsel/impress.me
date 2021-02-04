@@ -121,6 +121,8 @@ export const fileToDataUri = (file: string): string => {
 
 /**
  * This is a blocking operation, and will not scale well with large amounts of downloads!
+ * @param {string} url - the URL to send a GET request to
+ * @return {string} the response body from the request to the given URL
  */
 export const urlToDataUri = (url: string): string => {
   const data = request('GET', url, {}).body;
