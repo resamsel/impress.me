@@ -205,8 +205,33 @@ to the positioning strategy.
 ## Layouts [](class=primary-red)
 
 * Multiple layouts
+* Grid layout
 * Single focus
 * Pair focus (default)
+
+### Grid Layout [](class=grid)
+
+* On the right hand side
+* You see a bunch
+* Of code lines
+* That are a bit taller
+* Than this list
+
+```markdown
+### Grid Layout [](class=grid)
+
+* On the right hand
+* Side you see a bunch
+* Of code lines
+* That are a bit taller
+* Than this list
+
+* On the right hand
+* Side you see a bunch
+* Of code lines
+* That are a bit taller
+* Than this list
+```
 
 ### Focus Image [](class=focus-image)
 
@@ -214,7 +239,10 @@ to the positioning strategy.
 
 ### Single Focus [](class=grid-single)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ### Single Focus Image [](class=grid-single)
 
@@ -222,8 +250,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ### Single Focus Code [](class=grid-single)
 
-```bash
-echo 'Hello impress.me!'
+```markdown
+### Single Focus Code [](class=grid-single)
+
+`echo 'Hello impress.me!'`
 ```
 
 ### Dual Focus [](class=grid-dual)
@@ -240,12 +270,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ### Dual Focus Code [](class=grid-dual)
 
-```bash
-echo 'Hello impress.me!'
+```markdown
+### Dual Focus Code [](class=grid-dual)
+
+`echo 'Hello impress.me!'`
 ```
 
-```bash
-echo 'Hello impress.me!'
+```markdown
+### Dual Focus Code [](class=grid-dual)
+
+`echo 'Hello impress.me!'`
 ```
 
 ### Dual Focus Blockquote [](class=grid-dual)
@@ -269,6 +303,8 @@ echo 'Hello impress.me!'
 </div>
 
 ```markdown
+### Dual Focus Grouped [](class=grid-dual)
+
 <div>
 
 Left column
