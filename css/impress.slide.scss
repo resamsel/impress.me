@@ -55,7 +55,9 @@ $slide-padding-vertical: 100px !default;
     width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
+  &.depth-2 > h1,
   &.depth-2 > h2,
+  &.depth-3 > h2,
   &.depth-3 > h3 {
     display: inline-block;
     margin-bottom: 64px;
@@ -65,7 +67,9 @@ $slide-padding-vertical: 100px !default;
     width: auto;
   }
 
+  &.present.depth-2 > h1,
   &.present.depth-2 > h2,
+  &.present.depth-3 > h2,
   &.present.depth-3 > h3 {
     white-space: normal;
   }

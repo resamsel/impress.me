@@ -10,6 +10,7 @@ import {minify} from 'uglify-es';
 import * as sass from 'sass';
 import {shapeConfig, shapes} from './shape';
 import request from 'sync-request';
+import jsyaml = require('js-yaml');
 
 export const excludeSlideClasses = ['title', 'overview', 'background', 'end'];
 export const attrPattern = /(.*\S)\s*(\[]\(|<a href=")([^"]*)(\)|"><\/a>)\s*/;
@@ -24,7 +25,7 @@ export const logInit = (): void => {
   timestamp = startTimestamp;
 };
 
-export const logStart = (message: string): void => {
+export const log = (message: string): void => {
   const now = new Date().getTime();
   debug(message + ' - took ' + (now - timestamp) + 'ms');
   timestamp = now;
@@ -32,9 +33,7 @@ export const logStart = (message: string): void => {
 
 export const logStep = (message: string): (<T>(input: T) => T) =>
   input => {
-    const now = new Date().getTime();
-    debug(message + ' - took ' + (now - timestamp) + 'ms');
-    timestamp = now;
+    log(message);
     return input;
   };
 
@@ -56,7 +55,8 @@ const pathPrefixes = [
   path.join(__dirname, '..', 'node_modules'),
 ];
 
-export const resolvePath = (p: string): string => pathPrefixes.map(prefix => path.join(prefix, p)).find(fs.existsSync) ?? p;
+export const resolvePath = (p: string, prefixes: string[] = []): string =>
+  [...prefixes, ...pathPrefixes].map(prefix => path.join(prefix, p)).find(fs.existsSync) ?? p;
 
 export const findRoot = (node: SlideNode): SlideNode => {
   if (node.parent === undefined) {
@@ -68,6 +68,38 @@ export const findRoot = (node: SlideNode): SlideNode => {
   }
   return node.parent.parent;
 };
+
+const configPattern = /^(---+\n+((.|[\r\n])*?)\n---+\n)/m;
+
+export const splitConfigAndContent = (content: string): [string, string] => {
+  const match = content.match(configPattern);
+  if (match) {
+    return [match[2], content.substring(match[1].length)];
+  }
+  return ['', content];
+};
+
+export const parseYamlConfig = (yaml: string | undefined): Partial<ImpressMeConfig> | undefined => {
+  if (yaml === undefined || yaml.trim() === '') {
+    return undefined;
+  }
+
+  const parsed = jsyaml.load(yaml);
+  if (!parsed || typeof parsed !== 'object') {
+    return undefined;
+  }
+
+  return {
+    ...parsed,
+    hasInlineConfig: true,
+  };
+};
+
+export const parseInput = (file: string): Promise<[string, Partial<ImpressMeConfig> | undefined]> =>
+  promises.readFile(file, 'utf8')
+    .then(logStep(`Markdown file "${file}" read`))
+    .then(splitConfigAndContent)
+    .then(([yaml, content]) => [content, parseYamlConfig(yaml)]);
 
 export const findIndex = (root: SlideNode, node: SlideNode): number => {
   if (root === node) {
@@ -193,7 +225,7 @@ const sassRender = (data: string, includePaths: string[]): Promise<string> => {
       const result = sass.renderSync({
         data,
         outputStyle: 'compressed',
-        includePaths: includePaths.map(resolvePath),
+        includePaths: includePaths.map(path => resolvePath(path)),
       });
       return resolve(result.css.toString('utf8'));
     } catch (error) {

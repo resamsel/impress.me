@@ -1,5 +1,7 @@
 .theme-gallery {
+  .slide.depth-2 > h1,
   .slide.depth-2 > h2,
+  .slide.depth-3 > h2,
   .slide.depth-3 > h3 {
     max-width: 100% !important;
     transform: translate3d(0, 0, 0) !important;

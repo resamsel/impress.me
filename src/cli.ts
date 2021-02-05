@@ -17,19 +17,16 @@ class ImpressMeCommand extends Command {
     primary: flags.string({
       char: 'p',
       description: 'define the primary color from material colors',
-      default: 'default',
     }),
     secondary: flags.string({
       char: 's',
       description: 'define the secondary color from material colors',
-      default: 'default',
     }),
     theme: flags.option({
       char: 't',
       description: 'choose the theme for the presentation (shape and strategy)',
       options: Object.keys(themeMap),
       parse: x => x,
-      default: 'planet',
     }),
     shape: flags.option({
       description: 'define the shape of the slides',
@@ -75,7 +72,7 @@ class ImpressMeCommand extends Command {
       log.setLevel('info');
     }
 
-    await new ImpressMe({...parsed.flags, theme: themeMap[parsed.flags.theme as string]})
+    await new ImpressMe(parsed.flags)
       .convert(parsed.args.input, parsed.args.output)
       .then(output => {
         if (parsed.flags.open) {

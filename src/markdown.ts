@@ -1,7 +1,7 @@
 import {PositionStrategy} from './position';
 import {error, warn} from 'loglevel';
 import {attrItemPattern, attrPattern, fileToDataUri, logStep, resolvePath, urlToDataUri} from './helpers';
-import {existsSync, promises} from 'fs';
+import {existsSync} from 'fs';
 import * as marked from 'marked';
 import {Slugger} from 'marked';
 import {highlightAuto} from 'highlight.js';
@@ -10,9 +10,12 @@ import {SlideNode} from './slide-node';
 import {SlideNodeState} from './slide-node-state';
 import {Transformation} from './transformation';
 import {rendererMap} from './renderers';
+import {SlideConfig} from './slide-config';
 import Heading = marked.Tokens.Heading;
 
-const appendHeadingAttributes = (text: string, attrs: Record<string, string>): void => {
+const specialSlideClasses = ['title', 'overview', 'end'];
+
+const appendHeadingAttributes = (text: string, attrs: Record<string, string>, config: SlideConfig): void => {
   let match = attrPattern.exec(text);
   if (match) {
     const attrText = match[3];
@@ -26,59 +29,79 @@ const appendHeadingAttributes = (text: string, attrs: Record<string, string>): v
       }
     }
   }
+
+  const classes = attrs.class.split(' ');
+  if (specialSlideClasses.filter(cls => !classes.includes(cls)).length === 0 &&
+    classes.find(cls => cls.includes('focus') || cls.includes('grid')) === undefined) {
+    // no layout classes have been set, yet - use the slide config
+    attrs.class += ` ${config.layout}`;
+  }
+
+  if (config.primary !== 'default') {
+    attrs.class += ` primary-${config.primary}`;
+  }
+
+  if (config.secondary !== 'default') {
+    attrs.class += ` secondary-${config.secondary}`;
+  }
 };
 
-const generateState = (headings: marked.Tokens.Heading[], positionStrategy: PositionStrategy): SlideNodeState => {
+export const generateState = (headings: marked.Tokens.Heading[], positionStrategy: PositionStrategy, config: ImpressMeConfig): SlideNodeState => {
   const outerState = headings.reduce((state: SlideNodeState, curr: Heading) => {
     const root = state.root;
+    const isRootNode = Object.keys(state.nodes).length === 0;
+    const depth = isRootNode ? 1 : (config.hasInlineConfig ? curr.depth + 1 : curr.depth);
     const node: SlideNode = {
       ...curr,
       children: [],
       attrs: {
-        class: 'step slide depth-' + curr.depth,
+        class: `step slide depth-${depth}`,
       },
+      depth,
     };
 
     state.nodes[curr.text] = node;
 
-    appendHeadingAttributes(curr.text, node.attrs);
+    appendHeadingAttributes(curr.text, node.attrs, config.slide);
 
-    if (node.depth === 1) {
+    if (isRootNode) {
       node.attrs.class += ' screen title';
     }
     node.classes = node.attrs.class.split(' ');
 
-    ['title', 'overview', 'end'].forEach(id => {
+    specialSlideClasses.forEach(id => {
       if (node.classes!.includes(id) && !node.attrs.id) {
         node.attrs.id = id;
       }
     });
 
+    if (isRootNode) {
+      return {
+        ...state,
+        root: node,
+      };
+    }
+
     let parent;
-    switch (curr.depth) {
-      case 1:
-        return {
-          ...state,
-          root: node,
-        };
+    switch (depth) {
       case 2:
         node.parent = root;
         root.children.push(node);
-        return {
-          ...state,
-          root,
-        };
+        break;
       case 3:
+        if (root.children.length === 0) {
+          throw new Error('Unexpected third level heading: ' + node.text);
+        }
+
         parent = root.children[root.children.length - 1];
         node.parent = parent;
         parent.children.push(node);
-        return {
-          ...state,
-          root,
-        };
+        break;
       default:
-        return state;
+        break;
     }
+
+    return state;
   }, {root: {}, nodes: {}, isOpen: false} as SlideNodeState);
 
   Object.keys(outerState.nodes).forEach(key => {
@@ -132,7 +155,7 @@ const processHeading = (state: SlideNodeState, config: ImpressMeConfig):
       text = match[1];
     }
 
-    if (level === 1) {
+    if (level === 1 && !config.hasInlineConfig) {
       config.title = config.title || text;
     }
 
@@ -151,7 +174,7 @@ const processHeading = (state: SlideNodeState, config: ImpressMeConfig):
   };
 };
 
-const processImage = (config: ImpressMeConfig): ((href: string, title: string, text: string) => string) =>
+const processImage = (basePath: string): ((href: string, title: string, text: string) => string) =>
   (href: string, title: string, text: string) => {
     if (href === null) {
       return text;
@@ -160,7 +183,7 @@ const processImage = (config: ImpressMeConfig): ((href: string, title: string, t
     if (href.startsWith('https://') || href.startsWith('http://')) {
       href = urlToDataUri(href);
     } else {
-      const imageSrc = [href, config.basePath + '/' + href, resolvePath(href)].find(existsSync);
+      const imageSrc = [href, basePath + '/' + href, resolvePath(href)].find(existsSync);
       if (imageSrc !== undefined) {
         href = fileToDataUri(imageSrc);
       }
@@ -200,22 +223,22 @@ const processHighlight = (code: string, paramString: string, callback: (err: any
   callback(undefined, highlightAuto(code, [lang]).value);
 };
 
-export const markdownToHtml = (file: string, config: ImpressMeConfig): Promise<string> => {
-  return promises.readFile(file, 'utf8')
-    .then(logStep(`Markdown file "${file}" read`))
+export const markdownToHtml = (md: string, config: ImpressMeConfig): Promise<string> => {
+  return Promise.resolve(md)
     .then<[string, SlideNodeState], never>(md => {
       const tokens = marked.lexer(md);
       const headings = tokens.filter(token => token.type === 'heading') as Heading[];
       const positionStrategy = config.positionStrategyFactory.create(config);
-      const state: SlideNodeState = generateState(headings, positionStrategy);
+      const state: SlideNodeState = generateState(headings, positionStrategy, config);
+      const cleanedMarkdown = tokens.filter(token => 'raw' in token).map(token => (token as any).raw).join('');
 
-      return [md, state];
+      return [cleanedMarkdown, state];
     })
     .then(logStep('Node state generated'))
     .then(([md, state]) => {
       const renderer = new marked.Renderer();
       renderer.heading = processHeading(state, config);
-      renderer.image = processImage(config);
+      renderer.image = processImage(config.basePath);
       const paragraph = renderer.paragraph;
       renderer.paragraph = (text: string) => {
         if (text.startsWith('<img src="') || text.startsWith('<a href="')) {

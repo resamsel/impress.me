@@ -14,3 +14,4 @@ export * from './strategy';
 export * from './theme';
 export * from './transformation';
 export * from './translation';
+export {SlideConfig} from './slide-config';

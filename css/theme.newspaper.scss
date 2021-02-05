@@ -85,7 +85,9 @@
     border-right: 2px solid #000;
   }
 
+  .slide.depth-2 > h1,
   .slide.depth-2 > h2,
+  .slide.depth-3 > h2,
   .slide.depth-3 > h3 {
     display: block;
     margin-top: 32px;

@@ -2,14 +2,18 @@ $slide-padding-horizontal: 32px !default;
 
 .slide.present.focus-headline {
   &.depth-2 > h2,
-  &.depth-3 > h3 {
+  &.depth-2 > h1,
+  &.depth-3 > h3,
+  &.depth-3 > h2 {
     transform: translate3d(440px, 440px, 0) translate3d(-50%, -50%, 0);
   }
 }
 
 /* focus image without headline */
 .slide.focus-image {
+  &.present.depth-2 > h1,
   &.present.depth-2 > h2,
+  &.present.depth-3 > h2,
   &.present.depth-3 > h3 {
     opacity: 0;
   }
@@ -37,7 +41,9 @@ $slide-padding-horizontal: 32px !default;
 
 .slide.focus-single,
 .slide.focus-dual {
+  &.present.depth-2 > h1,
   &.present.depth-2 > h2,
+  &.present.depth-3 > h2,
   &.present.depth-3 > h3 {
     max-width: none;
   }
@@ -164,6 +170,7 @@ $slide-padding-horizontal: 32px !default;
     grid-area: header;
   }
 
+  > h1,
   > h2,
   > h3 {
     justify-self: start;
@@ -215,6 +222,7 @@ $slide-padding-horizontal: 32px !default;
     grid-area: content;
   }
 
+  > h1,
   > h2,
   > h3 {
     margin-bottom: unset;
@@ -322,6 +330,7 @@ Specific styles for: .title slides
   opacity: 1;
 }
 
+.slide.end > h1,
 .slide.end > h2,
 .slide.end::before {
   display: none;
@@ -351,6 +360,7 @@ Specific styles for: .title slides
 
 /* Background */
 
+.step.background > h1,
 .step.background > h2,
 .step.background::before {
   content: '';
