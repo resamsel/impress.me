@@ -3,25 +3,25 @@ $shape-none-height: 1080px !default;
 $shape-none-offset-x: 0 !default;
 $shape-none-offset-y: 0 !default;
 
-.shape-none .slide:not([class*='shape-']),
-.slide.shape-none {
-  &::before {
-    content: '';
-    height: $shape-none-height;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate3d(-50%, -50%, -1px) translate3d($shape-none-offset-x, $shape-none-offset-y, 0) scale(1.012);
-    width: $shape-none-width;
-  }
+@media screen {
+  .shape-none .slide:not([class*='shape-']),
+  .slide.shape-none {
+    &::before {
+      content: '';
+      height: $shape-none-height;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate3d(-50%, -50%, -1px) translate3d($shape-none-offset-x, $shape-none-offset-y, 0) scale(1.012);
+      width: $shape-none-width;
+    }
 
-  &.depth-2:not(.present) > h1,
-  &.depth-2:not(.present) > h2,
-  &.depth-3:not(.present) > h2,
-  &.depth-3:not(.present) > h3 {
-    left: 50%;
-    max-width: $shape-none-width/2-100px;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0) translate3d($shape-none-width/2, $shape-none-height/2 - 100px, 0) scale(2);
+    &.depth-2:not(.present) > .heading,
+    &.depth-3:not(.present) > .heading {
+      left: 50%;
+      max-width: $shape-none-width/2-100px;
+      top: 50%;
+      transform: translate3d(-50%, -50%, 0) translate3d($shape-none-width/2, $shape-none-height/2 - 100px, 0) scale(2);
+    }
   }
 }

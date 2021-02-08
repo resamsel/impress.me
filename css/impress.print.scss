@@ -1,0 +1,28 @@
+@media print {
+  @page {
+    size: landscape
+  }
+
+  body {
+    height: unset !important;
+    overflow: unset !important;
+  }
+
+  #impress,
+  #impress > div,
+  .slide {
+    position: unset !important;
+  }
+
+  #impress {
+    transform: unset !important;
+  }
+
+  .slide {
+    font-size: 22px;
+    transform: unset !important;
+    page-break-after: always;
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+}

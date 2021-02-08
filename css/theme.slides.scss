@@ -1,12 +1,12 @@
-.theme-slides {
-  .slide.depth-2 > h1,
-  .slide.depth-2 > h2,
-  .slide.depth-3 > h2,
-  .slide.depth-3 > h3 {
-    transform: none !important;
-  }
+@media screen {
+  .theme-slides {
+    .slide.depth-2 > .heading,
+    .slide.depth-3 > .heading {
+      transform: none !important;
+    }
 
-  .slide > * {
-    opacity: 1;
+    .slide > * {
+      opacity: 1;
+    }
   }
 }

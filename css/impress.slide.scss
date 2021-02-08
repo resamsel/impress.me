@@ -19,14 +19,14 @@ $slide-padding-vertical: 100px !default;
   position: relative;
   width: 1920px;
 
-  > * {
-    opacity: 0;
-    transition: $transition-duration;
+  @media screen {
+    > * {
+      opacity: 0;
+      transition: $transition-duration;
+    }
   }
 
-  > h1,
-  > h2,
-  > h3,
+  > .heading,
   &.present > * {
     opacity: 1;
   }
@@ -55,10 +55,8 @@ $slide-padding-vertical: 100px !default;
     width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
-  &.depth-2 > h1,
-  &.depth-2 > h2,
-  &.depth-3 > h2,
-  &.depth-3 > h3 {
+  &.depth-2 > .heading,
+  &.depth-3 > .heading {
     display: inline-block;
     margin-bottom: 64px;
     overflow: hidden;
@@ -67,10 +65,8 @@ $slide-padding-vertical: 100px !default;
     width: auto;
   }
 
-  &.present.depth-2 > h1,
-  &.present.depth-2 > h2,
-  &.present.depth-3 > h2,
-  &.present.depth-3 > h3 {
+  &.present.depth-2 > .heading,
+  &.present.depth-3 > .heading {
     white-space: normal;
   }
 
@@ -96,7 +92,7 @@ $slide-padding-vertical: 100px !default;
 
   ol,
   ul {
-    padding-left: 128px;
+    padding-left: 6.67%;
   }
 
   ul > li {

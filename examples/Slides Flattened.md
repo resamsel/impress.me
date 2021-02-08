@@ -1,13 +1,16 @@
 ---
-
 # Inline configuration
-
-theme: classic primary: amber secondary: red cssFiles:
-
-- myfont.css jsFiles:
-- log.js slide:
-  layout: grid primary: bluegrey transitionDuration: 0
-
+theme: classic
+primary: amber
+secondary: red
+cssFiles:
+- myfont.css
+jsFiles:
+- log.js
+slide:
+  layout: grid
+  primary: purple
+transitionDuration: 0
 ---
 
 impress.me Demo Presentation Config

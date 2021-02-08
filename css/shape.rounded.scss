@@ -3,26 +3,26 @@ $shape-rounded-height: 1080px !default;
 $shape-rounded-offset-x: 0 !default;
 $shape-rounded-offset-y: 0 !default;
 
-.shape-rounded .slide:not([class*='shape-']),
-.slide.shape-rounded {
-  &::before {
-    background-color: rgba(255, 255, 255, 0.87);
-    border-radius: 32px;
-    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
-    content: '';
-    height: $shape-rounded-height;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate3d(-50%, -50%, -1px) translate3d($shape-rounded-offset-x, $shape-rounded-offset-y, 0);
-    width: $shape-rounded-width;
-  }
+@media screen {
+  .shape-rounded .slide:not([class*='shape-']),
+  .slide.shape-rounded {
+    &::before {
+      background-color: rgba(255, 255, 255, 0.87);
+      border-radius: 32px;
+      box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+      content: '';
+      height: $shape-rounded-height;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate3d(-50%, -50%, -1px) translate3d($shape-rounded-offset-x, $shape-rounded-offset-y, 0);
+      width: $shape-rounded-width;
+    }
 
-  &.depth-2:not(.present) > h1,
-  &.depth-2:not(.present) > h2,
-  &.depth-3:not(.present) > h2,
-  &.depth-3:not(.present) > h3 {
-    max-width: $shape-rounded-width/2-100px;
-    transform: translate3d(-50%, -50%, 0) translate3d(-$shape-rounded-offset-x + 100px, $shape-rounded-height/2 - 100px, 0) scale(2);
+    &.depth-2:not(.present) > .heading,
+    &.depth-3:not(.present) > .heading {
+      max-width: $shape-rounded-width/2-100px;
+      transform: translate3d(-50%, -50%, 0) translate3d(-$shape-rounded-offset-x + 100px, $shape-rounded-height/2 - 100px, 0) scale(2);
+    }
   }
 }

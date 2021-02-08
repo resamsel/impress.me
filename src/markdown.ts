@@ -37,11 +37,11 @@ const appendHeadingAttributes = (text: string, attrs: Record<string, string>, co
     attrs.class += ` ${config.layout}`;
   }
 
-  if (config.primary !== 'default') {
+  if (config.primary !== 'default' && classes.find(cls => cls.includes('primary-')) === undefined) {
     attrs.class += ` primary-${config.primary}`;
   }
 
-  if (config.secondary !== 'default') {
+  if (config.secondary !== 'default' && classes.find(cls => cls.includes('secondary-')) === undefined) {
     attrs.class += ` secondary-${config.secondary}`;
   }
 };
@@ -169,7 +169,7 @@ const processHeading = (state: SlideNodeState, config: ImpressMeConfig):
       .map(key => `${key}="${node.attrs[key]}"`);
     html += '<div ' + attrList.join(' ') + '>';
     state.isOpen = true;
-    html += '<' + h + '>' + text + '</' + h + '>';
+    html += '<' + h + ' class="heading">' + text + '</' + h + '>';
     return html;
   };
 };

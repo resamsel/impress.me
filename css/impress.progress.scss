@@ -2,45 +2,54 @@ $transition-duration: 1000ms !default;
 $progressbar-height: 0.6vh !default;
 $progressbar-dot-size: 1.6vh !default;
 
-.impress-mouse-timeout .impress-progressbar {
-  div::after {
-    opacity: 0;
+@media screen {
+  .impress-mouse-timeout .impress-progressbar {
+    div::after {
+      opacity: 0;
+    }
+  }
+
+  .impress-progress {
+    display: none;
+  }
+
+  .impress-progressbar {
+    background-color: #fff;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    transition: bottom $transition-duration;
+
+    div {
+      background: rgba(0, 0, 0, 0.4);
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.87), rgba(0, 0, 0, 0.4));
+      height: $progressbar-height;
+      position: relative;
+      transition: width $transition-duration linear;
+      width: 0;
+
+      &::after {
+        background: rgba(127, 127, 127, 1);
+        border-radius: 50%;
+        // The dot at the end of the progressbar
+        content: '';
+        display: block;
+        height: $progressbar-dot-size;
+        position: absolute;
+        right: -$progressbar-dot-size;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        transition: opacity $transition-duration;
+        width: $progressbar-dot-size;
+      }
+    }
   }
 }
 
-.impress-progress {
-  display: none;
-}
-
-.impress-progressbar {
-  background-color: #fff;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  transition: bottom $transition-duration;
-
-  div {
-    background: rgba(0, 0, 0, 0.4);
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.87), rgba(0, 0, 0, 0.4));
-    height: $progressbar-height;
-    position: relative;
-    transition: width $transition-duration linear;
-    width: 0;
-
-    &::after {
-      background: rgba(127, 127, 127, 1);
-      border-radius: 50%;
-      // The dot at the end of the progressbar
-      content: '';
-      display: block;
-      height: $progressbar-dot-size;
-      position: absolute;
-      right: -$progressbar-dot-size;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      transition: opacity $transition-duration;
-      width: $progressbar-dot-size;
-    }
+@media print {
+  #impress-progress,
+  #impress-progressbar {
+    display: none;
   }
 }

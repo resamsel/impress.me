@@ -7,99 +7,107 @@ $toolbar-padding: 1.4vh !default;
   opacity: 0;
 }
 
-#impress-toolbar {
-  bottom: 0;
-  height: $toolbar-main-button-size;
-  left: 0;
-  padding: $toolbar-padding;
-  pointer-events: auto;
-  position: fixed;
-  right: 0;
-  transition: opacity $transition-duration;
+@media screen {
+  #impress-toolbar {
+    bottom: 0;
+    height: $toolbar-main-button-size;
+    left: 0;
+    padding: $toolbar-padding;
+    pointer-events: auto;
+    position: fixed;
+    right: 0;
+    transition: opacity $transition-duration;
 
-  button,
-  select {
-    border-width: 0;
-    cursor: pointer;
-    font-size: $toolbar-button-size*0.6;
-    line-height: $toolbar-button-size;
-    margin: 0 4px;
-    opacity: 0.6;
-  }
-
-  button {
-    background-color: #666;
-    border-radius: 50%;
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    color: #fff;
-    height: $toolbar-button-size;
-    left: 8vh;
-    position: absolute;
-    text-align: center;
-    top: 50%;
-    width: $toolbar-button-size;
-
-    &:hover {
-      opacity: 0.87;
-    }
-
-    &:active {
-      background-color: #9e9e9e;
-    }
-
-    &:focus {
-      outline: none;
-    }
-
-    .material-icons {
+    button,
+    select {
+      border-width: 0;
+      cursor: pointer;
       font-size: $toolbar-button-size*0.6;
       line-height: $toolbar-button-size;
-    }
-  }
-
-  select {
-    appearance: none;
-    background-color: #fff;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
-    box-sizing: border-box;
-    color: #444;
-    display: block;
-    line-height: 1.3;
-    margin: 0;
-    max-width: 20%;
-    padding: 0.6em 1.4em 0.5em 0.8em;
-    position: absolute;
-    right: 16px;
-    text-transform: capitalize;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 20%;
-
-    &:hover {
-      border-color: #888;
+      margin: 0 4px;
+      opacity: 0.6;
     }
 
-    option {
-      background: #fff;
-      color: #000;
-      font-weight: normal;
+    button {
+      background-color: #666;
+      border-radius: 50%;
+      box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+      color: #fff;
+      height: $toolbar-button-size;
+      left: 8vh;
+      position: absolute;
+      text-align: center;
+      top: 50%;
+      width: $toolbar-button-size;
+
+      &:hover {
+        opacity: 0.87;
+      }
+
+      &:active {
+        background-color: #9e9e9e;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      .material-icons {
+        font-size: $toolbar-button-size*0.6;
+        line-height: $toolbar-button-size;
+      }
+    }
+
+    select {
+      appearance: none;
+      background-color: #fff;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+      box-sizing: border-box;
+      color: #444;
+      display: block;
       line-height: 1.3;
+      margin: 0;
+      max-width: 20%;
+      padding: 0.6em 1.4em 0.5em 0.8em;
+      position: absolute;
+      right: 16px;
+      text-transform: capitalize;
+      top: 50%;
+      transform: translate(0, -50%);
+      width: 20%;
+
+      &:hover {
+        border-color: #888;
+      }
+
+      option {
+        background: #fff;
+        color: #000;
+        font-weight: normal;
+        line-height: 1.3;
+      }
     }
+  }
+
+  #impress-autoplay-playpause {
+    height: $toolbar-main-button-size !important;
+    transform: translate(-50%, -50%);
+    width: $toolbar-main-button-size !important;
+  }
+
+  #impress-navigation-ui-prev {
+    transform: translate(-50%, -50%) translate(-$toolbar-button-size*1.4, 0);
+  }
+
+  #impress-navigation-ui-next {
+    transform: translate(-50%, -50%) translate($toolbar-button-size*1.4, 0);
   }
 }
 
-#impress-autoplay-playpause {
-  height: $toolbar-main-button-size !important;
-  transform: translate(-50%, -50%);
-  width: $toolbar-main-button-size !important;
-}
-
-#impress-navigation-ui-prev {
-  transform: translate(-50%, -50%) translate(-$toolbar-button-size*1.4, 0);
-}
-
-#impress-navigation-ui-next {
-  transform: translate(-50%, -50%) translate($toolbar-button-size*1.4, 0);
+@media print {
+  #impress-toolbar {
+    display: none;
+  }
 }
