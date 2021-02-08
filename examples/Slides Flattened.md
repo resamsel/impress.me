@@ -6,7 +6,7 @@ theme: classic primary: amber secondary: red cssFiles:
 
 - myfont.css jsFiles:
 - log.js slide:
-  layout: grid primary: bluegrey
+  layout: grid primary: bluegrey transitionDuration: 0
 
 ---
 

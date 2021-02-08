@@ -46,7 +46,6 @@ class ImpressMeCommand extends Command {
     transitionDuration: flags.integer({
       char: 'd',
       description: 'the duration between slides in millis',
-      default: 1000,
     }),
     debug: flags.boolean({
       description: 'enable debug logging',
@@ -54,7 +53,6 @@ class ImpressMeCommand extends Command {
     open: flags.boolean({
       char: 'o',
       description: 'open created document',
-      default: false,
     }),
   };
 
