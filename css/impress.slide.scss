@@ -48,13 +48,6 @@ $slide-padding-vertical: 100px !default;
     letter-spacing: 0;
   }
 
-  &.depth-2 > p,
-  &.depth-3 > p,
-  &.depth-2 > div > p,
-  &.depth-3 > div > p {
-    width: calc(50% - #{$slide-padding-horizontal * 2});
-  }
-
   &.depth-2 > .heading,
   &.depth-3 > .heading {
     display: inline-block;
@@ -87,12 +80,11 @@ $slide-padding-vertical: 100px !default;
   > div > ul {
     font-size: 180%;
     overflow: hidden;
-    width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
   ol,
   ul {
-    padding-left: 6.67%;
+    padding-left: 6.67vw;
   }
 
   ul > li {
@@ -113,7 +105,6 @@ $slide-padding-vertical: 100px !default;
     position: absolute;
     right: $slide-padding-horizontal;
     top: $slide-padding-vertical;
-    width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
   .code {
@@ -125,7 +116,6 @@ $slide-padding-vertical: 100px !default;
     position: absolute;
     right: $slide-padding-horizontal;
     top: $slide-padding-vertical;
-    width: calc(50% - #{$slide-padding-horizontal * 2});
   }
 
   pre > code {
@@ -141,7 +131,6 @@ $slide-padding-vertical: 100px !default;
     margin: 1.5em 10px;
     padding: 0.5em 32px;
     quotes: '\201C' '\201D';
-    width: calc(50% - #{$slide-padding-horizontal * 2});
 
     &::before {
       color: #ccc;
@@ -164,6 +153,26 @@ $slide-padding-vertical: 100px !default;
     footer::before {
       content: '—';
       margin-right: 0.2em;
+    }
+  }
+
+  /**
+   * Sizing
+   */
+  &:not(.grid) {
+    &.depth-2 > p,
+    &.depth-3 > p,
+    &.depth-2 > div > p,
+    &.depth-3 > div > p,
+    > ol,
+    > ul,
+    > div > ol,
+    > div > ul,
+    > pre,
+    > div > pre,
+    .code,
+    blockquote {
+      width: calc(50% - #{$slide-padding-horizontal * 2});
     }
   }
 }

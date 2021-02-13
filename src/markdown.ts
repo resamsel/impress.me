@@ -13,7 +13,7 @@ import {rendererMap} from './renderers';
 import {SlideConfig} from './slide-config';
 import Heading = marked.Tokens.Heading;
 
-const specialSlideClasses = ['title', 'overview', 'end'];
+const specialLayoutSlideClasses = ['title', 'overview', 'end'];
 
 const appendHeadingAttributes = (text: string, attrs: Record<string, string>, config: SlideConfig): void => {
   let match = attrPattern.exec(text);
@@ -31,8 +31,8 @@ const appendHeadingAttributes = (text: string, attrs: Record<string, string>, co
   }
 
   const classes = attrs.class.split(' ');
-  if (specialSlideClasses.filter(cls => !classes.includes(cls)).length === 0 &&
-    classes.find(cls => cls.includes('focus') || cls.includes('grid')) === undefined) {
+  if (specialLayoutSlideClasses.find(cls => classes.includes(cls)) === undefined &&
+    classes.find(cls => cls.startsWith('focus') || cls.startsWith('grid')) === undefined) {
     // no layout classes have been set, yet - use the slide config
     attrs.class += ` ${config.layout}`;
   }
@@ -62,14 +62,15 @@ export const generateState = (headings: marked.Tokens.Heading[], positionStrateg
 
     state.nodes[curr.text] = node;
 
-    appendHeadingAttributes(curr.text, node.attrs, config.slide);
-
     if (isRootNode) {
       node.attrs.class += ' screen title';
     }
+
+    appendHeadingAttributes(curr.text, node.attrs, config.slide);
+
     node.classes = node.attrs.class.split(' ');
 
-    specialSlideClasses.forEach(id => {
+    specialLayoutSlideClasses.forEach(id => {
       if (node.classes!.includes(id) && !node.attrs.id) {
         node.attrs.id = id;
       }
