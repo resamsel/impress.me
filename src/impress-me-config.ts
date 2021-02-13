@@ -23,7 +23,7 @@ export interface ImpressMeConfig {
   title?: string;
 
   /** Defines on the heading hierarchy starting at level 1 (true) or 2 (false) */
-  hasInlineConfig: boolean;
+  flattened: boolean;
 
   slide: SlideConfig;
 }

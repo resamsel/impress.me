@@ -45,7 +45,7 @@ export const defaultConfig: ImpressMeConfig = {
   shapeOffset: 400,
   stepDistance: 1920 * 0.6,
 
-  hasInlineConfig: false,
+  flattened: false,
   slide: {
     layout: 'default',
     primary: 'default',

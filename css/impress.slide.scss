@@ -21,7 +21,6 @@ $slide-padding-vertical: 100px !default;
 
   @media screen {
     > * {
-      opacity: 0;
       transition: $transition-duration;
     }
   }

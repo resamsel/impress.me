@@ -1,0 +1,58 @@
+$shape-circle-width: 1680px !default;
+$shape-circle-height: 1080px !default;
+$shape-circle-offset-x: 1680px !default;
+$shape-circle-offset-y: 1080px !default;
+
+@media screen {
+  .theme-planet {
+    .slide {
+      > * {
+        opacity: 0;
+      }
+
+      &.present > *,
+      > .heading {
+        opacity: 1;
+      }
+    }
+
+    &.shape-circle .slide:not([class*='shape-']),
+    .slide.shape-circle {
+      &.depth-2:not(.present) > .heading,
+      &.depth-3:not(.present) > .heading {
+        max-width: $shape-circle-width/2-100px;
+        transform: translate3d(-$shape-circle-offset-x - 70px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
+      }
+    }
+
+    &.shape-none .slide:not([class*='shape-']),
+    .slide.shape-none {
+      &.depth-2:not(.present) > .heading,
+      &.depth-3:not(.present) > .heading {
+        left: 50%;
+        max-width: $shape-none-width/2-100px;
+        top: 50%;
+        transform: translate3d(-50%, -50%, 0) translate3d($shape-none-width/2, $shape-none-height/2 - 100px, 0) scale(2);
+      }
+    }
+
+
+    &.shape-rounded .slide:not([class*='shape-']),
+    .slide.shape-rounded {
+      &.depth-2:not(.present) > .heading,
+      &.depth-3:not(.present) > .heading {
+        max-width: $shape-rounded-width/2-100px;
+        transform: translate3d(-50%, -50%, 0) translate3d(-$shape-rounded-offset-x + 100px, $shape-rounded-height/2 - 100px, 0) scale(2);
+      }
+    }
+
+    &.shape-square .slide:not([class*='shape-']),
+    .slide.shape-square {
+      &.depth-2:not(.present) > .heading,
+      &.depth-3:not(.present) > .heading {
+        max-width: $shape-square-width/2-100px;
+        transform: translate3d(-$shape-square-offset-x - 70px, 440px, 0) translate3d(-50%, -50%, 0) scale(2) rotate($shape-square-rotate);
+      }
+    }
+  }
+}

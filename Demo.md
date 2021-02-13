@@ -1,3 +1,9 @@
+---
+flattened: false
+slide:
+  layout: grid
+---
+
 impress.me Demo Presentation
 ====================================
 

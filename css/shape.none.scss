@@ -15,13 +15,5 @@ $shape-none-offset-y: 0 !default;
       transform: translate3d(-50%, -50%, -1px) translate3d($shape-none-offset-x, $shape-none-offset-y, 0) scale(1.012);
       width: $shape-none-width;
     }
-
-    &.depth-2:not(.present) > .heading,
-    &.depth-3:not(.present) > .heading {
-      left: 50%;
-      max-width: $shape-none-width/2-100px;
-      top: 50%;
-      transform: translate3d(-50%, -50%, 0) translate3d($shape-none-width/2, $shape-none-height/2 - 100px, 0) scale(2);
-    }
   }
 }

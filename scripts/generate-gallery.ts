@@ -1,6 +1,6 @@
 // eslint-disable no-console
 
-import {ImpressMe, shapes, strategies, themeMap, themes} from '../src';
+import {ImpressMe, ImpressMeConfig, shapes, strategies, themes} from '../src';
 import * as fs from 'fs';
 import {mkdirSync, promises} from 'fs';
 
@@ -21,14 +21,26 @@ const overview = `
 Promise.all(themes.map(theme => {
   const themeName = theme.themeName;
 
-  return Promise.all(strategies.map(strategy => {
-    return Promise.all(shapes.map(shape => {
-      const presentation = `dist/gallery/Demo-${themeName}-${strategy}-${shape}.html`;
-      const screenshot = `dist/gallery/Demo-${themeName}-${strategy}-${shape}.png`;
+  return Promise.all([undefined, ...strategies].map(strategy => {
+    return Promise.all([undefined, ...shapes].map(shape => {
+      const name = [themeName, strategy, shape].filter(x => Boolean(x)).join('-')
+      const presentation = `dist/gallery/Demo-${name}.html`;
+      const screenshot = `dist/gallery/Demo-${name}.png`;
+      const overrides: Partial<ImpressMeConfig> = {theme: themeName};
 
-      return new ImpressMe({theme, strategy, shape})
+      if (strategy !== undefined) {
+        overrides.strategy = strategy;
+      }
+
+      if (shape !== undefined) {
+        overrides.shape = shape;
+      }
+
+      console.log(`Preparing ${presentation}...`);
+
+      return new ImpressMe(overrides)
         .convert('Demo.md', presentation)
-        .then(() => console.log('Generated ' + presentation))
+        .then(() => console.log(`Generated ${presentation}`))
         .then(() => captureWebsite.file(
           presentation,
           screenshot,
@@ -39,7 +51,7 @@ Promise.all(themes.map(theme => {
             overwrite: true,
           },
         ))
-        .then(() => console.log('Captured ' + screenshot))
+        .then(() => console.log(`Captured ${screenshot}`))
         .then(() => `### ${themeName} ${strategy} ${shape} [](class=focus-single)
 
 [![Shape ${shape}](Demo-${themeName}-${strategy}-${shape}.png)](Demo-${themeName}-${strategy}-${shape}.html)\n`)
@@ -53,8 +65,8 @@ Promise.all(themes.map(theme => {
     .then(markdowns => [`## ${themeName}\n`, ...markdowns].join('\n'));
 }))
   .then(markdowns => [title, ...markdowns, overview].join('\n'))
-  .then(markdown => promises.writeFile('dist/gallery/Gallery.md', markdown))
-  .then(() => new ImpressMe({theme: themeMap.gallery}).convert('dist/gallery/Gallery.md'))
+  .then(markdown => promises.writeFile('dist/gallery/Overview.md', markdown))
+  .then(() => new ImpressMe({theme: 'gallery'}).convert('dist/gallery/Overview.md'))
   .then(() => console.log('Gallery generated'));
 
 // eslint-enable no-console

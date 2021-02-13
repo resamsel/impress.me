@@ -50,7 +50,7 @@ export const generateState = (headings: marked.Tokens.Heading[], positionStrateg
   const outerState = headings.reduce((state: SlideNodeState, curr: Heading) => {
     const root = state.root;
     const isRootNode = Object.keys(state.nodes).length === 0;
-    const depth = isRootNode ? 1 : (config.hasInlineConfig ? curr.depth + 1 : curr.depth);
+    const depth = isRootNode ? 1 : (config.flattened ? curr.depth + 1 : curr.depth);
     const node: SlideNode = {
       ...curr,
       children: [],
@@ -156,7 +156,7 @@ const processHeading = (state: SlideNodeState, config: ImpressMeConfig):
       text = match[1];
     }
 
-    if (level === 1 && !config.hasInlineConfig) {
+    if (level === 1 && !config.flattened) {
       config.title = config.title || text;
     }
 
@@ -228,7 +228,7 @@ export const markdownToHtml = (md: string, config: ImpressMeConfig): Promise<str
   return Promise.resolve(md)
     .then<[string, SlideNodeState], never>(md => {
       const tokens = marked.lexer(md);
-      const headings = tokens.filter(token => token.type === 'heading') as Heading[];
+      const headings = tokens.filter(token => 'type' in token && token.type === 'heading') as Heading[];
       const positionStrategy = config.positionStrategyFactory.create(config);
       const state: SlideNodeState = generateState(headings, positionStrategy, config);
       const cleanedMarkdown = tokens.filter(token => 'raw' in token).map(token => (token as any).raw).join('');

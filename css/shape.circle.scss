@@ -18,11 +18,5 @@ $shape-circle-offset-y: 1080px !default;
       width: $shape-circle-width;
       z-index: -1;
     }
-
-    &.depth-2:not(.present) > .heading,
-    &.depth-3:not(.present) > .heading {
-      max-width: $shape-circle-width/2-100px;
-      transform: translate3d(-$shape-circle-offset-x - 70px, 440px, 0) translate3d(-50%, -50%, 0) scale(2);
-    }
   }
 }

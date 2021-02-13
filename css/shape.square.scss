@@ -24,11 +24,5 @@ $primary-100: rgba(255, 255, 255, 0.87) !default;
     &.present::before {
       transform: translate3d(-50%, -50%, -1px) translate3d($shape-square-offset-x + 100px, $shape-square-offset-y, 0) rotate($shape-square-rotate) scale(0.7);
     }
-
-    &.depth-2:not(.present) > .heading,
-    &.depth-3:not(.present) > .heading {
-      max-width: $shape-square-width/2-100px;
-      transform: translate3d(-$shape-square-offset-x - 70px, 440px, 0) translate3d(-50%, -50%, 0) scale(2) rotate($shape-square-rotate);
-    }
   }
 }

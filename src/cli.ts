@@ -47,6 +47,10 @@ class ImpressMeCommand extends Command {
       char: 'd',
       description: 'the duration between slides in millis',
     }),
+    flattened: flags.boolean({
+      description: 'defines on the heading hierarchy starting at level 1 (true) or 2 (false)',
+      allowNo: true,
+    }),
     debug: flags.boolean({
       description: 'enable debug logging',
     }),

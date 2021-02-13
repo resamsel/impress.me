@@ -1,4 +1,4 @@
-export default {title: 'Examples'};
+export default {title: 'Examples/Examples'};
 
 export const RenderCode = () => '<iframe class="fullscreen" src="Render Code.md.html"></iframe>';
 
@@ -9,3 +9,5 @@ export const Slides02 = () => '<iframe class="fullscreen" src="Slides 02.md.html
 export const Slides05 = () => '<iframe class="fullscreen" src="Slides 05.md.html"></iframe>';
 
 export const Slides16 = () => '<iframe class="fullscreen" src="Slides 16.md.html"></iframe>';
+
+export const SlidesFlattened = () => '<iframe class="fullscreen" src="Slides Flattened.md.html"></iframe>';

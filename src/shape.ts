@@ -28,14 +28,14 @@ export const shapeConfig: Record<Shape, ShapeConfig> = {
     height: 1600,
     offset: {x: -500, y: 0, z: 0},
     parentOffset: {x: 200, y: 0, z: 0},
-    siblingOffset: {x: 320, y: 100, z: 0},
+    siblingOffset: {x: 580, y: 260, z: 0},
   },
   [Shape.Rounded]: {
     width: 1500,
     height: 1000,
     offset: {x: -300, y: 0, z: 0},
     parentOffset: {x: 0, y: 0, z: 0},
-    siblingOffset: {x: 420, y: 64, z: 0},
+    siblingOffset: {x: 420, y: 260, z: 0},
   },
   [Shape.None]: {
     width: 1920,

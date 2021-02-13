@@ -91,7 +91,7 @@ export const parseYamlConfig = (yaml: string | undefined): Partial<ImpressMeConf
 
   return {
     ...parsed,
-    hasInlineConfig: true,
+    flattened: (parsed as Partial<ImpressMeConfig>).flattened ?? true,
   };
 };
 
