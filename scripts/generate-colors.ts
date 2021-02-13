@@ -89,6 +89,6 @@ fs.writeFile(
     .concat(Object.keys(colors)
       .filter(colorName => !excluded.includes(colorName))
       .map(colorName => colorTemplate(colorName.toLowerCase(), colors[colorName])))
-    .join('\n'),
+    .join('\n') + '\n',
   () => console.log('Colors style file written'),
 );
