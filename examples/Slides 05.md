@@ -51,7 +51,7 @@ impress.me Demo.md --cssFiles a.css b.css
 
 ### Satellite 8
 
-## Heading 2 [](class=primary-deeppurple focus-headline)
+## Heading 2 [](class=primary-deeppurple focus-headline shape-square)
 
 ### Satellite 4 of 2 [](class=focus-headline)
 
@@ -60,7 +60,7 @@ impress.me Demo.md --cssFiles a.css b.css
 
 ## Heading 4 [](class=primary-green shape-none)
 
-## Heading 5 [](class=primary-amber)
+## Heading 5 [](class=primary-amber shape-rounded)
 
 ## Overview [](class=overview)
 

@@ -4,7 +4,7 @@
 
 import {promises} from 'fs';
 import * as path from 'path';
-import {themes} from "../src";
+import {shapes, strategies, themes} from "../src";
 
 const header = (root: string, ...title: string[]): string => `export default {title: '${root}/${title.join('/')}'};
 `;
@@ -29,15 +29,27 @@ promises.readdir('dist/examples')
   .then(contents =>
     promises.writeFile('stories/' + storiesTitle.toLowerCase() + '.stories.ts', contents.join('\n')));
 
-storiesTitle = capitalize(path.basename('dist/gallery'));
-promises.readdir('dist/gallery')
-  .then(filenames =>
-    themes.reduce((agg, theme) => ({
-      ...agg,
-      [theme.themeName]: filenames.filter(f => f.startsWith(`Demo-${theme.themeName}`) && f.endsWith('.html'))
-        .map(f => createStory(cleanTitle(f.replace(`Demo-${theme.themeName}-`, '')), `${f}`)),
-    }), {} as Record<string, string[]>)
-  )
-  .then(stories => themes.map(theme => {
-    promises.writeFile('stories/gallery-' + theme.themeName + '.stories.ts', [header('Gallery', theme.themeName)].concat(stories[theme.themeName]).join('\n'));
+themes.map(theme => ({
+  name: theme.themeName,
+  stories: [
+    {name: 'Standard', file: 'Demo-' + theme.themeName + '.html'},
+    ...strategies.filter(strategy => theme.strategy !== strategy)
+      .map(strategy => [
+        {name: 'Strategy ' + strategy, file: 'Demo-' + theme.themeName + '-' + strategy + '.html'},
+        ...shapes.filter(shape => theme.shape !== shape)
+          .map(shape => ({
+            name: 'Strategy ' + strategy + ' shape ' + shape,
+            file: 'Demo-' + [theme.themeName, strategy, shape].join('-') + '.html'
+          })),
+      ])
+      .reduce((agg, curr) => [...agg, ...curr], [])
+  ]
+}))
+  .map(theme => ({
+    file: 'stories/gallery-' + theme.name + '.stories.ts',
+    content: [
+      header('Gallery', 'Theme ' + capitalize(theme.name)),
+      ...theme.stories.map(story => createStory(cleanTitle(story.name), story.file))
+    ].join('\n'),
   }))
+    .forEach(({file, content}) => promises.writeFile(file, content));

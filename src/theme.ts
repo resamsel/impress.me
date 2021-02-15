@@ -28,11 +28,6 @@ export const themeMap: Record<string, Theme> = {
     shape: Shape.None,
     strategy: Strategy.Column,
   },
-  gallery: {
-    themeName: 'gallery',
-    shape: Shape.None,
-    strategy: Strategy.Row,
-  },
 };
 
 export const themes = Object.keys(themeMap).map(key => themeMap[key]);
