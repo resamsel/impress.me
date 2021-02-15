@@ -24,7 +24,7 @@
     "sass": "1.32.7",
     "sync-request": "6.1.0",
     "tslib": "2.1.0",
-    "uglify-es": "^3.3.9",
+    "uglify-es": "^3.3.10",
     "viz.js": "^2.1.2"
   },
   "devDependencies": {
