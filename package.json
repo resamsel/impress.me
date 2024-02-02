@@ -8,8 +8,8 @@
   },
   "bugs": "https://github.com/resamsel/impress.me/issues",
   "dependencies": {
-    "@oclif/command": "1.8.0",
-    "@oclif/config": "1.17.0",
+    "@oclif/command": "1.8.36",
+    "@oclif/config": "1.18.17",
     "@oclif/errors": "1.3.4",
     "@oclif/plugin-help": "3.2.2",
     "clean-css": "^5.0.1",
