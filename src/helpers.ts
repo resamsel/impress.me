@@ -181,7 +181,7 @@ const cssPropertyValueToDataUri = (propertyName: string, propertyValue: string, 
         try {
           return 'url(' + fileToDataUri(filename) + ')';
         } catch (error) {
-          console.warn(`Error while inlining ${filename}: ${error.message}`);
+          console.warn(`Error while inlining ${filename}: ${(error as Error).message}`);
         }
       }
     }
@@ -215,21 +215,21 @@ const cssVars: CssVar[] = [
 ];
 
 export const insertCssVars = (config: ImpressMeConfig): ((css: string) => string) =>
-  (css: string) => cssVars.map(([name, fn]) => `$${name}: ${fn(config)}`)
-    .concat([css])
-    .join(';');
+  (css: string) => {
+    const args = cssVars.map(([name, fn]) => `$${name}: ${fn(config)}`).join(', ');
+    return `@use 'variables' with (${args});\n${css}`;
+  };
 
 const sassRender = (data: string, includePaths: string[]): Promise<string> => {
   return new Promise<string>((resolve, reject) => {
     try {
-      const result = sass.renderSync({
-        data,
-        outputStyle: 'compressed',
-        includePaths: includePaths.map(path => resolvePath(path)),
+      const result = sass.compileString(data, {
+        style: 'compressed',
+        loadPaths: includePaths.map(path => resolvePath(path)),
       });
-      return resolve(result.css.toString('utf8'));
+      return resolve(result.css);
     } catch (error) {
-      console.log('Error while rendering stylesheet: ' + error.message, includePaths);
+      console.log('Error while rendering stylesheet: ' + (error as Error).message, includePaths);
       return reject(error);
     }
   });

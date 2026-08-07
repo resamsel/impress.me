@@ -1,5 +1,5 @@
 import {parseYamlConfig, splitConfigAndContent, toOutputFilename} from '../src';
-import {expect} from '@oclif/test';
+import {expect} from 'chai';
 import {YAMLException} from 'js-yaml';
 
 describe('helpers', () => {
@@ -69,7 +69,7 @@ describe('helpers', () => {
       const actual = parseYamlConfig(yaml);
 
       // then
-      expect(actual).to.deep.eq({title: 'My Title', strategy: 'planet', hasInlineConfig: true});
+      expect(actual).to.deep.eq({title: 'My Title', strategy: 'planet', flattened: true});
     });
 
     it('should parse failing yaml config to undefined', function () {

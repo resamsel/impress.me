@@ -1,6 +1,4 @@
-$transition-duration: 1000ms !default;
-$progressbar-height: 0.6vh !default;
-$progressbar-dot-size: 1.6vh !default;
+@use 'variables' as *;
 
 @media screen {
   .impress-mouse-timeout .impress-progressbar {

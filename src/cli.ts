@@ -5,7 +5,6 @@ import {handle} from '@oclif/errors';
 import {themeMap} from './theme';
 import {strategies, Strategy} from './strategy';
 import {Shape, shapes} from './shape';
-import * as open from 'open';
 
 class ImpressMeCommand extends Command {
   static description = 'create impress.js presentations from markdown documents in style';
@@ -76,10 +75,11 @@ class ImpressMeCommand extends Command {
 
     await new ImpressMe(parsed.flags)
       .convert(parsed.args.input, parsed.args.output)
-      .then(output => {
+      .then(async output => {
         if (parsed.flags.open) {
           log.debug(`Opening "${output}"`);
-          open(output);
+          const {default: openBrowser} = await import('open');
+          await openBrowser(output);
         }
       })
       .catch(handle);

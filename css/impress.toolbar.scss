@@ -1,7 +1,4 @@
-$transition-duration: 1000ms !default;
-$toolbar-button-size: 3.2vh !default;
-$toolbar-main-button-size: 4vh !default;
-$toolbar-padding: 1.4vh !default;
+@use 'variables' as *;
 
 .impress-mouse-timeout #impress-toolbar {
   opacity: 0;

@@ -1,6 +1,4 @@
-$transition-duration: 1000ms !default;
-$slide-padding-horizontal: 32px !default;
-$slide-padding-vertical: 100px !default;
+@use 'variables' as *;
 
 /* Slide steps */
 

@@ -1,6 +1,6 @@
 import {PlanetPositionStrategy, PositionStrategy} from '../../src/position';
 import {defaultConfig, ImpressMeConfig, SlideNode, Transformation} from '../../src';
-import {expect} from '@oclif/test';
+import {expect} from 'chai';
 
 const config: ImpressMeConfig = defaultConfig;
 const circleRadius = 1680;
