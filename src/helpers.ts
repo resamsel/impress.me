@@ -190,13 +190,14 @@ const cssPropertyValueToDataUri = (propertyName: string, propertyValue: string, 
 };
 
 const cssMinify = (data: string, includePaths: string[]): string => {
+  // @types/clean-css@4 predates the v5 `plugins` API, so the options hash is untyped here.
   return new CleanCss({
-    level: {
-      1: {
-        transform: (name: string, value: string) => cssPropertyValueToDataUri(name, value, includePaths),
+    plugins: [{
+      level1: {
+        value: (name: string, value: string) => cssPropertyValueToDataUri(name, value, includePaths),
       },
-    },
-  }).minify(data).styles;
+    }],
+  } as unknown as CleanCss.OptionsOutput).minify(data).styles;
 };
 
 type CssVar = [string, (config: ImpressMeConfig) => string];
