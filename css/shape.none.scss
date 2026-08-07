@@ -1,7 +1,4 @@
-$shape-none-width: 1920px !default;
-$shape-none-height: 1080px !default;
-$shape-none-offset-x: 0 !default;
-$shape-none-offset-y: 0 !default;
+@use 'variables' as *;
 
 @media screen {
   .shape-none .slide:not([class*='shape-']),

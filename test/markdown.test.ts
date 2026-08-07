@@ -1,6 +1,7 @@
 import {defaultConfig, generateState, LinearPositionStrategy} from '../src';
-import {expect} from '@oclif/test';
-import Heading = marked.Tokens.Heading;
+import {expect} from 'chai';
+import type {Tokens} from 'marked';
+type Heading = Tokens.Heading;
 
 describe('markdown', () => {
   describe('generateState', () => {
@@ -22,7 +23,7 @@ describe('markdown', () => {
     it('should generate the state for a single slide doc', function () {
       // given
       const config = defaultConfig;
-      const headings: Heading[] = [{type: 'heading', depth: 1, text: 'Title'}];
+      const headings: Heading[] = [{type: 'heading', depth: 1, text: 'Title', raw: '# Title\n', tokens: []}];
       const positionStrategy = new LinearPositionStrategy(config);
 
       // when
@@ -39,9 +40,9 @@ describe('markdown', () => {
       // given
       const config = defaultConfig;
       const headings: Heading[] = [
-        {type: 'heading', depth: 1, text: 'Title'},
-        {type: 'heading', depth: 2, text: 'First'},
-        {type: 'heading', depth: 2, text: 'Second'},
+        {type: 'heading', depth: 1, text: 'Title', raw: '# Title\n', tokens: []},
+        {type: 'heading', depth: 2, text: 'First', raw: '## First\n', tokens: []},
+        {type: 'heading', depth: 2, text: 'Second', raw: '## Second\n', tokens: []},
       ];
       const positionStrategy = new LinearPositionStrategy(config);
 
@@ -64,10 +65,10 @@ describe('markdown', () => {
       expect(actual.nodes.Second.children).to.have.length(0);
     });
 
-    it('should generate the state for a single slide doc with hasInlineConfig=true', function () {
+    it('should generate the state for a single slide doc with flattened=true', function () {
       // given
-      const config = {...defaultConfig, hasInlineConfig: true, title: 'Document Config'};
-      const headings: Heading[] = [{type: 'heading', depth: 1, text: 'First'}];
+      const config = {...defaultConfig, flattened: true, title: 'Document Config'};
+      const headings: Heading[] = [{type: 'heading', depth: 1, text: 'First', raw: '# First\n', tokens: []}];
       const positionStrategy = new LinearPositionStrategy(config);
 
       // when
@@ -83,13 +84,13 @@ describe('markdown', () => {
       expect(actual.nodes.First.children).to.have.length(0);
     });
 
-    it('should generate the state for a three slide doc with hasInlineConfig=true', function () {
+    it('should generate the state for a three slide doc with flattened=true', function () {
       // given
-      const config = {...defaultConfig, hasInlineConfig: true};
+      const config = {...defaultConfig, flattened: true};
       const headings: Heading[] = [
-        {type: 'heading', depth: 1, text: 'First'},
-        {type: 'heading', depth: 1, text: 'Second'},
-        {type: 'heading', depth: 1, text: 'Third'},
+        {type: 'heading', depth: 1, text: 'First', raw: '# First\n', tokens: []},
+        {type: 'heading', depth: 1, text: 'Second', raw: '# Second\n', tokens: []},
+        {type: 'heading', depth: 1, text: 'Third', raw: '# Third\n', tokens: []},
       ];
       const positionStrategy = new LinearPositionStrategy(config);
 

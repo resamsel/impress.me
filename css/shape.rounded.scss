@@ -1,7 +1,4 @@
-$shape-rounded-width: 1600px !default;
-$shape-rounded-height: 1080px !default;
-$shape-rounded-offset-x: 0 !default;
-$shape-rounded-offset-y: 0 !default;
+@use 'variables' as *;
 
 @media screen {
   .shape-rounded .slide:not([class*='shape-']),

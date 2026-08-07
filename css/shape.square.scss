@@ -1,8 +1,5 @@
-$shape-square-width: 1680px !default;
-$shape-square-height: 1680px !default;
-$shape-square-offset-x: 1680px !default;
-$shape-square-offset-y: 1080px !default;
-$shape-square-rotate: -5deg !default;
+@use 'variables' as *;
+
 $primary-100: rgba(255, 255, 255, 0.87) !default;
 
 @media screen {

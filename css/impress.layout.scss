@@ -1,4 +1,4 @@
-$slide-padding-horizontal: 32px !default;
+@use 'variables' as *;
 
 .slide.present.focus-headline {
   &.depth-2 > .heading,

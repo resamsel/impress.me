@@ -1,7 +1,4 @@
-$shape-circle-width: 1680px !default;
-$shape-circle-height: 1080px !default;
-$shape-circle-offset-x: 1680px !default;
-$shape-circle-offset-y: 1080px !default;
+@use 'variables' as *;
 
 @media screen {
   .shape-circle .slide:not([class*='shape-']),

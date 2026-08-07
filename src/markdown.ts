@@ -2,16 +2,17 @@ import {PositionStrategy} from './position';
 import {error, warn} from 'loglevel';
 import {attrItemPattern, attrPattern, fileToDataUri, logStep, resolvePath, urlToDataUri} from './helpers';
 import {existsSync} from 'fs';
-import * as marked from 'marked';
-import {Slugger} from 'marked';
-import {highlightAuto} from 'highlight.js';
+import {Marked, marked} from 'marked';
+import type {Tokens} from 'marked';
+import hljs from 'highlight.js';
 import {ImpressMeConfig} from './impress-me-config';
 import {SlideNode} from './slide-node';
 import {SlideNodeState} from './slide-node-state';
 import {Transformation} from './transformation';
 import {rendererMap} from './renderers';
 import {SlideConfig} from './slide-config';
-import Heading = marked.Tokens.Heading;
+
+type Heading = Tokens.Heading;
 
 const specialLayoutSlideClasses = ['title', 'overview', 'end'];
 
@@ -33,7 +34,6 @@ const appendHeadingAttributes = (text: string, attrs: Record<string, string>, co
   const classes = attrs.class.split(' ');
   if (specialLayoutSlideClasses.find(cls => classes.includes(cls)) === undefined &&
     classes.find(cls => cls.startsWith('focus') || cls.startsWith('grid')) === undefined) {
-    // no layout classes have been set, yet - use the slide config
     attrs.class += ` ${config.layout}`;
   }
 
@@ -46,7 +46,7 @@ const appendHeadingAttributes = (text: string, attrs: Record<string, string>, co
   }
 };
 
-export const generateState = (headings: marked.Tokens.Heading[], positionStrategy: PositionStrategy, config: ImpressMeConfig): SlideNodeState => {
+export const generateState = (headings: Tokens.Heading[], positionStrategy: PositionStrategy, config: ImpressMeConfig): SlideNodeState => {
   const outerState = headings.reduce((state: SlideNodeState, curr: Heading) => {
     const root = state.root;
     const isRootNode = Object.keys(state.nodes).length === 0;
@@ -128,101 +128,25 @@ export const generateState = (headings: marked.Tokens.Heading[], positionStrateg
 };
 
 function cleanEmoji(s: string) {
-  return s.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
+  return s.replace(/([-]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
 }
 
-const processHeading = (state: SlideNodeState, config: ImpressMeConfig):
-  ((text: string, level: number, raw: string, slugger: Slugger) => string) => {
-  return (text: string, level: number, raw: string, slugger: Slugger) => {
-    const h = 'h' + level;
-    const nodeKey = text
-      .replace('<a href="', '[](')
-      .replace('"></a>', ')');
-    const node = state.nodes[nodeKey];
-    if (node === undefined) {
-      warn('Node not found', nodeKey, Object.keys(state.nodes));
-    }
-
-    if (node === undefined || level > 3) {
-      return '<' + h + '>' + text + '</' + h + '>';
-    }
-
-    let html = '';
-    if (state.isOpen) {
-      html += '</div>';
-    }
-    const match = attrPattern.exec(text);
-    if (match) {
-      text = match[1];
-    }
-
-    if (level === 1 && !config.flattened) {
-      config.title = config.title || text;
-    }
-
-    const slug = cleanEmoji(slugger.slug(text));
-    if (node.attrs.id === undefined) {
-      node.attrs.id = slug;
-    }
-
-    const attrList = Object.keys(node.attrs)
-      .filter(key => node.attrs[key] !== undefined)
-      .map(key => `${key}="${node.attrs[key]}"`);
-    html += '<div ' + attrList.join(' ') + '>';
-    state.isOpen = true;
-    html += '<' + h + ' class="heading">' + text + '</' + h + '>';
-    return html;
+function makeSlugger() {
+  const slugCounts = new Map<string, number>();
+  return function slugify(text: string): string {
+    const base = text
+      .toLowerCase()
+      .trim()
+      .replace(/<[^>]+>/g, '')
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    const clean = cleanEmoji(base);
+    const count = slugCounts.get(clean) ?? 0;
+    slugCounts.set(clean, count + 1);
+    return count === 0 ? clean : `${clean}-${count}`;
   };
-};
-
-const processImage = (basePath: string): ((href: string, title: string, text: string) => string) =>
-  (href: string, title: string, text: string) => {
-    if (href === null) {
-      return text;
-    }
-
-    if (href.startsWith('https://') || href.startsWith('http://')) {
-      href = urlToDataUri(href);
-    } else {
-      const imageSrc = [href, basePath + '/' + href, resolvePath(href)].find(existsSync);
-      if (imageSrc !== undefined) {
-        href = fileToDataUri(imageSrc);
-      }
-    }
-    let out = '<img src="' + href + '" alt="' + text + '"';
-    if (title) {
-      out += ' title="' + title + '"';
-    }
-    out += '>';
-    return out;
-  };
-
-const processHighlight = (code: string, paramString: string, callback: (err: any | undefined, code?: string) => void): string | void => {
-  const params = paramString.split(',');
-  const lang = params[0];
-  if (params.includes('render')) {
-    if (rendererMap[lang] !== undefined) {
-      const options = params.slice(2).reduce((opts, curr) => {
-        const [key, value] = curr.split('=');
-        return {
-          ...opts,
-          [key]: value,
-        };
-      }, {});
-      rendererMap[lang].render(code, lang, options)
-        .then(rendered => callback(undefined, rendered))
-        .catch(err => { // eslint-disable-line unicorn/catch-error-name
-          error('Error while rendering code block', err);
-          callback(err);
-        });
-      return;
-    }
-
-    warn('No renderer for language ' + lang + ' found.');
-  }
-
-  callback(undefined, highlightAuto(code, [lang]).value);
-};
+}
 
 export const markdownToHtml = (md: string, config: ImpressMeConfig): Promise<string> => {
   return Promise.resolve(md)
@@ -237,49 +161,125 @@ export const markdownToHtml = (md: string, config: ImpressMeConfig): Promise<str
     })
     .then(logStep('Node state generated'))
     .then(([md, state]) => {
-      const renderer = new marked.Renderer();
-      renderer.heading = processHeading(state, config);
-      renderer.image = processImage(config.basePath);
-      const paragraph = renderer.paragraph;
-      renderer.paragraph = (text: string) => {
-        if (text.startsWith('<img src="') || text.startsWith('<a href="')) {
-          // omit wrapping paragraph when it starts with an image or a link
-          return text;
-        }
+      const slugger = makeSlugger();
 
-        return paragraph(text);
-      };
-      const codeFn = renderer.code;
-      renderer.code = (code: string, language: string | undefined, isEscaped: boolean): string => {
-        if (language?.split(',').includes('render')) {
-          return code;
-        }
-        return codeFn.bind(renderer)(code, language, isEscaped);
-      };
-
-      return new Promise((resolve, reject) => {
-        marked(
-          md,
-          {
-            gfm: true,
-            breaks: false,
-            pedantic: false,
-            smartLists: true,
-            smartypants: false,
-            renderer,
-            langPrefix: 'hljs ',
-            highlight: processHighlight,
-          },
-          (err, content) => {
-            if (err) {
-              return reject(err);
+      const markedInstance = new Marked();
+      markedInstance.use({
+        async: true,
+        renderer: {
+          heading(token: Tokens.Heading): string {
+            const {text: rawText, depth} = token;
+            const h = 'h' + depth;
+            const node = state.nodes[rawText];
+            if (node === undefined) {
+              warn('Node not found', rawText, Object.keys(state.nodes));
             }
+
+            const renderedText = this.parser.parseInline(token.tokens);
+
+            if (node === undefined || depth > 3) {
+              return '<' + h + '>' + renderedText + '</' + h + '>';
+            }
+
+            let html = '';
             if (state.isOpen) {
-              content += '</div>';
+              html += '</div>';
             }
-            resolve(content);
+
+            const match = attrPattern.exec(renderedText);
+            const displayText = match ? match[1] : renderedText;
+
+            if (depth === 1 && !config.flattened) {
+              config.title = config.title || displayText;
+            }
+
+            const slug = cleanEmoji(slugger(displayText.replace(/<[^>]+>/g, '')));
+            if (node.attrs.id === undefined) {
+              node.attrs.id = slug;
+            }
+
+            const attrList = Object.keys(node.attrs)
+              .filter(key => node.attrs[key] !== undefined)
+              .map(key => `${key}="${node.attrs[key]}"`);
+            html += '<div ' + attrList.join(' ') + '>';
+            state.isOpen = true;
+            html += '<' + h + ' class="heading">' + displayText + '</' + h + '>';
+            return html;
           },
-        );
+
+          image(token: Tokens.Image): string {
+            let {href, title, text} = token;
+            if (!href) {
+              return text;
+            }
+
+            if (href.startsWith('https://') || href.startsWith('http://')) {
+              href = urlToDataUri(href);
+            } else {
+              const imageSrc = [href, config.basePath + '/' + href, resolvePath(href)].find(existsSync);
+              if (imageSrc !== undefined) {
+                href = fileToDataUri(imageSrc);
+              }
+            }
+            let out = '<img src="' + href + '" alt="' + text + '"';
+            if (title) {
+              out += ' title="' + title + '"';
+            }
+            out += '>';
+            return out;
+          },
+
+          paragraph(token: Tokens.Paragraph): string {
+            const text = this.parser.parseInline(token.tokens);
+            if (text.startsWith('<img src="') || text.startsWith('<a href="')) {
+              return text + '\n';
+            }
+            return `<p>${text}</p>\n`;
+          },
+
+          code(token: Tokens.Code): string {
+            const {text, lang} = token;
+            if (lang?.split(',').includes('render')) {
+              return text;
+            }
+            const language = lang?.split(',')[0];
+            const highlighted = language
+              ? hljs.highlight(text, {language, ignoreIllegals: true}).value
+              : hljs.highlightAuto(text).value;
+            const langClass = language ? 'language-' + language : '';
+            return `<pre><code class="hljs ${langClass}">${highlighted}</code></pre>\n`;
+          },
+        },
+
+        walkTokens: async (token) => {
+          if (token.type === 'code') {
+            const params = (token.lang ?? '').split(',');
+            if (params.includes('render')) {
+              const lang = params[0];
+              if (rendererMap[lang] !== undefined) {
+                const options = params.slice(2).reduce((opts: Record<string, string>, curr: string) => {
+                  const [key, value] = curr.split('=');
+                  return {...opts, [key]: value};
+                }, {});
+                try {
+                  token.text = await rendererMap[lang].render(token.text, lang, options);
+                } catch (err) {
+                  error('Error while rendering code block', err);
+                }
+              } else {
+                warn('No renderer for language ' + lang + ' found.');
+              }
+            }
+          }
+        },
       });
+
+      return (markedInstance.parse(md, {async: true}) as Promise<string>)
+        .then(html => {
+          if (state.isOpen) {
+            return html + '</div>';
+          }
+          return html;
+        });
     });
 };
